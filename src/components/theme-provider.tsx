@@ -24,14 +24,13 @@ export function ThemeProvider({
   defaultTheme = "system",
   storageKey = "global-indicies-theme",
 }: ThemeProviderProps) {
-  const [theme, setTheme] = React.useState<Theme>(defaultTheme)
-
-  React.useEffect(() => {
-    const stored = localStorage.getItem(storageKey) as Theme | null
-    if (stored) {
-      setTheme(stored)
+  const [theme, setTheme] = React.useState<Theme>(() => {
+    // On client, read from localStorage immediately
+    if (typeof window !== "undefined") {
+      return (localStorage.getItem(storageKey) as Theme) || defaultTheme
     }
-  }, [storageKey])
+    return defaultTheme
+  })
 
   React.useEffect(() => {
     const root = window.document.documentElement

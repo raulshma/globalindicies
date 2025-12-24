@@ -149,11 +149,23 @@ export const Route = createRootRouteWithContext<RouterContext>()({
   shellComponent: RootDocument,
 })
 
+// Inline script to prevent flash of wrong theme
+const themeScript = `
+(function() {
+  const storageKey = 'global-indicies-theme';
+  const theme = localStorage.getItem(storageKey);
+  const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const resolved = theme === 'dark' || (theme === 'system' && systemDark) || (!theme && systemDark) ? 'dark' : 'light';
+  document.documentElement.classList.add(resolved);
+})();
+`
+
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>
         {children}

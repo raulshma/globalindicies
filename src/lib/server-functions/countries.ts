@@ -6,8 +6,10 @@
 import { asc, eq } from 'drizzle-orm'
 import { z } from 'zod'
 import { createServerFn } from '@tanstack/react-start'
+import { setResponseHeader } from '@tanstack/react-start/server'
 import { db } from '../db'
 import { countries, peerGroups, rankingEntries } from '../db/schema'
+import { CDN_CACHE } from '../cache-config'
 
 /**
  * Get full ranking list for an index (all countries)
@@ -23,6 +25,9 @@ export const getFullRankingList = createServerFn({ method: 'GET' })
   )
   .handler(async ({ data }) => {
     const { indexId, year } = data
+
+    // Cache for 30 minutes (REFERENCE data - rankings by index/year)
+    setResponseHeader('Cache-Control', CDN_CACHE.REFERENCE)
 
     // Get all ranking entries for this index and year, ordered by rank
     const rankings = await db.query.rankingEntries.findMany({
@@ -44,6 +49,9 @@ export const getFullRankingList = createServerFn({ method: 'GET' })
  */
 export const getAllCountries = createServerFn({ method: 'GET' }).handler(
   async () => {
+    // Cache for 1 hour (STATIC data - countries rarely change)
+    setResponseHeader('Cache-Control', CDN_CACHE.STATIC)
+
     const allCountries = await db.query.countries.findMany({
       orderBy: [asc(countries.name)],
     })
@@ -64,6 +72,9 @@ export const getCountriesByPeerGroup = createServerFn({ method: 'GET' })
   )
   .handler(async ({ data }) => {
     const { peerGroupId } = data
+
+    // Cache for 1 hour (STATIC data - peer groups rarely change)
+    setResponseHeader('Cache-Control', CDN_CACHE.STATIC)
 
     // Get the peer group
     const peerGroup = await db.query.peerGroups.findFirst({
@@ -101,6 +112,9 @@ export const getCountriesByPeerGroup = createServerFn({ method: 'GET' })
  */
 export const getAllPeerGroups = createServerFn({ method: 'GET' }).handler(
   async () => {
+    // Cache for 1 hour (STATIC data - peer groups rarely change)
+    setResponseHeader('Cache-Control', CDN_CACHE.STATIC)
+
     const allPeerGroups = await db.query.peerGroups.findMany({
       orderBy: [asc(peerGroups.name)],
     })

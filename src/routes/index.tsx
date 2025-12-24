@@ -100,7 +100,7 @@ function HomePage() {
       </BentoGrid>
 
       {/* Top Movers - Bento Row 2 */}
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-4 lg:grid-cols-2 max-w-7xl mx-auto">
         <Retro3D>
             <Card className="h-full overflow-hidden">
             <CardHeader className="pb-3 border-b border-white/10 bg-white/5">
@@ -167,7 +167,7 @@ function HomePage() {
       </div>
 
       {/* Domain Summaries - Bento Grid */}
-      <div>
+      <div className="max-w-7xl mx-auto">
         <h2 className="mb-4 text-2xl font-black uppercase tracking-tighter flex items-center gap-2">
              <span className="w-4 h-4 bg-primary inline-block" /> Domain Performance
         </h2>

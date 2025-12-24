@@ -6,8 +6,10 @@
 import { asc, desc, eq } from "drizzle-orm"
 import { z } from "zod"
 import { createServerFn } from "@tanstack/react-start"
+import { setResponseHeader } from "@tanstack/react-start/server"
 import { db } from "../db"
 import { domains, rankingEntries } from "../db/schema"
+import { CDN_CACHE } from "../cache-config"
 
 /**
  * Get all domains with their indices and aggregate statistics
@@ -22,6 +24,9 @@ export const getAllDomainsWithStats = createServerFn({ method: "GET" })
   )
   .handler(async ({ data }) => {
     const { countryCode } = data
+
+    // Cache for 30 minutes (REFERENCE data - domain stats)
+    setResponseHeader('Cache-Control', CDN_CACHE.REFERENCE)
 
     // Get all domains
     const allDomains = await db.query.domains.findMany({
@@ -180,6 +185,9 @@ export const getDomainWithIndices = createServerFn({ method: "GET" })
   )
   .handler(async ({ data }) => {
     const { domainId, countryCode } = data
+
+    // Cache for 30 minutes (REFERENCE data - domain detail with rankings)
+    setResponseHeader('Cache-Control', CDN_CACHE.REFERENCE)
 
     // Get the domain
     const domain = await db.query.domains.findFirst({

@@ -6,8 +6,10 @@
 import { asc, desc, eq } from "drizzle-orm"
 import { z } from "zod"
 import { createServerFn } from "@tanstack/react-start"
+import { setResponseHeader } from "@tanstack/react-start/server"
 import { db } from "../db"
 import { domains, rankingEntries } from "../db/schema"
+import { CDN_CACHE } from "../cache-config"
 
 /**
  * Get dashboard overview data for a country
@@ -24,6 +26,9 @@ export const getDashboardData = createServerFn({ method: "GET" })
   )
   .handler(async ({ data }) => {
     const { countryCode } = data
+
+    // Cache for 5 minutes (DYNAMIC data - varies by country)
+    setResponseHeader('Cache-Control', CDN_CACHE.DYNAMIC)
 
     // Get all domains
     const allDomains = await db.query.domains.findMany({

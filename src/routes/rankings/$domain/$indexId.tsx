@@ -242,8 +242,6 @@ function IndexDetailPage() {
             <YearSelector
               years={data.availableYears}
               selectedYear={data.selectedYear}
-              domainId={params.domain}
-              indexId={params.indexId}
             />
           </CardHeader>
           <CardContent>
@@ -505,19 +503,19 @@ function IndexDetailPage() {
 interface YearSelectorProps {
   years: Array<number>
   selectedYear: number
-  domainId: string
-  indexId: string
 }
 
 function YearSelector({
   years,
   selectedYear,
-  domainId,
-  indexId,
 }: YearSelectorProps) {
+  const navigate = Route.useNavigate()
+
   const handleYearChange = (year: string | null) => {
     if (year) {
-      window.location.href = `/rankings/${domainId}/${indexId}?year=${year}`
+      void navigate({
+        search: (prev) => ({ ...prev, year: parseInt(year, 10) }),
+      })
     }
   }
 

@@ -3,6 +3,9 @@
  * Uses modular data files from seed-data/ directory
  */
 
+import 'dotenv/config'
+import { drizzle } from 'drizzle-orm/libsql'
+import { createClient } from '@libsql/client'
 import {
   allIndices,
   allRankingsData,
@@ -19,7 +22,18 @@ import {
   rankingEntries,
   rankingIndices,
 } from './schema'
-import { db } from './index'
+import * as schema from './schema'
+
+// Create a dedicated client for seeding that we can properly close
+const dbUrl = process.env.TURSO_DATABASE_URL || 'file:local.db'
+console.log(`📡 Connecting to: ${dbUrl}`)
+
+const client = createClient({
+  url: dbUrl,
+  authToken: process.env.TURSO_AUTH_TOKEN,
+})
+
+const db = drizzle(client, { schema })
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -111,7 +125,7 @@ async function seed() {
     }
 
     // Insert in batches to avoid SQLite variable limit
-    const BATCH_SIZE = 500
+    const BATCH_SIZE = 100
     for (let i = 0; i < entries.length; i += BATCH_SIZE) {
       const batch = entries.slice(i, i + BATCH_SIZE)
       await db.insert(rankingEntries).values(batch)
@@ -165,5 +179,13 @@ Data Sources:
 
 // Run seed
 seed()
-  .then(() => process.exit(0))
-  .catch(() => process.exit(1))
+  .then(() => {
+    console.log('Closing database connection...')
+    client.close()
+    process.exit(0)
+  })
+  .catch((error) => {
+    console.error('Seed error:', error)
+    client.close()
+    process.exit(1)
+  })
