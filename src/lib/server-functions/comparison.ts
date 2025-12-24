@@ -19,7 +19,9 @@ import type { ComparisonDataPoint, GapAnalysis } from '../types'
 export const compareCountries = createServerFn({ method: 'GET' })
   .inputValidator(
     z.object({
-      countryCodes: z.array(z.string().length(3)).min(2),
+      // Allow min(1) since peer group countries may be added inside the handler
+      // The handler will ensure at least 2 countries are being compared after merging
+      countryCodes: z.array(z.string().length(3)).min(1),
       indexIds: z.array(z.string()).optional(),
       year: z.number().optional(),
       peerGroupId: z.string().optional(),
