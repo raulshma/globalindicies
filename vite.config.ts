@@ -18,6 +18,11 @@ const config = defineConfig({
     tanstackStart(),
     viteReact(),
   ],
+  resolve: {
+    alias: {
+      '@tabler/icons-react': '@tabler/icons-react/dist/esm/icons/index.mjs',
+    },
+  },
   build: {
     // Enable minification for production
     minify: 'esbuild',
@@ -31,6 +36,9 @@ const config = defineConfig({
   // Optimize dependencies
   optimizeDeps: {
     include: ['react', 'react-dom', '@tanstack/react-router', 'recharts'],
+  },
+  ssr: {
+    noExternal: ['@tabler/icons-react'],
   },
   environments: {
     client: {
