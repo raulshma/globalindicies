@@ -14,4 +14,5 @@ export const domainsData = [
   { id: 'd-sports', name: 'Sports', description: 'Sports performance and athletic achievement indices', icon: '🏆' },
   { id: 'd-happiness', name: 'Happiness', description: 'Well-being, life satisfaction, and quality of life indices', icon: '😊' },
   { id: 'd-social', name: 'Social Development', description: 'Human development, equality, and social progress indices', icon: '👥' },
+  { id: 'd-development', name: 'Sustainable Development', description: 'Sustainable development goals, social progress, and long-term development indices', icon: '🌱' },
 ]

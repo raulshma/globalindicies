@@ -143,5 +143,22 @@ export const countriesData = [
   { id: 'c-png', code: 'PNG', name: 'Papua New Guinea', region: 'Oceania', incomeLevel: 'lower-middle', population: 10329931 },
   { id: 'c-tls', code: 'TLS', name: 'Timor-Leste', region: 'Asia', incomeLevel: 'lower-middle', population: 1360596 },
   { id: 'c-zmb', code: 'ZMB', name: 'Zambia', region: 'Africa', incomeLevel: 'lower-middle', population: 20569737 },
+  // Additional countries for complete ranking coverage
+  { id: 'c-hkg', code: 'HKG', name: 'Hong Kong', region: 'Asia', incomeLevel: 'high', population: 7413100 },
+  { id: 'c-twn', code: 'TWN', name: 'Taiwan', region: 'Asia', incomeLevel: 'high', population: 23894394 },
+  { id: 'c-lie', code: 'LIE', name: 'Liechtenstein', region: 'Europe', incomeLevel: 'high', population: 39870 },
+  { id: 'c-brb', code: 'BRB', name: 'Barbados', region: 'Latin America', incomeLevel: 'high', population: 281995 },
+  { id: 'c-caf', code: 'CAF', name: 'Central African Republic', region: 'Africa', incomeLevel: 'low', population: 5742315 },
+  { id: 'c-hti', code: 'HTI', name: 'Haiti', region: 'Latin America', incomeLevel: 'lower-middle', population: 11724763 },
+  { id: 'c-lby', code: 'LBY', name: 'Libya', region: 'Africa', incomeLevel: 'upper-middle', population: 7361263 },
+  { id: 'c-ner', code: 'NER', name: 'Niger', region: 'Africa', incomeLevel: 'low', population: 27202843 },
+  { id: 'c-som', code: 'SOM', name: 'Somalia', region: 'Africa', incomeLevel: 'low', population: 18143379 },
+  { id: 'c-ssd', code: 'SSD', name: 'South Sudan', region: 'Africa', incomeLevel: 'low', population: 11943408 },
+  { id: 'c-syr', code: 'SYR', name: 'Syria', region: 'Asia', incomeLevel: 'low', population: 23865423 },
+  { id: 'c-tcd', code: 'TCD', name: 'Chad', region: 'Africa', incomeLevel: 'low', population: 18523165 },
+  // Alternative codes used in some rankings (pointing to same countries)
+  { id: 'c-bot', code: 'BOT', name: 'Botswana (alt)', region: 'Africa', incomeLevel: 'upper-middle', population: 2562122 },
+  { id: 'c-lat', code: 'LAT', name: 'Latvia (alt)', region: 'Europe', incomeLevel: 'high', population: 1853559 },
+  { id: 'c-uae', code: 'UAE', name: 'United Arab Emirates (alt)', region: 'Asia', incomeLevel: 'high', population: 11346000 },
 ]
 

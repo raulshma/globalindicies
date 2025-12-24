@@ -34,7 +34,7 @@ import { climatePerformanceIndex, climatePerformanceRankings, totalCountries as 
 import { networkReadinessIndex, networkReadinessRankings, totalCountries as networkReadinessTotal } from './network-readiness'
 import { economicFreedomIndex, economicFreedomRankings, totalCountries as economicFreedomTotal } from './economic-freedom'
 import { ictDevelopmentIndex, ictDevelopmentRankings, totalCountries as ictDevelopmentTotal } from './ict-development'
-import { globalInnovationIndex, globalInnovationRankings, totalCountries as globalInnovationTotal } from './global-innovation'
+
 import { sdgIndex, sdgRankings, totalCountries as sdgTotal } from './sdg-index'
 import { logisticsPerformanceIndex, logisticsPerformanceRankings, totalCountries as logisticsTotal } from './logistics-performance'
 import { travelTourismIndex, travelTourismRankings, totalCountries as travelTourismTotal } from './travel-tourism'
@@ -74,7 +74,7 @@ export { climatePerformanceIndex, climatePerformanceRankings } from './climate-p
 export { networkReadinessIndex, networkReadinessRankings } from './network-readiness'
 export { economicFreedomIndex, economicFreedomRankings } from './economic-freedom'
 export { ictDevelopmentIndex, ictDevelopmentRankings } from './ict-development'
-export { globalInnovationIndex, globalInnovationRankings } from './global-innovation'
+
 export { sdgIndex, sdgRankings } from './sdg-index'
 export { logisticsPerformanceIndex, logisticsPerformanceRankings } from './logistics-performance'
 export { travelTourismIndex, travelTourismRankings } from './travel-tourism'
@@ -116,7 +116,6 @@ export const allIndices = [
   economicFreedomIndex,
   ictDevelopmentIndex,
   // Additional indices
-  globalInnovationIndex,
   sdgIndex,
   logisticsPerformanceIndex,
   travelTourismIndex,
@@ -160,7 +159,6 @@ export const allRankingsData = [
   { index: economicFreedomIndex, rankings: economicFreedomRankings, totalCountries: economicFreedomTotal, valueField: 'score' as const },
   { index: ictDevelopmentIndex, rankings: ictDevelopmentRankings, totalCountries: ictDevelopmentTotal, valueField: 'score' as const },
   // Additional indices data
-  { index: globalInnovationIndex, rankings: globalInnovationRankings, totalCountries: globalInnovationTotal, valueField: 'score' as const },
   { index: sdgIndex, rankings: sdgRankings, totalCountries: sdgTotal, valueField: 'score' as const },
   { index: logisticsPerformanceIndex, rankings: logisticsPerformanceRankings, totalCountries: logisticsTotal, valueField: 'score' as const },
   { index: travelTourismIndex, rankings: travelTourismRankings, totalCountries: travelTourismTotal, valueField: 'score' as const },
