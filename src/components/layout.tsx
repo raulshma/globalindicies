@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from "react"
 import { Link } from "@tanstack/react-router"
 import { IconChartBar } from "@tabler/icons-react"
@@ -8,6 +6,7 @@ import { MobileNavigation, Navigation } from "@/components/navigation"
 import { CountrySelector } from "@/components/country-selector"
 import { SkipLink } from "@/components/ui/skip-link"
 import { SRAnnouncerProvider } from "@/components/ui/sr-announcer"
+import { GrainOverlay, RetroGrid } from "@/components/ui/retro-effects"
 
 interface Country {
   id: string
@@ -36,17 +35,19 @@ export function Layout({ children, countries, selectedCountry }: LayoutProps) {
 
   return (
     <SRAnnouncerProvider>
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background relative overflow-hidden font-mono selection:bg-primary selection:text-white">
+        <GrainOverlay />
+        <RetroGrid />
         <SkipLink href="#main-content" />
         <header 
-          className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60"
+          className="sticky top-0 z-50 border-b-2 border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 shadow-hard-sm"
           role="banner"
         >
           <div className="container mx-auto flex h-14 items-center justify-between px-4">
             <div className="flex items-center gap-4 md:gap-6">
               <Link to="/" className="flex items-center gap-2" aria-label="India Ranks Home">
                 <IconChartBar className="size-5 text-primary" aria-hidden="true" />
-                <span className="font-semibold text-sm">India Ranks</span>
+                <span className="font-bold text-sm tracking-tighter uppercase">India Ranks</span>
               </Link>
               <Navigation 
                 isMobileMenuOpen={isMobileMenuOpen}

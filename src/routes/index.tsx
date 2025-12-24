@@ -10,6 +10,8 @@ import {
 } from "@tabler/icons-react"
 import { getDashboardData } from "@/lib/server-functions/dashboard"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { BentoGrid, BentoItem } from "@/components/ui/bento-grid"
+import { Retro3D } from "@/components/ui/retro-3d"
 import { cn } from "@/lib/utils"
 import { CACHE_CONFIG } from "@/lib/cache-config"
 
@@ -55,148 +57,158 @@ function HomePage() {
   const data = Route.useLoaderData()
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8 relative z-10">
       <div>
-        <h1 className="text-2xl font-bold">Dashboard</h1>
-        <p className="text-muted-foreground text-sm">
-          Overview of global rankings using latest available data
+        <h1 className="text-4xl font-black uppercase tracking-tighter mb-2">Dashboard_</h1>
+        <p className="text-muted-foreground font-mono text-sm border-l-4 border-primary pl-4">
+          :: Overview of global rankings using latest available data
         </p>
       </div>
 
-      {/* Summary Stats */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <StatCard
+      {/* Summary Stats - Bento Row 1 */}
+      <BentoGrid className="md:auto-rows-[10rem]">
+        <BentoItem
           title="Total Indices"
-          value={data.summary.totalIndices}
-          icon={<IconChartBar className="size-4" />}
+          description="Tracked globally"
+          header={<div className="font-black text-4xl">{data.summary.totalIndices}</div>}
+          className="md:col-span-1 bg-card text-card-foreground"
+          icon={<IconChartBar className="size-6 mb-2 text-primary" />}
         />
-        <StatCard
+        <BentoItem
           title="Avg. Percentile"
-          value={`${data.summary.avgPercentile.toFixed(1)}%`}
-          description="Higher is better"
+          description="Global standing (Higher is better)"
+          header={<div className="font-black text-4xl">{data.summary.avgPercentile.toFixed(1)}%</div>}
+          className="md:col-span-1"
         />
-        <StatCard
-          title="Improving"
-          value={data.summary.improvingCount}
-          icon={<IconTrendingUp className="size-4 text-green-600" />}
-          valueClassName="text-green-600"
+        <BentoItem
+          title="Momentum"
+          description="Indices Improving vs Declining"
+          className="md:col-span-1 flex flex-row items-center justify-between"
+          header={
+            <div className="flex gap-4 w-full">
+              <div className="flex flex-col">
+                <span className="text-green-600 font-black text-3xl flex items-center gap-1">
+                  <IconTrendingUp className="size-6" /> {data.summary.improvingCount}
+                </span>
+                <span className="text-xs text-muted-foreground uppercase">Improving</span>
+              </div>
+              <div className="h-full w-px bg-border mx-2" />
+              <div className="flex flex-col">
+                <span className="text-red-500 font-black text-3xl flex items-center gap-1">
+                  <IconTrendingDown className="size-6" /> {data.summary.decliningCount}
+                </span>
+                <span className="text-xs text-muted-foreground uppercase">Declining</span>
+              </div>
+            </div>
+          }
         />
-        <StatCard
-          title="Declining"
-          value={data.summary.decliningCount}
-          icon={<IconTrendingDown className="size-4 text-red-600" />}
-          valueClassName="text-red-600"
-        />
-      </div>
+      </BentoGrid>
 
-      {/* Top Improving and Declining */}
+      {/* Top Movers - Bento Row 2 */}
       <div className="grid gap-6 lg:grid-cols-2">
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="flex items-center gap-2 text-base">
-              <IconTrendingUp className="size-4 text-green-600" />
-              Top Improving Indices
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            {data.topImproving.length > 0 ? (
-              <div className="space-y-3">
-                {data.topImproving.map((item) => (
-                  <RankingChangeItem
-                    key={item.indexId}
-                    indexName={item.indexName}
-                    domainName={item.domainName}
-                    rank={item.rank}
-                    previousRank={item.previousRank}
-                    rankChange={item.rankChange}
-                    percentile={item.percentile}
-                  />
-                ))}
-              </div>
-            ) : (
-              <p className="text-muted-foreground text-sm">
-                No improving indices found
-              </p>
-            )}
-          </CardContent>
-        </Card>
+        <Retro3D>
+            <Card className="h-full border-2 border-border shadow-hard">
+            <CardHeader className="pb-3 border-b-2 border-border bg-muted/20">
+                <CardTitle className="flex items-center gap-2 text-lg font-bold uppercase tracking-wide">
+                <IconTrendingUp className="size-5 text-green-600" />
+                Top Improvers
+                </CardTitle>
+            </CardHeader>
+            <CardContent className="pt-4">
+                {data.topImproving.length > 0 ? (
+                <div className="space-y-3">
+                    {data.topImproving.map((item) => (
+                    <RankingChangeItem
+                        key={item.indexId}
+                        indexName={item.indexName}
+                        domainName={item.domainName}
+                        rank={item.rank}
+                        previousRank={item.previousRank}
+                        rankChange={item.rankChange}
+                        percentile={item.percentile}
+                    />
+                    ))}
+                </div>
+                ) : (
+                <p className="text-muted-foreground text-sm font-mono">
+                    // No improving indices found
+                </p>
+                )}
+            </CardContent>
+            </Card>
+        </Retro3D>
 
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="flex items-center gap-2 text-base">
-              <IconTrendingDown className="size-4 text-red-600" />
-              Top Declining Indices
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            {data.topDeclining.length > 0 ? (
-              <div className="space-y-3">
-                {data.topDeclining.map((item) => (
-                  <RankingChangeItem
-                    key={item.indexId}
-                    indexName={item.indexName}
-                    domainName={item.domainName}
-                    rank={item.rank}
-                    previousRank={item.previousRank}
-                    rankChange={item.rankChange}
-                    percentile={item.percentile}
-                  />
-                ))}
-              </div>
-            ) : (
-              <p className="text-muted-foreground text-sm">
-                No declining indices found
-              </p>
-            )}
-          </CardContent>
-        </Card>
+        <Retro3D>
+            <Card className="h-full border-2 border-border shadow-hard">
+            <CardHeader className="pb-3 border-b-2 border-border bg-muted/20">
+                <CardTitle className="flex items-center gap-2 text-lg font-bold uppercase tracking-wide">
+                <IconTrendingDown className="size-5 text-red-600" />
+                Top Decliners
+                </CardTitle>
+            </CardHeader>
+            <CardContent className="pt-4">
+                {data.topDeclining.length > 0 ? (
+                <div className="space-y-3">
+                    {data.topDeclining.map((item) => (
+                    <RankingChangeItem
+                        key={item.indexId}
+                        indexName={item.indexName}
+                        domainName={item.domainName}
+                        rank={item.rank}
+                        previousRank={item.previousRank}
+                        rankChange={item.rankChange}
+                        percentile={item.percentile}
+                    />
+                    ))}
+                </div>
+                ) : (
+                <p className="text-muted-foreground text-sm font-mono">
+                    // No declining indices found
+                </p>
+                )}
+            </CardContent>
+            </Card>
+        </Retro3D>
       </div>
 
-      {/* Domain Summaries */}
+      {/* Domain Summaries - Bento Grid */}
       <div>
-        <h2 className="mb-4 text-lg font-semibold">Performance by Domain</h2>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <h2 className="mb-4 text-2xl font-black uppercase tracking-tighter flex items-center gap-2">
+             <span className="w-4 h-4 bg-primary inline-block" /> Domain Performance
+        </h2>
+        <BentoGrid className="md:grid-cols-4 md:auto-rows-[16rem]">
           {data.domainSummaries
             .filter((d) => d.totalIndices > 0)
-            .map((summary) => (
-              <DomainCard key={summary.domain.id} summary={summary} />
+            .map((summary, i) => (
+              <BentoItem
+                key={summary.domain.id}
+                title={summary.domain.name}
+                description={`${summary.totalIndices} Indices`}
+                className={i === 0 || i === 3 ? "md:col-span-2 bg-muted/10" : "md:col-span-1"}
+                icon={<span className="text-2xl mb-2 block">{summary.domain.icon}</span>}
+                header={
+                   <div className="mt-auto pt-4 border-t-2 border-border border-dashed w-full">
+                       <div className="flex justify-between items-end">
+                           <div>
+                               <div className="text-xs text-muted-foreground font-bold uppercase">Avg Percentile</div>
+                               <div className="text-2xl font-black">{summary.avgPercentile.toFixed(0)}%</div>
+                           </div>
+                           <div className={cn(
+                               "text-xl font-bold flex items-center gap-1",
+                               summary.avgRankChange > 0 ? "text-green-600" : "text-red-500"
+                           )}>
+                               {summary.avgRankChange > 0 ? "↑" : "↓"} {Math.abs(summary.avgRankChange).toFixed(1)}
+                           </div>
+                       </div>
+                   </div> 
+                }
+              >
+                 <a href={`/rankings/${summary.domain.id}`} className="absolute inset-0 z-10" aria-label={`View ${summary.domain.name} rankings`} />
+              </BentoItem>
             ))}
-        </div>
+        </BentoGrid>
       </div>
     </div>
-  )
-}
-
-interface StatCardProps {
-  title: string
-  value: string | number
-  description?: string
-  icon?: React.ReactNode
-  valueClassName?: string
-}
-
-function StatCard({
-  title,
-  value,
-  description,
-  icon,
-  valueClassName,
-}: StatCardProps) {
-  return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between pb-2">
-        <CardTitle className="text-muted-foreground text-xs font-medium">
-          {title}
-        </CardTitle>
-        {icon}
-      </CardHeader>
-      <CardContent>
-        <div className={cn("text-2xl font-bold", valueClassName)}>{value}</div>
-        {description && (
-          <p className="text-muted-foreground text-xs">{description}</p>
-        )}
-      </CardContent>
-    </Card>
   )
 }
 
@@ -274,99 +286,5 @@ function RankChangeIndicator({ change, previousRank }: RankChangeIndicatorProps)
       <IconMinus className="size-4" />
       <span className="text-xs">0</span>
     </div>
-  )
-}
-
-interface DomainSummary {
-  domain: {
-    id: string
-    name: string
-    description: string
-    icon: string
-  }
-  totalIndices: number
-  avgPercentile: number
-  avgRankChange: number
-  bestIndex: {
-    id: string
-    name: string
-    rank: number
-    percentile: number
-  } | null
-  worstIndex: {
-    id: string
-    name: string
-    rank: number
-    percentile: number
-  } | null
-}
-
-interface DomainCardProps {
-  summary: DomainSummary
-}
-
-function DomainCard({ summary }: DomainCardProps) {
-  const { domain, totalIndices, avgPercentile, avgRankChange, bestIndex } =
-    summary
-
-  return (
-    <a
-      href={`/rankings/${domain.id}`}
-      className="block"
-    >
-      <Card className="transition-colors hover:bg-muted/50">
-        <CardHeader className="pb-2">
-          <CardTitle className="flex items-center gap-2 text-sm">
-            <span>{domain.icon}</span>
-            <span>{domain.name}</span>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-muted-foreground text-xs">Indices</span>
-              <span className="text-sm font-medium">{totalIndices}</span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-muted-foreground text-xs">
-                Avg. Percentile
-              </span>
-              <span className="text-sm font-medium">
-                {avgPercentile.toFixed(0)}%
-              </span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-muted-foreground text-xs">Trend</span>
-              <span
-                className={cn(
-                  "flex items-center gap-1 text-sm font-medium",
-                  avgRankChange > 0.5
-                    ? "text-green-600"
-                    : avgRankChange < -0.5
-                      ? "text-red-600"
-                      : "text-muted-foreground"
-                )}
-              >
-                {avgRankChange > 0.5 ? (
-                  <IconArrowUp className="size-3" />
-                ) : avgRankChange < -0.5 ? (
-                  <IconArrowDown className="size-3" />
-                ) : (
-                  <IconMinus className="size-3" />
-                )}
-                {avgRankChange > 0 ? "+" : ""}
-                {avgRankChange.toFixed(1)}
-              </span>
-            </div>
-            {bestIndex && (
-              <div className="border-t border-border pt-2">
-                <p className="text-muted-foreground text-xs">Best performing</p>
-                <p className="truncate text-xs font-medium">{bestIndex.name}</p>
-              </div>
-            )}
-          </div>
-        </CardContent>
-      </Card>
-    </a>
   )
 }
