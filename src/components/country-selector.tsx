@@ -3,6 +3,9 @@
 import * as React from "react"
 import { useNavigate } from "@tanstack/react-router"
 import {
+  IconFlag,
+} from "@tabler/icons-react"
+import {
   Combobox,
   ComboboxContent,
   ComboboxEmpty,
@@ -28,61 +31,6 @@ interface CountrySelectorProps {
 
 const STORAGE_KEY = "global-indicies-selected-country"
 const DEFAULT_COUNTRY = "IND"
-
-/**
- * Convert ISO 3166-1 alpha-3 country code to flag emoji
- * Uses regional indicator symbols (Unicode)
- */
-function getCountryFlag(code: string): string {
-  // Map common alpha-3 codes to alpha-2 for flag emoji
-  const alpha3ToAlpha2: Record<string, string> = {
-    AFG: "AF", ALB: "AL", DZA: "DZ", AND: "AD", AGO: "AO",
-    ARG: "AR", ARM: "AM", AUS: "AU", AUT: "AT", AZE: "AZ",
-    BGD: "BD", BLR: "BY", BEL: "BE", BEN: "BJ", BTN: "BT",
-    BOL: "BO", BIH: "BA", BWA: "BW", BRA: "BR", BRN: "BN",
-    BGR: "BG", BFA: "BF", BDI: "BI", KHM: "KH", CMR: "CM",
-    CAN: "CA", CAF: "CF", TCD: "TD", CHL: "CL", CHN: "CN",
-    COL: "CO", COD: "CD", COG: "CG", CRI: "CR", HRV: "HR",
-    CUB: "CU", CYP: "CY", CZE: "CZ", DNK: "DK", DJI: "DJ",
-    DOM: "DO", ECU: "EC", EGY: "EG", SLV: "SV", GNQ: "GQ",
-    ERI: "ER", EST: "EE", SWZ: "SZ", ETH: "ET", FJI: "FJ",
-    FIN: "FI", FRA: "FR", GAB: "GA", GMB: "GM", GEO: "GE",
-    DEU: "DE", GHA: "GH", GRC: "GR", GTM: "GT", GIN: "GN",
-    GNB: "GW", GUY: "GY", HTI: "HT", HND: "HN", HUN: "HU",
-    ISL: "IS", IND: "IN", IDN: "ID", IRN: "IR", IRQ: "IQ",
-    IRL: "IE", ISR: "IL", ITA: "IT", JAM: "JM", JPN: "JP",
-    JOR: "JO", KAZ: "KZ", KEN: "KE", PRK: "KP", KOR: "KR",
-    KWT: "KW", KGZ: "KG", LAO: "LA", LVA: "LV", LBN: "LB",
-    LSO: "LS", LBR: "LR", LBY: "LY", LTU: "LT", LUX: "LU",
-    MDG: "MG", MWI: "MW", MYS: "MY", MDV: "MV", MLI: "ML",
-    MLT: "MT", MRT: "MR", MUS: "MU", MEX: "MX", MDA: "MD",
-    MNG: "MN", MNE: "ME", MAR: "MA", MOZ: "MZ", MMR: "MM",
-    NAM: "NA", NPL: "NP", NLD: "NL", NZL: "NZ", NIC: "NI",
-    NER: "NE", NGA: "NG", MKD: "MK", NOR: "NO", OMN: "OM",
-    PAK: "PK", PAN: "PA", PNG: "PG", PRY: "PY", PER: "PE",
-    PHL: "PH", POL: "PL", PRT: "PT", QAT: "QA", ROU: "RO",
-    RUS: "RU", RWA: "RW", SAU: "SA", SEN: "SN", SRB: "RS",
-    SLE: "SL", SGP: "SG", SVK: "SK", SVN: "SI", SOM: "SO",
-    ZAF: "ZA", SSD: "SS", ESP: "ES", LKA: "LK", SDN: "SD",
-    SUR: "SR", SWE: "SE", CHE: "CH", SYR: "SY", TWN: "TW",
-    TJK: "TJ", TZA: "TZ", THA: "TH", TLS: "TL", TGO: "TG",
-    TTO: "TT", TUN: "TN", TUR: "TR", TKM: "TM", UGA: "UG",
-    UKR: "UA", ARE: "AE", GBR: "GB", USA: "US", URY: "UY",
-    UZB: "UZ", VEN: "VE", VNM: "VN", YEM: "YE", ZMB: "ZM",
-    ZWE: "ZW", CIV: "CI", PSE: "PS", XKX: "XK",
-  }
-  
-  const alpha2 = alpha3ToAlpha2[code.toUpperCase()]
-  if (!alpha2) return "🏳️"
-  
-  // Convert alpha-2 code to flag emoji using regional indicator symbols
-  const codePoints = alpha2
-    .toUpperCase()
-    .split("")
-    .map((char) => 127397 + char.charCodeAt(0))
-  
-  return String.fromCodePoint(...codePoints)
-}
 
 /**
  * Get stored country from localStorage
@@ -190,7 +138,7 @@ export function CountrySelector({ countries, selectedCountry }: CountrySelectorP
                 <ComboboxLabel>{formatRegion(region)}</ComboboxLabel>
                 {regionCountries.map((country) => (
                   <ComboboxItem key={country.code} value={country.code}>
-                    <span className="mr-2 text-base">{getCountryFlag(country.code)}</span>
+                    <IconFlag className="mr-2 size-4 text-muted-foreground/50" />
                     <span className="font-medium">{country.name}</span>
                     <span className="text-muted-foreground ml-auto text-xs">
                       {country.code}
@@ -203,7 +151,7 @@ export function CountrySelector({ countries, selectedCountry }: CountrySelectorP
             // Flat filtered view
             filteredCountries.map((country) => (
               <ComboboxItem key={country.code} value={country.code}>
-                <span className="mr-2 text-base">{getCountryFlag(country.code)}</span>
+                <IconFlag className="mr-2 size-4 text-muted-foreground/50" />
                 <div className="flex flex-col">
                   <span className="font-medium">{country.name}</span>
                   <span className="text-muted-foreground text-xs">

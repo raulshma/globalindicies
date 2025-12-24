@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react"
-import { createFileRoute } from "@tanstack/react-router"
+import { createFileRoute, Link } from "@tanstack/react-router"
 import { z } from "zod"
 import {
   IconArrowDown,
@@ -215,13 +215,14 @@ function IndexDetailPage() {
     <div className="space-y-8 container-wide relative z-10">
       <div className="mb-8 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <a
-            href={`/rankings/${params.domain}`}
+          <Link
+            to="/rankings/$domain"
+            params={{ domain: params.domain }}
             className="flex items-center gap-1 text-[10px] font-black uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary"
           >
             <IconChevronLeft className="size-3" />
             {index.domain.name}_INDICES
-          </a>
+          </Link>
         </div>
         <a
           href={index.sourceUrl}

@@ -9,10 +9,12 @@ import {
   IconArrowUp,
   IconMinus,
 } from "@tabler/icons-react"
+import { Link } from "@tanstack/react-router"
 
 import type { LatestIndexRanking } from "@/lib/server-functions/country-rankings"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { DomainIcon } from "@/components/domain-icon"
 import { cn } from "@/lib/utils"
 
 export interface IndexRankingCardProps {
@@ -120,7 +122,7 @@ export function IndexRankingCard({ ranking, showDomain = false }: IndexRankingCa
             </CardTitle>
             {showDomain && (
               <Badge variant="outline" className="shrink-0 text-xs">
-                <span aria-hidden="true">{ranking.domainIcon}</span>
+                <DomainIcon icon={ranking.domainIcon} className="size-3" />
                 <span className="ml-1 hidden sm:inline">{ranking.domainName}</span>
                 <span className="sr-only">{ranking.domainName}</span>
               </Badge>
@@ -149,8 +151,9 @@ export function IndexRankingCard({ ranking, showDomain = false }: IndexRankingCa
   }
 
   return (
-    <a 
-      href={`/rankings/${ranking.domainId}/${ranking.indexId}`} 
+    <Link
+      to="/rankings/$domain/$indexId"
+      params={{ domain: ranking.domainId, indexId: ranking.indexId }}
       className="block touch-manipulation"
       aria-label={`${ranking.indexName}: Rank ${ranking.rank} of ${ranking.totalCountries}, ${getPerformanceLabel(ranking.percentile!)}`}
     >
@@ -162,7 +165,7 @@ export function IndexRankingCard({ ranking, showDomain = false }: IndexRankingCa
             </CardTitle>
             {showDomain && (
               <Badge variant="outline" className="shrink-0 text-xs">
-                <span aria-hidden="true">{ranking.domainIcon}</span>
+                <DomainIcon icon={ranking.domainIcon} className="size-3" />
                 <span className="ml-1 hidden sm:inline">{ranking.domainName}</span>
                 <span className="sr-only">{ranking.domainName}</span>
               </Badge>
@@ -228,6 +231,6 @@ export function IndexRankingCard({ ranking, showDomain = false }: IndexRankingCa
           </div>
         </CardContent>
       </Card>
-    </a>
+    </Link>
   )
 }

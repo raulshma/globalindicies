@@ -22,6 +22,7 @@ import {
   ComboboxList,
 } from "@/components/ui/combobox"
 import { TrendChart } from "@/components/charts/trend-chart"
+import { DomainIcon } from "@/components/domain-icon"
 import { cn } from "@/lib/utils"
 import { CACHE_CONFIG } from "@/lib/cache-config"
 
@@ -298,7 +299,7 @@ function TrendsPage() {
                     )
                   }
                 >
-                  {domain.icon} {domain.name}
+                  <DomainIcon icon={domain.icon} className="size-4 mr-2 inline" /> {domain.name}
                 </Button>
               ))}
             </div>

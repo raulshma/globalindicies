@@ -13,6 +13,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Layout } from "@/components/layout"
 import { getAllCountries } from "@/lib/server-functions/countries"
 import { generateWebsiteJsonLd } from "@/lib/seo"
+import { ThreeBackground } from "@/components/ThreeBackground"
 
 // Router context type
 export interface RouterContext {
@@ -115,14 +116,6 @@ export const Route = createRootRouteWithContext<RouterContext>()({
         href: "https://fonts.gstatic.com",
         crossOrigin: "anonymous",
       },
-      // Preload critical font weights
-      {
-        rel: "preload",
-        href: "/fonts/noto-sans-latin-wght-normal.woff2",
-        as: "font",
-        type: "font/woff2",
-        crossOrigin: "anonymous",
-      },
       // Apple touch icon for iOS
       {
         rel: "apple-touch-icon",
@@ -196,6 +189,7 @@ function RootComponent() {
   return (
     <ThemeProvider defaultTheme="system" storageKey="global-indicies-theme">
       <Layout countries={countries} selectedCountry={selectedCountry}>
+        <ThreeBackground />
         <Outlet />
       </Layout>
     </ThemeProvider>

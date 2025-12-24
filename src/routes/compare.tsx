@@ -25,6 +25,7 @@ import {
   ComboboxList,
 } from "@/components/ui/combobox"
 import { RadarChart } from "@/components/charts/radar-chart"
+import { DomainIcon } from "@/components/domain-icon"
 import { cn } from "@/lib/utils"
 import { generateComparisonJsonLd } from "@/lib/seo"
 import { CACHE_CONFIG } from "@/lib/cache-config"
@@ -389,7 +390,7 @@ function ComparePage() {
                     )
                   }
                 >
-                  {domain.icon} {domain.name}
+                  <DomainIcon icon={domain.icon} className="size-4 mr-2 inline" /> {domain.name}
                 </Button>
               ))}
             </div>

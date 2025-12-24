@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router"
+import { createFileRoute, Link } from "@tanstack/react-router"
 import { z } from "zod"
 import {
   IconArrowDown,
@@ -87,13 +87,13 @@ function DomainDetailPage() {
   return (
     <div className="space-y-8 container-wide relative z-10">
       <div className="mb-8">
-        <a
-          href="/rankings"
+        <Link
+          to="/rankings"
           className="flex items-center gap-1 text-xs font-bold uppercase text-muted-foreground hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary w-fit"
         >
           <IconChevronLeft className="size-4" />
           All Domain Indices
-        </a>
+        </Link>
       </div>
 
       {/* Stats Overview */}
@@ -166,12 +166,13 @@ function DomainDetailPage() {
                       className="group hover:bg-white/5 transition-colors"
                     >
                       <td className="py-4">
-                        <a
-                          href={`/rankings/${domain.id}/${ranking.indexId}`}
+                        <Link
+                          to="/rankings/$domain/$indexId"
+                          params={{ domain: domain.id, indexId: ranking.indexId }}
                           className="font-bold text-sm block group-hover:text-primary transition-colors"
                         >
                           {ranking.indexName}
-                        </a>
+                        </Link>
                         <span className="text-[10px] text-muted-foreground uppercase tracking-widest leading-none">
                           {ranking.shortName}
                         </span>

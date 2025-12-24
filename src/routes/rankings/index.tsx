@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router"
+import { createFileRoute, Link } from "@tanstack/react-router"
 import { z } from "zod"
 import {
   IconArrowDown,
@@ -9,6 +9,7 @@ import {
 import { getAllDomainsWithStats } from "@/lib/server-functions/domains"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { DomainIcon } from "@/components/domain-icon"
 import { cn } from "@/lib/utils"
 import { CACHE_CONFIG } from "@/lib/cache-config"
 
@@ -126,7 +127,7 @@ function DomainSection({ domain }: DomainSectionProps) {
       <CardHeader className="pb-4 border-b border-white/10 bg-white/5">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3">
-            <span className="text-3xl filter grayscale hover:grayscale-0 transition-all">{domain.icon}</span>
+            <DomainIcon icon={domain.icon} className="size-8" />
             <div>
               <CardTitle className="text-xl font-black uppercase tracking-tight">{domain.name}</CardTitle>
               <p className="text-muted-foreground font-mono text-xs">
@@ -134,13 +135,14 @@ function DomainSection({ domain }: DomainSectionProps) {
               </p>
             </div>
           </div>
-          <a
-            href={`/rankings/${domain.id}`}
+          <Link
+            to="/rankings/$domain"
+            params={{ domain: domain.id }}
             className="flex items-center gap-1 text-xs font-bold uppercase text-primary hover:underline bg-primary/10 px-2 py-1"
           >
             Explore All
             <IconChevronRight className="size-3" />
-          </a>
+          </Link>
         </div>
 
         {/* Domain Stats */}
@@ -205,12 +207,13 @@ function DomainSection({ domain }: DomainSectionProps) {
                       className="group hover:bg-white/5 transition-colors"
                     >
                       <td className="py-4">
-                        <a
-                          href={`/rankings/${domain.id}/${ranking.indexId}`}
+                        <Link
+                          to="/rankings/$domain/$indexId"
+                          params={{ domain: domain.id, indexId: ranking.indexId }}
                           className="font-bold text-sm block group-hover:text-primary transition-colors"
                         >
                           {ranking.indexName}
-                        </a>
+                        </Link>
                         <span className="text-[10px] text-muted-foreground uppercase tracking-widest leading-none">
                           {ranking.source}
                         </span>
@@ -292,8 +295,9 @@ interface HighlightCardProps {
 
 function HighlightCard({ type, index, domainId }: HighlightCardProps) {
   return (
-    <a
-      href={`/rankings/${domainId}/${index.id}`}
+    <Link
+      to="/rankings/$domain/$indexId"
+      params={{ domain: domainId, indexId: index.id }}
       className={cn(
         "block border p-3 transition-colors hover:bg-muted/50",
         type === "best" ? "border-green-200 bg-green-50/50 dark:border-green-900 dark:bg-green-950/20" : "border-red-200 bg-red-50/50 dark:border-red-900 dark:bg-red-950/20"
@@ -311,7 +315,7 @@ function HighlightCard({ type, index, domainId }: HighlightCardProps) {
           ({index.percentile.toFixed(0)}th percentile)
         </span>
       </div>
-    </a>
+    </Link>
   )
 }
 

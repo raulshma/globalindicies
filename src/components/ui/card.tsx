@@ -11,7 +11,7 @@ function Card({
     <div
       data-slot="card"
       data-size={size}
-      className={cn("bg-card/70 backdrop-blur-3xl text-card-foreground p-6 rounded-3xl border border-white/20 dark:border-white/10 shadow-soft hover:shadow-soft-lg transition-all duration-500 hover:-translate-y-1", className)}
+      className={cn("bg-card/40 backdrop-blur-2xl text-card-foreground p-6 rounded-3xl border border-white/20 dark:border-white/10 shadow-soft hover:shadow-soft-lg transition-all duration-500 hover:-translate-y-1", className)}
       {...props}
     />
   )

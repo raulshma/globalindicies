@@ -6,10 +6,12 @@
 
 import * as React from "react"
 import { IconChevronDown, IconChevronRight } from "@tabler/icons-react"
+import { Link } from "@tanstack/react-router"
 
 import type { DomainRankingGroup } from "@/lib/server-functions/country-rankings"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { DomainIcon } from "@/components/domain-icon"
 import { IndexRankingCard } from "@/components/index-ranking-card"
 import { cn } from "@/lib/utils"
 
@@ -53,17 +55,18 @@ function DomainSection({ group, defaultExpanded = true }: DomainSectionProps) {
           )}
         </Button>
 
-        <a
+        <Link
           id={headerId}
-          href={`/rankings/${group.domainId}`}
+          to="/rankings/$domain"
+          params={{ domain: group.domainId }}
           className="flex items-center gap-2 hover:text-primary transition-colors flex-1 min-w-0"
         >
-          <span className="text-xl shrink-0" aria-hidden="true">{group.domainIcon}</span>
+          <DomainIcon icon={group.domainIcon} className="size-5 shrink-0" />
           <h2 className="text-base sm:text-lg font-semibold truncate">{group.domainName}</h2>
           <Badge variant="secondary" className="shrink-0 ml-auto sm:ml-2">
             {group.rankings.length} {group.rankings.length === 1 ? "index" : "indices"}
           </Badge>
-        </a>
+        </Link>
       </div>
 
       {/* Index Cards Grid - Requirement 7.4: Mobile-friendly card layout */}

@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router"
+import { createFileRoute, Link } from "@tanstack/react-router"
 import { z } from "zod"
 import {
   IconArrowDown,
@@ -12,6 +12,7 @@ import { getDashboardData } from "@/lib/server-functions/dashboard"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { BentoGrid, BentoItem } from "@/components/ui/bento-grid"
 import { Retro3D } from "@/components/ui/retro-3d"
+import { DomainIcon } from "@/components/domain-icon"
 import { cn } from "@/lib/utils"
 import { CACHE_CONFIG } from "@/lib/cache-config"
 
@@ -180,7 +181,7 @@ function HomePage() {
                 title={summary.domain.name}
                 description={`${summary.totalIndices} Indices`}
                 className={i === 0 || i === 3 ? "md:col-span-2 bg-muted/10" : "md:col-span-1"}
-                icon={<span className="text-2xl mb-2 block">{summary.domain.icon}</span>}
+                icon={<DomainIcon icon={summary.domain.icon} className="mb-2" />}
               >
                 <div className="mt-auto pt-4 border-t border-white/10 w-full">
                   <div className="flex justify-between items-end">
@@ -194,17 +195,22 @@ function HomePage() {
                     </div>
                     <div
                       className={cn(
-                        "text-xl font-bold flex items-center gap-1",
+                        "text-xl font-bold flex items-center gap-0.5",
                         summary.avgRankChange > 0 ? "text-green-600" : "text-red-500"
                       )}
                     >
-                      {summary.avgRankChange > 0 ? "↑" : "↓"}{" "}
+                      {summary.avgRankChange > 0 ? (
+                        <IconArrowUp className="size-5" />
+                      ) : (
+                        <IconArrowDown className="size-5" />
+                      )}{" "}
                       {Math.abs(summary.avgRankChange).toFixed(1)}
                     </div>
                   </div>
                 </div>
-                <a
-                  href={`/rankings/${summary.domain.id}`}
+                <Link
+                  to="/rankings/$domain"
+                  params={{ domain: summary.domain.id }}
                   className="absolute inset-0 z-10"
                   aria-label={`View ${summary.domain.name} rankings`}
                 />
