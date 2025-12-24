@@ -77,7 +77,7 @@ function RankChangeIndicator({ change, previousYear }: RankChangeIndicatorProps)
     return (
       <span className="flex items-center gap-1 text-red-600" role="status">
         <IconArrowDown className="size-3" aria-hidden="true" />
-        <span className="text-xs font-medium">{change}</span>
+        <span className="text-xs font-medium">{Math.abs(change)}</span>
         <span className="sr-only">positions declined from {previousYear}</span>
       </span>
     )

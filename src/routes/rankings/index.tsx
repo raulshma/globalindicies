@@ -368,7 +368,7 @@ function RankChangeIndicator({
     return (
       <span className="flex items-center justify-end gap-0.5 text-red-600">
         <IconArrowDown className="size-3" />
-        <span className="text-xs">{change}</span>
+        <span className="text-xs">{Math.abs(change)}</span>
       </span>
     )
   }

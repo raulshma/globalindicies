@@ -1,8 +1,8 @@
 /**
  * World Competitiveness Index Data
- * Source: IMD World Competitiveness Center - 2024
- * https://www.imd.org/centers/world-competitiveness-center/rankings/world-competitiveness-ranking/
- * Higher score = more competitive. Rankings are 1 (most competitive) to 67 (least competitive)
+ * Source: IMD World Competitiveness Center - 2025
+ * https://www.imd.org/centers/wcc/world-competitiveness-center/rankings/world-competitiveness-ranking/rankings/wcr-rankings/
+ * Higher score = more competitive. Rankings are 1 (most competitive) to 69 (least competitive)
  */
 
 export const worldCompetitivenessIndex = {
@@ -11,17 +11,89 @@ export const worldCompetitivenessIndex = {
   shortName: 'WCI',
   domainId: 'd-economy',
   source: 'IMD World Competitiveness Center',
-  sourceUrl: 'https://www.imd.org/centers/world-competitiveness-center/rankings/world-competitiveness-ranking/',
+  sourceUrl: 'https://www.imd.org/centers/wcc/world-competitiveness-center/rankings/world-competitiveness-ranking/rankings/wcr-rankings/',
   methodology:
     'Composite index measuring national competitiveness across four factors: economic performance, government efficiency, business efficiency, and infrastructure. Based on 336 criteria using statistical data and survey responses. Higher score indicates greater competitiveness.',
   updateFrequency: 'annual',
   scoreMin: 0,
   scoreMax: 100,
   higherIsBetter: true,
-  lastUpdated: new Date('2024-06-01'),
+  lastUpdated: new Date('2025-06-01'),
 }
 
 export const worldCompetitivenessRankings = [
+  // 2025 Rankings (Latest)
+  { code: 'CHE', rank: 1, year: 2025, score: 100.0 },
+  { code: 'SGP', rank: 2, year: 2025, score: 99.4 },
+  { code: 'HKG', rank: 3, year: 2025, score: 99.2 },
+  { code: 'DNK', rank: 4, year: 2025, score: 97.5 },
+  { code: 'ARE', rank: 5, year: 2025, score: 96.1 },
+  { code: 'TWN', rank: 6, year: 2025, score: 93.7 },
+  { code: 'IRL', rank: 7, year: 2025, score: 91.3 },
+  { code: 'SWE', rank: 8, year: 2025, score: 90.2 },
+  { code: 'QAT', rank: 9, year: 2025, score: 89.9 },
+  { code: 'NLD', rank: 10, year: 2025, score: 89.8 },
+  { code: 'CAN', rank: 11, year: 2025, score: 88.7 },
+  { code: 'NOR', rank: 12, year: 2025, score: 86.2 },
+  { code: 'USA', rank: 13, year: 2025, score: 84.3 },
+  { code: 'FIN', rank: 14, year: 2025, score: 83.8 },
+  { code: 'ISL', rank: 15, year: 2025, score: 83.5 },
+  { code: 'CHN', rank: 16, year: 2025, score: 82.1 },
+  { code: 'SAU', rank: 17, year: 2025, score: 82.1 },
+  { code: 'AUS', rank: 18, year: 2025, score: 78.4 },
+  { code: 'DEU', rank: 19, year: 2025, score: 78.2 },
+  { code: 'LUX', rank: 20, year: 2025, score: 78.2 },
+  { code: 'LTU', rank: 21, year: 2025, score: 77.7 },
+  { code: 'BHR', rank: 22, year: 2025, score: 76.6 },
+  { code: 'MYS', rank: 23, year: 2025, score: 74.8 },
+  { code: 'BEL', rank: 24, year: 2025, score: 74.6 },
+  { code: 'CZE', rank: 25, year: 2025, score: 73.7 },
+  { code: 'AUT', rank: 26, year: 2025, score: 73.6 },
+  { code: 'KOR', rank: 27, year: 2025, score: 73.4 },
+  { code: 'OMN', rank: 28, year: 2025, score: 72.9 },
+  { code: 'GBR', rank: 29, year: 2025, score: 71.9 },
+  { code: 'THA', rank: 30, year: 2025, score: 71.3 },
+  { code: 'NZL', rank: 31, year: 2025, score: 70.2 },
+  { code: 'FRA', rank: 32, year: 2025, score: 69.9 },
+  { code: 'EST', rank: 33, year: 2025, score: 69.7 },
+  { code: 'KAZ', rank: 34, year: 2025, score: 69.0 },
+  { code: 'JPN', rank: 35, year: 2025, score: 68.7 },
+  { code: 'KWT', rank: 36, year: 2025, score: 68.7 },
+  { code: 'PRT', rank: 37, year: 2025, score: 67.8 },
+  { code: 'LVA', rank: 38, year: 2025, score: 67.0 },
+  { code: 'ESP', rank: 39, year: 2025, score: 65.8 },
+  { code: 'IDN', rank: 40, year: 2025, score: 64.3 },
+  { code: 'IND', rank: 41, year: 2025, score: 64.2 },
+  { code: 'CHL', rank: 42, year: 2025, score: 62.5 },
+  { code: 'ITA', rank: 43, year: 2025, score: 62.5 },
+  { code: 'CYP', rank: 44, year: 2025, score: 61.8 },
+  { code: 'PRI', rank: 45, year: 2025, score: 61.0 },
+  { code: 'SVN', rank: 46, year: 2025, score: 59.1 },
+  { code: 'JOR', rank: 47, year: 2025, score: 57.8 },
+  { code: 'HUN', rank: 48, year: 2025, score: 56.7 },
+  { code: 'ROU', rank: 49, year: 2025, score: 56.6 },
+  { code: 'GRC', rank: 50, year: 2025, score: 55.3 },
+  { code: 'PHL', rank: 51, year: 2025, score: 54.9 },
+  { code: 'POL', rank: 52, year: 2025, score: 53.9 },
+  { code: 'HRV', rank: 53, year: 2025, score: 51.2 },
+  { code: 'COL', rank: 54, year: 2025, score: 49.7 },
+  { code: 'MEX', rank: 55, year: 2025, score: 48.8 },
+  { code: 'KEN', rank: 56, year: 2025, score: 48.3 },
+  { code: 'BGR', rank: 57, year: 2025, score: 48.0 },
+  { code: 'BRA', rank: 58, year: 2025, score: 46.4 },
+  { code: 'BWA', rank: 59, year: 2025, score: 46.1 },
+  { code: 'PER', rank: 60, year: 2025, score: 45.9 },
+  { code: 'GHA', rank: 61, year: 2025, score: 44.2 },
+  { code: 'ARG', rank: 62, year: 2025, score: 42.8 },
+  { code: 'SVK', rank: 63, year: 2025, score: 42.8 },
+  { code: 'ZAF', rank: 64, year: 2025, score: 42.0 },
+  { code: 'MNG', rank: 65, year: 2025, score: 40.9 },
+  { code: 'TUR', rank: 66, year: 2025, score: 40.4 },
+  { code: 'NGA', rank: 67, year: 2025, score: 39.7 },
+  { code: 'NAM', rank: 68, year: 2025, score: 37.5 },
+  { code: 'VEN', rank: 69, year: 2025, score: 25.5 },
+
+  // 2024 Rankings (Historical)
   { code: 'SGP', rank: 1, year: 2024, score: 100.0 },
   { code: 'CHE', rank: 2, year: 2024, score: 98.7 },
   { code: 'DNK', rank: 3, year: 2024, score: 97.5 },
@@ -64,7 +136,7 @@ export const worldCompetitivenessRankings = [
   { code: 'POL', rank: 40, year: 2024, score: 51.2 },
   { code: 'KAZ', rank: 41, year: 2024, score: 50.0 },
   { code: 'ITA', rank: 42, year: 2024, score: 48.7 },
-  { code: 'LAT', rank: 43, year: 2024, score: 47.5 },
+  { code: 'LVA', rank: 43, year: 2024, score: 47.5 },
   { code: 'TUR', rank: 44, year: 2024, score: 46.2 },
   { code: 'HUN', rank: 45, year: 2024, score: 45.0 },
   { code: 'PHL', rank: 46, year: 2024, score: 43.7 },
@@ -91,4 +163,4 @@ export const worldCompetitivenessRankings = [
   { code: 'MOZ', rank: 67, year: 2024, score: 17.5 },
 ]
 
-export const totalCountries = 67
+export const totalCountries = 69

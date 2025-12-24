@@ -160,5 +160,6 @@ export const countriesData = [
   { id: 'c-bot', code: 'BOT', name: 'Botswana (alt)', region: 'Africa', incomeLevel: 'upper-middle', population: 2562122 },
   { id: 'c-lat', code: 'LAT', name: 'Latvia (alt)', region: 'Europe', incomeLevel: 'high', population: 1853559 },
   { id: 'c-uae', code: 'UAE', name: 'United Arab Emirates (alt)', region: 'Asia', incomeLevel: 'high', population: 11346000 },
+  { id: 'c-pri', code: 'PRI', name: 'Puerto Rico', region: 'Latin America', incomeLevel: 'high', population: 3205691 },
 ]
 
