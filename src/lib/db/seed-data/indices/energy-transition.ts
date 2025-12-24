@@ -1,0 +1,82 @@
+/**
+ * Energy Transition Index Data
+ * Source: World Economic Forum (WEF) - Fostering Effective Energy Transition 2024
+ * https://www.weforum.org/publications/fostering-effective-energy-transition-2024
+ * 
+ * Evaluates countries on energy system performance and transition readiness.
+ */
+
+export const energyTransitionIndex = {
+  id: 'ri-energy-transition',
+  name: 'Energy Transition Index',
+  shortName: 'ETI',
+  domainId: 'd-environment',
+  source: 'World Economic Forum',
+  sourceUrl: 'https://www.weforum.org/publications/fostering-effective-energy-transition-2024',
+  methodology: 'Evaluates countries based on energy system performance (security, equity, sustainability) and transition readiness (capital, institutions, infrastructure, innovation).',
+  updateFrequency: 'annual',
+  scoreMin: 0,
+  scoreMax: 100,
+  higherIsBetter: true,
+  lastUpdated: new Date('2024-06-19'),
+}
+
+export const energyTransitionRankings = [
+  { code: 'SWE', rank: 1, year: 2024, score: 78.4 },
+  { code: 'DNK', rank: 2, year: 2024, score: 75.2 },
+  { code: 'FIN', rank: 3, year: 2024, score: 74.5 },
+  { code: 'CHE', rank: 4, year: 2024, score: 73.4 },
+  { code: 'FRA', rank: 5, year: 2024, score: 71.1 },
+  { code: 'NOR', rank: 6, year: 2024, score: 69.9 },
+  { code: 'ISL', rank: 7, year: 2024, score: 68.0 },
+  { code: 'AUT', rank: 8, year: 2024, score: 67.9 },
+  { code: 'EST', rank: 9, year: 2024, score: 67.8 },
+  { code: 'NLD', rank: 10, year: 2024, score: 66.7 },
+  { code: 'DEU', rank: 11, year: 2024, score: 66.5 },
+  { code: 'BRA', rank: 12, year: 2024, score: 65.7 },
+  { code: 'GBR', rank: 13, year: 2024, score: 65.6 },
+  { code: 'PRT', rank: 14, year: 2024, score: 65.4 },
+  { code: 'LVA', rank: 15, year: 2024, score: 65.2 },
+  { code: 'ESP', rank: 16, year: 2024, score: 64.3 },
+  { code: 'CHN', rank: 17, year: 2024, score: 64.1 },
+  { code: 'LUX', rank: 18, year: 2024, score: 64.1 },
+  { code: 'USA', rank: 19, year: 2024, score: 64.0 },
+  { code: 'CHL', rank: 20, year: 2024, score: 63.9 },
+  { code: 'ISR', rank: 21, year: 2024, score: 63.8 },
+  { code: 'AUS', rank: 22, year: 2024, score: 63.7 },
+  { code: 'KOR', rank: 23, year: 2024, score: 63.5 },
+  { code: 'LTU', rank: 24, year: 2024, score: 63.2 },
+  { code: 'NZL', rank: 25, year: 2024, score: 62.8 },
+  { code: 'JPN', rank: 26, year: 2024, score: 62.4 },
+  { code: 'CAN', rank: 27, year: 2024, score: 62.4 },
+  { code: 'HUN', rank: 28, year: 2024, score: 62.1 },
+  { code: 'SVN', rank: 29, year: 2024, score: 61.9 },
+  { code: 'CRI', rank: 30, year: 2024, score: 61.3 },
+  { code: 'IRL', rank: 31, year: 2024, score: 61.0 },
+  { code: 'BEL', rank: 32, year: 2024, score: 60.8 },
+  { code: 'ITA', rank: 33, year: 2024, score: 60.5 },
+  { code: 'GRC', rank: 34, year: 2024, score: 59.8 },
+  { code: 'POL', rank: 35, year: 2024, score: 59.2 },
+  { code: 'CZE', rank: 38, year: 2024, score: 58.1 },
+  { code: 'SVK', rank: 40, year: 2024, score: 57.5 },
+  { code: 'ROU', rank: 42, year: 2024, score: 56.8 },
+  { code: 'HRV', rank: 44, year: 2024, score: 56.2 },
+  { code: 'URY', rank: 46, year: 2024, score: 55.8 },
+  { code: 'BGR', rank: 48, year: 2024, score: 55.2 },
+  { code: 'MYS', rank: 50, year: 2024, score: 54.6 },
+  { code: 'ARG', rank: 52, year: 2024, score: 53.9 },
+  { code: 'THA', rank: 55, year: 2024, score: 53.2 },
+  { code: 'MEX', rank: 58, year: 2024, score: 52.4 },
+  { code: 'VNM', rank: 60, year: 2024, score: 51.8 },
+  { code: 'IND', rank: 63, year: 2024, score: 50.5 },
+  { code: 'TUR', rank: 65, year: 2024, score: 50.1 },
+  { code: 'IDN', rank: 68, year: 2024, score: 49.2 },
+  { code: 'PHL', rank: 70, year: 2024, score: 48.5 },
+  { code: 'ZAF', rank: 75, year: 2024, score: 46.8 },
+  { code: 'EGY', rank: 80, year: 2024, score: 45.2 },
+  { code: 'PAK', rank: 85, year: 2024, score: 43.5 },
+  { code: 'NGA', rank: 95, year: 2024, score: 40.1 },
+  { code: 'IRQ', rank: 105, year: 2024, score: 36.2 },
+]
+
+export const totalCountries = 120

@@ -40,6 +40,10 @@ import { logisticsPerformanceIndex, logisticsPerformanceRankings, totalCountries
 import { travelTourismIndex, travelTourismRankings, totalCountries as travelTourismTotal } from './travel-tourism'
 import { worldCompetitivenessIndex, worldCompetitivenessRankings, totalCountries as worldCompetitivenessTotal } from './world-competitiveness'
 import { fragileStatesIndex, fragileStatesRankings, totalCountries as fragileStatesTotal } from './fragile-states'
+import { airQualityIndex, airQualityRankings, totalCountries as airQualityTotal } from './air-quality'
+import { socialProgressIndex, socialProgressRankings, totalCountries as socialProgressTotal } from './social-progress'
+import { energyTransitionIndex, energyTransitionRankings, totalCountries as energyTransitionTotal } from './energy-transition'
+import { goodCountryIndex, goodCountryRankings, totalCountries as goodCountryTotal } from './good-country'
 
 // Re-export individual index data
 export { populationIndex, populationRankings } from './population'
@@ -76,6 +80,10 @@ export { logisticsPerformanceIndex, logisticsPerformanceRankings } from './logis
 export { travelTourismIndex, travelTourismRankings } from './travel-tourism'
 export { worldCompetitivenessIndex, worldCompetitivenessRankings } from './world-competitiveness'
 export { fragileStatesIndex, fragileStatesRankings } from './fragile-states'
+export { airQualityIndex, airQualityRankings } from './air-quality'
+export { socialProgressIndex, socialProgressRankings } from './social-progress'
+export { energyTransitionIndex, energyTransitionRankings } from './energy-transition'
+export { goodCountryIndex, goodCountryRankings } from './good-country'
 
 // All index metadata
 export const allIndices = [
@@ -114,6 +122,11 @@ export const allIndices = [
   travelTourismIndex,
   worldCompetitivenessIndex,
   fragileStatesIndex,
+  // Air Quality and sustainability indices
+  airQualityIndex,
+  socialProgressIndex,
+  energyTransitionIndex,
+  goodCountryIndex,
 ]
 
 // All rankings data with their index info
@@ -153,4 +166,9 @@ export const allRankingsData = [
   { index: travelTourismIndex, rankings: travelTourismRankings, totalCountries: travelTourismTotal, valueField: 'score' as const },
   { index: worldCompetitivenessIndex, rankings: worldCompetitivenessRankings, totalCountries: worldCompetitivenessTotal, valueField: 'score' as const },
   { index: fragileStatesIndex, rankings: fragileStatesRankings, totalCountries: fragileStatesTotal, valueField: 'score' as const },
+  // Air Quality and sustainability indices
+  { index: airQualityIndex, rankings: airQualityRankings, totalCountries: airQualityTotal, valueField: 'score' as const },
+  { index: socialProgressIndex, rankings: socialProgressRankings, totalCountries: socialProgressTotal, valueField: 'score' as const },
+  { index: energyTransitionIndex, rankings: energyTransitionRankings, totalCountries: energyTransitionTotal, valueField: 'score' as const },
+  { index: goodCountryIndex, rankings: goodCountryRankings, totalCountries: goodCountryTotal, valueField: 'score' as const },
 ]
