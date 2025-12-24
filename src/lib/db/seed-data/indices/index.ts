@@ -62,6 +62,14 @@ import { ipIndex, ipIndexRankings, totalCountries as ipTotal } from './ip-index'
 import { digitalQualityOfLifeIndex, digitalQualityOfLifeRankings, totalCountries as digitalQualityOfLifeTotal } from './digital-quality-of-life'
 import { modernSlaveryIndex, modernSlaveryRankings, totalCountries as modernSlaveryTotal } from './modern-slavery'
 
+// Additional new indices - December 2025
+import { softPowerIndex, softPowerRankings, totalCountries as softPowerTotal } from './soft-power'
+import { worldRiskIndex, worldRiskRankings, totalCountries as worldRiskTotal } from './world-risk'
+import { natureConservationIndex, natureConservationRankings, totalCountries as natureConservationTotal } from './nature-conservation'
+import { futurePossibilitiesIndex, futurePossibilitiesRankings, totalCountries as futurePossibilitiesTotal } from './future-possibilities'
+import { globalHealthIndex, globalHealthRankings, totalCountries as globalHealthTotal } from './global-health'
+import { renewableEnergyIndex, renewableEnergyRankings, totalCountries as renewableEnergyTotal } from './renewable-energy'
+
 // Re-export individual index data
 export { populationIndex, populationRankings } from './population'
 export { giiIndex, giiRankings } from './gii'
@@ -119,6 +127,14 @@ export { ipIndex, ipIndexRankings } from './ip-index'
 export { digitalQualityOfLifeIndex, digitalQualityOfLifeRankings } from './digital-quality-of-life'
 export { modernSlaveryIndex, modernSlaveryRankings } from './modern-slavery'
 
+// Additional new exports - December 2025
+export { softPowerIndex, softPowerRankings } from './soft-power'
+export { worldRiskIndex, worldRiskRankings } from './world-risk'
+export { natureConservationIndex, natureConservationRankings } from './nature-conservation'
+export { futurePossibilitiesIndex, futurePossibilitiesRankings } from './future-possibilities'
+export { globalHealthIndex, globalHealthRankings } from './global-health'
+export { renewableEnergyIndex, renewableEnergyRankings } from './renewable-energy'
+
 // All index metadata
 export const allIndices = [
   populationIndex,
@@ -175,6 +191,13 @@ export const allIndices = [
   ipIndex,
   digitalQualityOfLifeIndex,
   modernSlaveryIndex,
+  // Additional new indices - December 2025
+  softPowerIndex,
+  worldRiskIndex,
+  natureConservationIndex,
+  futurePossibilitiesIndex,
+  globalHealthIndex,
+  renewableEnergyIndex,
 ]
 
 // All rankings data with their index info
@@ -233,4 +256,11 @@ export const allRankingsData = [
   { index: ipIndex, rankings: ipIndexRankings, totalCountries: ipTotal, valueField: 'score' as const },
   { index: digitalQualityOfLifeIndex, rankings: digitalQualityOfLifeRankings, totalCountries: digitalQualityOfLifeTotal, valueField: 'score' as const },
   { index: modernSlaveryIndex, rankings: modernSlaveryRankings, totalCountries: modernSlaveryTotal, valueField: 'score' as const },
+  // Additional new indices data - December 2025
+  { index: softPowerIndex, rankings: softPowerRankings, totalCountries: softPowerTotal, valueField: 'score' as const },
+  { index: worldRiskIndex, rankings: worldRiskRankings, totalCountries: worldRiskTotal, valueField: 'score' as const },
+  { index: natureConservationIndex, rankings: natureConservationRankings, totalCountries: natureConservationTotal, valueField: 'score' as const },
+  { index: futurePossibilitiesIndex, rankings: futurePossibilitiesRankings, totalCountries: futurePossibilitiesTotal, valueField: 'score' as const },
+  { index: globalHealthIndex, rankings: globalHealthRankings, totalCountries: globalHealthTotal, valueField: 'score' as const },
+  { index: renewableEnergyIndex, rankings: renewableEnergyRankings, totalCountries: renewableEnergyTotal, valueField: 'score' as const },
 ]

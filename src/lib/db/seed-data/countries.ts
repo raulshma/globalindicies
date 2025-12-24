@@ -170,5 +170,18 @@ export const countriesData = [
   { id: 'c-vut', code: 'VUT', name: 'Vanuatu', region: 'Oceania', incomeLevel: 'lower-middle', population: 334506 },
   { id: 'c-hnd', code: 'HND', name: 'Honduras', region: 'Latin America', incomeLevel: 'lower-middle', population: 10593798 },
   { id: 'c-eri', code: 'ERI', name: 'Eritrea', region: 'Africa', incomeLevel: 'low', population: 3748901 },
+  // Additional countries for new indices - December 2025
+  { id: 'c-mco', code: 'MCO', name: 'Monaco', region: 'Europe', incomeLevel: 'high', population: 39050 },
+  { id: 'c-fsm', code: 'FSM', name: 'Micronesia', region: 'Oceania', incomeLevel: 'lower-middle', population: 115021 },
+  { id: 'c-kir', code: 'KIR', name: 'Kiribati', region: 'Oceania', incomeLevel: 'lower-middle', population: 131536 },
+  { id: 'c-slv', code: 'SLV', name: 'El Salvador', region: 'Latin America', incomeLevel: 'lower-middle', population: 6314167 },
+  { id: 'c-gab', code: 'GAB', name: 'Gabon', region: 'Africa', incomeLevel: 'upper-middle', population: 2436566 },
+  { id: 'c-vct', code: 'VCT', name: 'St. Vincent and the Grenadines', region: 'Latin America', incomeLevel: 'upper-middle', population: 104332 },
+  { id: 'c-blz', code: 'BLZ', name: 'Belize', region: 'Latin America', incomeLevel: 'upper-middle', population: 410825 },
+  { id: 'c-gnq', code: 'GNQ', name: 'Equatorial Guinea', region: 'Africa', incomeLevel: 'upper-middle', population: 1714671 },
+  { id: 'c-lso', code: 'LSO', name: 'Lesotho', region: 'Africa', incomeLevel: 'lower-middle', population: 2210000 },
+  { id: 'c-swz', code: 'SWZ', name: 'Eswatini', region: 'Africa', incomeLevel: 'lower-middle', population: 1210822 },
+  { id: 'c-bfa', code: 'BFA', name: 'Burkina Faso', region: 'Africa', incomeLevel: 'low', population: 23251485 },
+  { id: 'c-fji', code: 'FJI', name: 'Fiji', region: 'Oceania', incomeLevel: 'upper-middle', population: 936375 },
 ]
 
