@@ -34,6 +34,12 @@ import { climatePerformanceIndex, climatePerformanceRankings, totalCountries as 
 import { networkReadinessIndex, networkReadinessRankings, totalCountries as networkReadinessTotal } from './network-readiness'
 import { economicFreedomIndex, economicFreedomRankings, totalCountries as economicFreedomTotal } from './economic-freedom'
 import { ictDevelopmentIndex, ictDevelopmentRankings, totalCountries as ictDevelopmentTotal } from './ict-development'
+import { globalInnovationIndex, globalInnovationRankings, totalCountries as globalInnovationTotal } from './global-innovation'
+import { sdgIndex, sdgRankings, totalCountries as sdgTotal } from './sdg-index'
+import { logisticsPerformanceIndex, logisticsPerformanceRankings, totalCountries as logisticsTotal } from './logistics-performance'
+import { travelTourismIndex, travelTourismRankings, totalCountries as travelTourismTotal } from './travel-tourism'
+import { worldCompetitivenessIndex, worldCompetitivenessRankings, totalCountries as worldCompetitivenessTotal } from './world-competitiveness'
+import { fragileStatesIndex, fragileStatesRankings, totalCountries as fragileStatesTotal } from './fragile-states'
 
 // Re-export individual index data
 export { populationIndex, populationRankings } from './population'
@@ -64,6 +70,12 @@ export { climatePerformanceIndex, climatePerformanceRankings } from './climate-p
 export { networkReadinessIndex, networkReadinessRankings } from './network-readiness'
 export { economicFreedomIndex, economicFreedomRankings } from './economic-freedom'
 export { ictDevelopmentIndex, ictDevelopmentRankings } from './ict-development'
+export { globalInnovationIndex, globalInnovationRankings } from './global-innovation'
+export { sdgIndex, sdgRankings } from './sdg-index'
+export { logisticsPerformanceIndex, logisticsPerformanceRankings } from './logistics-performance'
+export { travelTourismIndex, travelTourismRankings } from './travel-tourism'
+export { worldCompetitivenessIndex, worldCompetitivenessRankings } from './world-competitiveness'
+export { fragileStatesIndex, fragileStatesRankings } from './fragile-states'
 
 // All index metadata
 export const allIndices = [
@@ -95,6 +107,13 @@ export const allIndices = [
   networkReadinessIndex,
   economicFreedomIndex,
   ictDevelopmentIndex,
+  // Additional indices
+  globalInnovationIndex,
+  sdgIndex,
+  logisticsPerformanceIndex,
+  travelTourismIndex,
+  worldCompetitivenessIndex,
+  fragileStatesIndex,
 ]
 
 // All rankings data with their index info
@@ -127,4 +146,11 @@ export const allRankingsData = [
   { index: networkReadinessIndex, rankings: networkReadinessRankings, totalCountries: networkReadinessTotal, valueField: 'score' as const },
   { index: economicFreedomIndex, rankings: economicFreedomRankings, totalCountries: economicFreedomTotal, valueField: 'score' as const },
   { index: ictDevelopmentIndex, rankings: ictDevelopmentRankings, totalCountries: ictDevelopmentTotal, valueField: 'score' as const },
+  // Additional indices data
+  { index: globalInnovationIndex, rankings: globalInnovationRankings, totalCountries: globalInnovationTotal, valueField: 'score' as const },
+  { index: sdgIndex, rankings: sdgRankings, totalCountries: sdgTotal, valueField: 'score' as const },
+  { index: logisticsPerformanceIndex, rankings: logisticsPerformanceRankings, totalCountries: logisticsTotal, valueField: 'score' as const },
+  { index: travelTourismIndex, rankings: travelTourismRankings, totalCountries: travelTourismTotal, valueField: 'score' as const },
+  { index: worldCompetitivenessIndex, rankings: worldCompetitivenessRankings, totalCountries: worldCompetitivenessTotal, valueField: 'score' as const },
+  { index: fragileStatesIndex, rankings: fragileStatesRankings, totalCountries: fragileStatesTotal, valueField: 'score' as const },
 ]

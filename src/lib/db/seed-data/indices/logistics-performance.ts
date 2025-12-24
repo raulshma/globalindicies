@@ -1,0 +1,83 @@
+/**
+ * Logistics Performance Index Data
+ * Source: World Bank - 2023
+ * https://lpi.worldbank.org/
+ * Higher score = better logistics. Rankings are 1 (best) to 139 (worst)
+ */
+
+export const logisticsPerformanceIndex = {
+  id: 'ri-lpi',
+  name: 'Logistics Performance Index',
+  shortName: 'LPI',
+  domainId: 'd-economy',
+  source: 'World Bank',
+  sourceUrl: 'https://lpi.worldbank.org/',
+  methodology:
+    'Composite index measuring logistics performance across six dimensions: customs efficiency, infrastructure quality, ease of international shipments, logistics services competency, tracking and tracing ability, and timeliness. Higher score indicates better logistics performance.',
+  updateFrequency: 'biennial',
+  scoreMin: 1,
+  scoreMax: 5,
+  higherIsBetter: true,
+  lastUpdated: new Date('2023-04-21'),
+}
+
+export const logisticsPerformanceRankings = [
+  { code: 'SGP', rank: 1, year: 2023, score: 4.3 },
+  { code: 'FIN', rank: 2, year: 2023, score: 4.2 },
+  { code: 'DNK', rank: 3, year: 2023, score: 4.1 },
+  { code: 'DEU', rank: 3, year: 2023, score: 4.1 },
+  { code: 'NLD', rank: 3, year: 2023, score: 4.1 },
+  { code: 'CHE', rank: 3, year: 2023, score: 4.1 },
+  { code: 'AUT', rank: 7, year: 2023, score: 4.0 },
+  { code: 'BEL', rank: 7, year: 2023, score: 4.0 },
+  { code: 'CAN', rank: 7, year: 2023, score: 4.0 },
+  { code: 'HKG', rank: 7, year: 2023, score: 4.0 },
+  { code: 'SWE', rank: 7, year: 2023, score: 4.0 },
+  { code: 'ARE', rank: 7, year: 2023, score: 4.0 },
+  { code: 'JPN', rank: 13, year: 2023, score: 3.9 },
+  { code: 'FRA', rank: 13, year: 2023, score: 3.9 },
+  { code: 'GBR', rank: 15, year: 2023, score: 3.8 },
+  { code: 'NOR', rank: 16, year: 2023, score: 3.7 },
+  { code: 'USA', rank: 17, year: 2023, score: 3.6 },
+  { code: 'KOR', rank: 17, year: 2023, score: 3.6 },
+  { code: 'ESP', rank: 19, year: 2023, score: 3.5 },
+  { code: 'AUS', rank: 20, year: 2023, score: 3.5 },
+  { code: 'ITA', rank: 21, year: 2023, score: 3.4 },
+  { code: 'PRT', rank: 22, year: 2023, score: 3.4 },
+  { code: 'CZE', rank: 23, year: 2023, score: 3.4 },
+  { code: 'POL', rank: 24, year: 2023, score: 3.4 },
+  { code: 'MYS', rank: 25, year: 2023, score: 3.4 },
+  { code: 'QAT', rank: 26, year: 2023, score: 3.4 },
+  { code: 'CHN', rank: 27, year: 2023, score: 3.4 },
+  { code: 'GRC', rank: 28, year: 2023, score: 3.3 },
+  { code: 'THA', rank: 29, year: 2023, score: 3.3 },
+  { code: 'SAU', rank: 30, year: 2023, score: 3.3 },
+  { code: 'CHL', rank: 31, year: 2023, score: 3.2 },
+  { code: 'VNM', rank: 32, year: 2023, score: 3.2 },
+  { code: 'TUR', rank: 33, year: 2023, score: 3.2 },
+  { code: 'HUN', rank: 34, year: 2023, score: 3.2 },
+  { code: 'ZAF', rank: 35, year: 2023, score: 3.2 },
+  { code: 'BRA', rank: 36, year: 2023, score: 3.1 },
+  { code: 'MEX', rank: 37, year: 2023, score: 3.1 },
+  { code: 'IND', rank: 38, year: 2023, score: 3.1 },
+  { code: 'IDN', rank: 39, year: 2023, score: 3.0 },
+  { code: 'PHL', rank: 40, year: 2023, score: 3.0 },
+  { code: 'RUS', rank: 41, year: 2023, score: 2.9 },
+  { code: 'ARG', rank: 42, year: 2023, score: 2.9 },
+  { code: 'COL', rank: 43, year: 2023, score: 2.8 },
+  { code: 'PER', rank: 44, year: 2023, score: 2.8 },
+  { code: 'EGY', rank: 45, year: 2023, score: 2.8 },
+  { code: 'UKR', rank: 50, year: 2023, score: 2.7 },
+  { code: 'KEN', rank: 55, year: 2023, score: 2.6 },
+  { code: 'PAK', rank: 60, year: 2023, score: 2.5 },
+  { code: 'BGD', rank: 65, year: 2023, score: 2.4 },
+  { code: 'NGA', rank: 75, year: 2023, score: 2.3 },
+  { code: 'ETH', rank: 85, year: 2023, score: 2.2 },
+  { code: 'CMR', rank: 130, year: 2023, score: 2.1 },
+  { code: 'HTI', rank: 135, year: 2023, score: 2.1 },
+  { code: 'AGO', rank: 136, year: 2023, score: 2.1 },
+  { code: 'LBY', rank: 138, year: 2023, score: 1.9 },
+  { code: 'AFG', rank: 139, year: 2023, score: 1.9 },
+]
+
+export const totalCountries = 139

@@ -27,7 +27,7 @@ import {
 import { RadarChart } from "@/components/charts/radar-chart"
 import { cn } from "@/lib/utils"
 import { generateComparisonJsonLd } from "@/lib/seo"
-import { CACHE_CONFIG } from "@/router"
+import { CACHE_CONFIG } from "@/lib/cache-config"
 
 const searchSchema = z.object({
   country: z.string().length(3).optional().default("IND"),

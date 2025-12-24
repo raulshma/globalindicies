@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/select"
 import { cn } from "@/lib/utils"
 import { generateBreadcrumbJsonLd, generateRankingIndexJsonLd } from "@/lib/seo"
-import { CACHE_CONFIG } from "@/router"
+import { CACHE_CONFIG } from "@/lib/cache-config"
 
 const searchSchema = z.object({
   country: z.string().length(3).optional().default("IND"),

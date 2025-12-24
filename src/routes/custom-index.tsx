@@ -17,7 +17,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { CustomIndexBuilder } from "@/components/custom-index-builder"
-import { CACHE_CONFIG } from "@/router"
+import { CACHE_CONFIG } from "@/lib/cache-config"
 
 const searchSchema = z.object({
   country: z.string().length(3).optional().default("IND"),

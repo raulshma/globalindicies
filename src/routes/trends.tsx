@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/combobox"
 import { TrendChart } from "@/components/charts/trend-chart"
 import { cn } from "@/lib/utils"
-import { CACHE_CONFIG } from "@/router"
+import { CACHE_CONFIG } from "@/lib/cache-config"
 
 const searchSchema = z.object({
   country: z.string().length(3).optional().default("IND"),
