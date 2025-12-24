@@ -146,7 +146,7 @@ function CountryRankingsPage() {
   }, [])
 
   return (
-    <div className="space-y-4 sm:space-y-6">
+    <div className="space-y-8 container mx-auto px-4 relative z-10">
       {/* Screen reader announcements for filter changes */}
       <SROnly aria-live="polite">{announcement}</SROnly>
 

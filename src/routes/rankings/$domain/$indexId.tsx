@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useRef, useState } from "react"
 import { createFileRoute } from "@tanstack/react-router"
 import { z } from "zod"
 import {
@@ -111,10 +112,104 @@ export const Route = createFileRoute("/rankings/$domain/$indexId")({
   component: IndexDetailPage,
 })
 
+function RankingRow({ 
+  entry, 
+  isPinned = false, 
+  naturalRef,
+  offsetTop
+}: { 
+  entry: any; 
+  isPinned?: boolean; 
+  naturalRef?: React.RefObject<HTMLTableRowElement | null>;
+  offsetTop?: number;
+}) {
+  const stickyTop = offsetTop ? `calc(56px + ${offsetTop}px)` : "56px";
+
+  return (
+    <tr
+      ref={naturalRef}
+      className={cn(
+        "group transition-colors",
+        !isPinned && "hover:bg-muted/30",
+        entry.isSelected && "bg-primary/5 ring-1 ring-inset ring-primary/20",
+        isPinned && "z-40 bg-background/95 backdrop-blur-md shadow-hard-sm border-b-2 border-primary/20 cursor-default"
+      )}
+      style={isPinned ? { position: 'sticky', top: stickyTop } : undefined}
+    >
+      <td className="py-3">
+        <span className={cn(
+          "font-black text-sm px-1",
+          entry.isSelected && "bg-primary text-white"
+        )}>
+          {entry.rank}
+        </span>
+      </td>
+      <td className="py-3">
+        <div className="flex items-center gap-2">
+          <span className="font-bold">{entry.countryName}</span>
+          {entry.isSelected && (
+            <span className="text-[10px] font-black uppercase tracking-tighter text-primary animate-pulse">
+              [SELECTED]{isPinned && " (PINNED)"}
+            </span>
+          )}
+        </div>
+      </td>
+      <td className="py-3 text-[10px] text-muted-foreground uppercase tracking-widest">
+        {entry.region}
+      </td>
+      <td className="py-3 text-right">
+        <span className="font-bold">
+          {entry.score !== null
+            ? entry.score.toFixed(1)
+            : entry.normalizedScore !== null
+              ? entry.normalizedScore.toFixed(0)
+              : "—"}
+        </span>
+      </td>
+      <td className="py-3 text-right">
+        <PercentileBadge percentile={entry.percentile} />
+      </td>
+    </tr>
+  )
+}
+
 function IndexDetailPage() {
   const data = Route.useLoaderData()
   const params = Route.useParams()
   const { index, selectedCountry, fullRankingList, milestones } = data
+
+  const [isPinned, setIsPinned] = useState(false)
+  const [headerHeight, setHeaderHeight] = useState(41)
+  const naturalRowRef = useRef<HTMLTableRowElement>(null)
+  const tableHeaderRef = useRef<HTMLTableRowElement>(null)
+
+  const selectedEntry = useMemo(() => fullRankingList.find(e => e.isSelected), [fullRankingList])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!naturalRowRef.current || !tableHeaderRef.current) return
+      
+      const headerRowHeight = tableHeaderRef.current.offsetHeight
+      if (headerRowHeight > 0 && headerRowHeight !== headerHeight) {
+        setHeaderHeight(headerRowHeight)
+      }
+
+      const naturalRect = naturalRowRef.current.getBoundingClientRect()
+      const layoutHeaderHeight = 56 // Site navigation height
+      const limit = layoutHeaderHeight + headerRowHeight
+      
+      // If natural row's top is further down than the limit, we pin it to the top
+      setIsPinned(naturalRect.top > limit)
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    // Small delay to ensure table layout is stable
+    const timer = setTimeout(handleScroll, 100)
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      clearTimeout(timer)
+    }
+  }, [selectedEntry])
 
   return (
     <div className="space-y-8 container-wide relative z-10">
@@ -344,60 +439,27 @@ function IndexDetailPage() {
           <p className="text-muted-foreground font-mono text-xs">// Complete international standing for this index</p>
         </CardHeader>
         <CardContent className="pt-6">
-          <div className="overflow-x-auto scrollbar-none">
-            <table className="w-full text-sm font-mono">
-              <thead>
-                <tr className="border-b-2 border-border border-dashed text-left">
-                  <th className="pb-3 font-black uppercase tracking-wider">Rank</th>
-                  <th className="pb-3 font-black uppercase tracking-wider">Country</th>
-                  <th className="pb-3 font-black uppercase tracking-wider">Region</th>
-                  <th className="pb-3 text-right font-black uppercase tracking-wider">Score</th>
-                  <th className="pb-3 text-right font-black uppercase tracking-wider">Percentile</th>
+          <div className="scrollbar-none">
+            <table className="w-full text-sm font-mono relative border-separate border-spacing-0">
+              <thead className="z-40">
+                <tr ref={tableHeaderRef} className="sticky top-[56px] z-50 bg-background/95 backdrop-blur-md border-b-2 border-border border-dashed text-left">
+                  <th className="pb-3 pt-1 font-black uppercase tracking-wider bg-background/95">Rank</th>
+                  <th className="pb-3 pt-1 font-black uppercase tracking-wider bg-background/95">Country</th>
+                  <th className="pb-3 pt-1 font-black uppercase tracking-wider bg-background/95">Region</th>
+                  <th className="pb-3 pt-1 text-right font-black uppercase tracking-wider bg-background/95">Score</th>
+                  <th className="pb-3 pt-1 text-right font-black uppercase tracking-wider bg-background/95">Percentile</th>
                 </tr>
+                {isPinned && selectedEntry && (
+                  <RankingRow entry={selectedEntry} isPinned={true} offsetTop={headerHeight} />
+                )}
               </thead>
               <tbody className="divide-y divide-border/50 divide-dashed">
                 {fullRankingList.map((entry) => (
-                  <tr
-                    key={entry.countryCode}
-                    className={cn(
-                      "group transition-colors hover:bg-muted/30",
-                      entry.isSelected && "bg-primary/5 ring-1 ring-inset ring-primary/20"
-                    )}
-                  >
-                    <td className="py-3">
-                      <span className={cn(
-                        "font-black text-sm px-1",
-                        entry.isSelected && "bg-primary text-white"
-                      )}>
-                        {entry.rank}
-                      </span>
-                    </td>
-                    <td className="py-3">
-                      <div className="flex items-center gap-2">
-                        <span className="font-bold">{entry.countryName}</span>
-                        {entry.isSelected && (
-                          <span className="text-[10px] font-black uppercase tracking-tighter text-primary animate-pulse">
-                            [SELECTED]
-                          </span>
-                        )}
-                      </div>
-                    </td>
-                    <td className="py-3 text-[10px] text-muted-foreground uppercase tracking-widest">
-                      {entry.region}
-                    </td>
-                    <td className="py-3 text-right">
-                      <span className="font-bold">
-                        {entry.score !== null
-                          ? entry.score.toFixed(1)
-                          : entry.normalizedScore !== null
-                            ? entry.normalizedScore.toFixed(0)
-                            : "—"}
-                      </span>
-                    </td>
-                    <td className="py-3 text-right">
-                      <PercentileBadge percentile={entry.percentile} />
-                    </td>
-                  </tr>
+                  <RankingRow 
+                    key={entry.countryCode} 
+                    entry={entry} 
+                    naturalRef={entry.isSelected ? naturalRowRef : undefined} 
+                  />
                 ))}
               </tbody>
             </table>

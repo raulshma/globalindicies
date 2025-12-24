@@ -58,7 +58,7 @@ function RankingsPage() {
   const data = Route.useLoaderData()
 
   return (
-    <div className="space-y-8 container-wide relative z-10">
+    <div className="space-y-8 container mx-auto px-4 relative z-10">
       <div>
         <h1 className="text-4xl font-black uppercase tracking-tighter mb-2">Rankings_</h1>
         <p className="text-muted-foreground font-mono text-sm border-l-4 border-primary pl-4">

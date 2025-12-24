@@ -35,7 +35,7 @@ export function Layout({ children, countries, selectedCountry }: LayoutProps) {
 
   return (
     <SRAnnouncerProvider>
-      <div className="min-h-screen bg-background relative overflow-hidden font-mono selection:bg-primary selection:text-white">
+      <div className="min-h-screen bg-background relative font-mono selection:bg-primary selection:text-white">
         <GrainOverlay />
         <RetroGrid />
         <SkipLink href="#main-content" />

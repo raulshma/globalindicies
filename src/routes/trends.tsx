@@ -265,7 +265,7 @@ function TrendsPage() {
   }, [data.timeSeriesData])
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8 container mx-auto px-4 relative z-10">
       <div>
         <h1 className="text-2xl font-bold">Trends Analysis</h1>
         <p className="text-muted-foreground text-sm">
