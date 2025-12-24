@@ -3,7 +3,7 @@
  * Requirements: 3.2, 3.4
  */
 
-import { asc, eq, sql } from "drizzle-orm"
+import { asc, desc, eq } from "drizzle-orm"
 import { z } from "zod"
 import { createServerFn } from "@tanstack/react-start"
 import { db } from "../db"
@@ -31,21 +31,9 @@ export const getAllDomainsWithStats = createServerFn({ method: "GET" })
       },
     })
 
-    // Get latest year
-    const latestYearResult = await db
-      .select({ maxYear: sql<number>`MAX(${rankingEntries.year})` })
-      .from(rankingEntries)
-      .where(eq(rankingEntries.countryCode, countryCode))
-
-    const latestYear = latestYearResult[0]?.maxYear ?? new Date().getFullYear()
-
-    // Get all rankings for the country in the latest year
-    const latestRankings = await db.query.rankingEntries.findMany({
-      where: (entries, { and: andFn, eq: eqFn }) =>
-        andFn(
-          eqFn(entries.countryCode, countryCode),
-          eqFn(entries.year, latestYear)
-        ),
+    // Get all rankings for the country (all years) to find the latest per index
+    const allRankings = await db.query.rankingEntries.findMany({
+      where: eq(rankingEntries.countryCode, countryCode),
       with: {
         index: {
           with: {
@@ -53,21 +41,35 @@ export const getAllDomainsWithStats = createServerFn({ method: "GET" })
           },
         },
       },
+      orderBy: [desc(rankingEntries.year)],
     })
 
-    // Get previous year's rankings for trend calculation
-    const previousYear = latestYear - 1
-    const previousRankings = await db.query.rankingEntries.findMany({
-      where: (entries, { and: andFn, eq: eqFn }) =>
-        andFn(
-          eqFn(entries.countryCode, countryCode),
-          eqFn(entries.year, previousYear)
-        ),
-    })
+    // Group rankings by indexId and get the latest entry for each
+    const latestRankingsMap = new Map<string, typeof allRankings[0]>()
+    const previousRankingsMap = new Map<string, typeof allRankings[0]>()
+    
+    for (const ranking of allRankings) {
+      const indexId = ranking.indexId
+      if (!latestRankingsMap.has(indexId)) {
+        // First entry for this index (since ordered by year desc, it's the latest)
+        latestRankingsMap.set(indexId, ranking)
+      } else {
+        // Check if this is the previous year's entry for trend calculation
+        const latestEntry = latestRankingsMap.get(indexId)!
+        if (ranking.year === latestEntry.year - 1 && !previousRankingsMap.has(indexId)) {
+          previousRankingsMap.set(indexId, ranking)
+        }
+      }
+    }
 
-    const previousRankingsMap = new Map(
-      previousRankings.map((r) => [r.indexId, r])
-    )
+    const latestRankings = Array.from(latestRankingsMap.values())
+    
+    // Determine the latest year from the data (for display purposes)
+    const latestYear = latestRankings.length > 0 
+      ? Math.max(...latestRankings.map(r => r.year))
+      : new Date().getFullYear()
+
+
 
     // Build domain stats
     const domainsWithStats = allDomains.map((domain) => {
@@ -191,43 +193,49 @@ export const getDomainWithIndices = createServerFn({ method: "GET" })
       throw new Error(`Domain not found: ${domainId}`)
     }
 
-    // Get latest year
-    const latestYearResult = await db
-      .select({ maxYear: sql<number>`MAX(${rankingEntries.year})` })
-      .from(rankingEntries)
-      .where(eq(rankingEntries.countryCode, countryCode))
-
-    const latestYear = latestYearResult[0]?.maxYear ?? new Date().getFullYear()
-
     // Get all rankings for this domain's indices
     const indexIds = domain.indices.map((i) => i.id)
 
-    const latestRankings = await db.query.rankingEntries.findMany({
+    // Get all rankings for the country for this domain's indices (all years)
+    const allRankings = await db.query.rankingEntries.findMany({
       where: (entries, { and: andFn, eq: eqFn, inArray }) =>
         andFn(
           eqFn(entries.countryCode, countryCode),
-          eqFn(entries.year, latestYear),
           inArray(entries.indexId, indexIds)
         ),
       with: {
         index: true,
       },
+      orderBy: [desc(rankingEntries.year)],
     })
 
-    // Get previous year's rankings
+    // Group rankings by indexId and get the latest entry for each
+    const latestRankingsMap = new Map<string, typeof allRankings[0]>()
+    const previousRankingsMap = new Map<string, typeof allRankings[0]>()
+    
+    for (const ranking of allRankings) {
+      const indexId = ranking.indexId
+      if (!latestRankingsMap.has(indexId)) {
+        // First entry for this index (since ordered by year desc, it's the latest)
+        latestRankingsMap.set(indexId, ranking)
+      } else {
+        // Check if this is the previous year's entry for trend calculation
+        const latestEntry = latestRankingsMap.get(indexId)!
+        if (ranking.year === latestEntry.year - 1 && !previousRankingsMap.has(indexId)) {
+          previousRankingsMap.set(indexId, ranking)
+        }
+      }
+    }
+
+    const latestRankings = Array.from(latestRankingsMap.values())
+    
+    // Determine the latest year from the data (for display purposes)
+    const latestYear = latestRankings.length > 0 
+      ? Math.max(...latestRankings.map(r => r.year))
+      : new Date().getFullYear()
+    
+    // Previous year for display (relative to the latest data)
     const previousYear = latestYear - 1
-    const previousRankings = await db.query.rankingEntries.findMany({
-      where: (entries, { and: andFn, eq: eqFn, inArray }) =>
-        andFn(
-          eqFn(entries.countryCode, countryCode),
-          eqFn(entries.year, previousYear),
-          inArray(entries.indexId, indexIds)
-        ),
-    })
-
-    const previousRankingsMap = new Map(
-      previousRankings.map((r) => [r.indexId, r])
-    )
 
     // Build rankings with change
     const rankingsWithChange = latestRankings.map((ranking) => {
