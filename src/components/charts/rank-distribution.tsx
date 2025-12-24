@@ -66,7 +66,7 @@ function CustomTooltip({ active, payload }: CustomTooltipProps) {
   const data = payload[0].payload
 
   return (
-    <div className="bg-popover border border-border p-3 shadow-md">
+    <div className="bg-popover/80 backdrop-blur-md border border-border p-3 shadow-soft rounded-xl">
       <p className="font-medium text-sm">{data.countryName}</p>
       <div className="mt-1 space-y-1 text-xs">
         <p>Rank: <span className="font-medium">#{data.rank}</span></p>

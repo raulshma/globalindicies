@@ -6,7 +6,7 @@ import { MobileNavigation, Navigation } from "@/components/navigation"
 import { CountrySelector } from "@/components/country-selector"
 import { SkipLink } from "@/components/ui/skip-link"
 import { SRAnnouncerProvider } from "@/components/ui/sr-announcer"
-import { GrainOverlay, RetroGrid } from "@/components/ui/retro-effects"
+import { GrainOverlay, SoftGradientMesh } from "@/components/ui/retro-effects"
 
 interface Country {
   id: string
@@ -35,12 +35,12 @@ export function Layout({ children, countries, selectedCountry }: LayoutProps) {
 
   return (
     <SRAnnouncerProvider>
-      <div className="min-h-screen bg-background relative font-mono selection:bg-primary selection:text-white">
+      <div className="min-h-screen bg-background relative font-sans selection:bg-primary selection:text-white">
         <GrainOverlay />
-        <RetroGrid />
+        <SoftGradientMesh />
         <SkipLink href="#main-content" />
         <header 
-          className="sticky top-0 z-50 border-b-2 border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 shadow-hard-sm"
+          className="sticky top-0 z-50 border-b border-white/10 bg-background/70 backdrop-blur-xl supports-backdrop-filter:bg-background/60 shadow-soft-sm"
           role="banner"
         >
           <div className="container mx-auto flex h-14 items-center justify-between px-4">

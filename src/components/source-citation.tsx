@@ -69,7 +69,7 @@ export function SourceCitation({
           className={cn(
             "inline-flex items-center justify-center size-4",
             "text-muted-foreground hover:text-foreground",
-            "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded",
+            "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded-full",
             className
           )}
           aria-label={`Source: ${source}`}

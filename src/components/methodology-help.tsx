@@ -52,7 +52,7 @@ export function MethodologyHelp({
       {isOpen && (
         <Card
           id="methodology-panel"
-          className="absolute top-full left-0 mt-2 z-50 w-80 sm:w-96 shadow-lg"
+          className="absolute top-full left-0 mt-2 z-50 w-80 sm:w-96 shadow-soft-lg rounded-xl border border-border"
           role="region"
           aria-label="Methodology information"
         >
@@ -149,7 +149,7 @@ export function MethodologyIcon({ methodology, className }: MethodologyIconProps
     <div className={cn("relative inline-flex", className)}>
       <button
         type="button"
-        className="text-muted-foreground hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded"
+        className="text-muted-foreground hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded-full"
         onMouseEnter={() => setIsVisible(true)}
         onMouseLeave={() => setIsVisible(false)}
         onFocus={() => setIsVisible(true)}
@@ -164,7 +164,7 @@ export function MethodologyIcon({ methodology, className }: MethodologyIconProps
         <div
           id={tooltipId}
           role="tooltip"
-          className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-50 w-64 p-3 text-xs bg-popover text-popover-foreground border border-border shadow-md"
+          className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-50 w-64 p-3 text-xs bg-popover text-popover-foreground border border-border shadow-soft rounded-xl"
         >
           <p className="font-medium mb-1">Methodology</p>
           <p className="text-muted-foreground">{methodology}</p>

@@ -152,32 +152,32 @@ function DomainDetailPage() {
       </div>
 
       {/* Rankings Table */}
-      <Card className="border-2 border-border shadow-hard">
-        <CardHeader className="border-b-2 border-border bg-muted/5">
-          <CardTitle className="text-xl font-black uppercase tracking-tight">
+      <Card className="overflow-hidden">
+        <CardHeader className="border-b border-white/10 bg-white/5">
+          <CardTitle className="text-xl font-bold uppercase tracking-tight">
             Comprehensive Index List_
           </CardTitle>
-          <p className="text-muted-foreground font-mono text-xs">// Performance breakdowns for {domain.name}</p>
+          <p className="text-muted-foreground text-xs">// Performance breakdowns for {domain.name}</p>
         </CardHeader>
         <CardContent className="pt-6">
           {rankings.length > 0 ? (
             <div className="overflow-x-auto scrollbar-none">
-              <table className="w-full text-sm font-mono">
+              <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b-2 border-border border-dashed text-left">
-                    <th className="pb-3 font-black uppercase tracking-wider">Index</th>
-                    <th className="pb-3 text-right font-black uppercase tracking-wider">Rank</th>
-                    <th className="pb-3 text-right font-black uppercase tracking-wider">Percentile</th>
-                    <th className="pb-3 text-right font-black uppercase tracking-wider">Score</th>
-                    <th className="pb-3 text-right font-black uppercase tracking-wider">Change</th>
-                    <th className="pb-3 text-right font-black uppercase tracking-wider">Source_URL</th>
+                  <tr className="border-b border-white/10 text-left bg-white/5">
+                    <th className="pb-3 pt-3 pl-4 font-bold uppercase tracking-wider text-xs text-muted-foreground">Index</th>
+                    <th className="pb-3 pt-3 text-right font-bold uppercase tracking-wider text-xs text-muted-foreground">Rank</th>
+                    <th className="pb-3 pt-3 text-right font-bold uppercase tracking-wider text-xs text-muted-foreground">Percentile</th>
+                    <th className="pb-3 pt-3 text-right font-bold uppercase tracking-wider text-xs text-muted-foreground">Score</th>
+                    <th className="pb-3 pt-3 text-right font-bold uppercase tracking-wider text-xs text-muted-foreground">Change</th>
+                    <th className="pb-3 pt-3 pr-4 text-right font-bold uppercase tracking-wider text-xs text-muted-foreground">Source_URL</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-border/50 divide-dashed">
+                <tbody className="divide-y divide-white/5">
                   {rankings.map((ranking) => (
                     <tr
                       key={ranking.indexId}
-                      className="group hover:bg-muted/30 transition-colors"
+                      className="group hover:bg-white/5 transition-colors"
                     >
                       <td className="py-4">
                         <a

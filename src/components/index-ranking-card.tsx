@@ -132,7 +132,7 @@ export function IndexRankingCard({ ranking, showDomain = false }: IndexRankingCa
             <span className="text-muted-foreground text-sm">No data available</span>
           </div>
           {/* Source Link - Requirement 5.3 */}
-          <div className="pt-2 border-t border-border">
+          <div className="pt-2 border-t border-white/10">
             <a
               href={ranking.sourceUrl}
               target="_blank"
@@ -154,7 +154,7 @@ export function IndexRankingCard({ ranking, showDomain = false }: IndexRankingCa
       className="block touch-manipulation"
       aria-label={`${ranking.indexName}: Rank ${ranking.rank} of ${ranking.totalCountries}, ${getPerformanceLabel(ranking.percentile!)}`}
     >
-      <Card className="h-full transition-colors hover:bg-muted/50 active:bg-muted/70">
+      <Card className="h-full transition-colors hover:bg-white/5 active:bg-white/10">
         <CardHeader className="pb-2">
           <div className="flex items-start justify-between gap-2">
             <CardTitle className="text-sm font-medium leading-tight line-clamp-2">
@@ -179,7 +179,7 @@ export function IndexRankingCard({ ranking, showDomain = false }: IndexRankingCa
               </span>
             </div>
             <Badge 
-              className={cn("font-medium text-xs", getPerformanceColor(ranking.percentile!))}
+              className={cn("font-medium text-xs rounded-full", getPerformanceColor(ranking.percentile!))}
               aria-label={`Percentile: ${ranking.percentile!.toFixed(0)}%, ${getPerformanceLabel(ranking.percentile!)}`}
             >
               {ranking.percentile!.toFixed(0)}%
@@ -204,7 +204,7 @@ export function IndexRankingCard({ ranking, showDomain = false }: IndexRankingCa
           </div>
 
           {/* Source Link - Requirement 5.3 */}
-          <div className="pt-2 border-t border-border">
+          <div className="pt-2 border-t border-white/10">
             <span
               onClick={(e) => {
                 e.preventDefault()

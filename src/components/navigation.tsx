@@ -53,7 +53,7 @@ export function Navigation({ isMobileMenuOpen, onMobileMenuToggle }: NavigationP
               key={item.href}
               to={item.href}
               className={cn(
-                "flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium transition-colors",
+                "flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium transition-colors rounded-full",
                 "hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                 isActive
                   ? "bg-muted text-foreground"
@@ -185,7 +185,7 @@ export function DomainNav({ domains }: DomainNavProps) {
             key={domain.id}
             to={href}
             className={cn(
-              "flex items-center gap-1.5 px-2 py-1.5 text-xs transition-colors whitespace-nowrap",
+              "flex items-center gap-1.5 px-2 py-1.5 text-xs transition-colors whitespace-nowrap rounded-full",
               "hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
               "touch-manipulation min-h-[36px]", // Touch-friendly minimum height
               isActive

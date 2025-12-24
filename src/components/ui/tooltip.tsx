@@ -134,7 +134,7 @@ export function Tooltip({
           id={tooltipId}
           role="tooltip"
           className={cn(
-            "fixed z-50 px-3 py-1.5 text-xs bg-popover text-popover-foreground border border-border shadow-md",
+            "fixed z-50 px-3 py-1.5 text-xs bg-popover text-popover-foreground border border-border shadow-soft rounded-md",
             "animate-in fade-in-0 zoom-in-95 duration-100",
             className
           )}

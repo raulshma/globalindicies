@@ -127,8 +127,8 @@ function DomainSection({ domain }: DomainSectionProps) {
   const { stats, rankings } = domain
 
   return (
-    <Card className="border-2 border-border shadow-hard">
-      <CardHeader className="pb-4 border-b-2 border-border bg-muted/5">
+    <Card className="overflow-hidden">
+      <CardHeader className="pb-4 border-b border-white/10 bg-white/5">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3">
             <span className="text-3xl filter grayscale hover:grayscale-0 transition-all">{domain.icon}</span>
@@ -194,20 +194,20 @@ function DomainSection({ domain }: DomainSectionProps) {
 
             {/* Rankings Table */}
             <div className="overflow-x-auto scrollbar-none">
-              <table className="w-full text-sm font-mono">
-                <thead>
-                  <tr className="border-b-2 border-border border-dashed text-left">
-                    <th className="pb-3 font-bold uppercase tracking-wider">Index</th>
-                    <th className="pb-3 text-right font-bold uppercase tracking-wider">Rank</th>
-                    <th className="pb-3 text-right font-bold uppercase tracking-wider">Percentile</th>
-                    <th className="pb-3 text-right font-bold uppercase tracking-wider">Change</th>
+              <table className="w-full text-sm">
+                <thead className="bg-white/5">
+                  <tr className="border-b border-white/10 text-left">
+                    <th className="py-3 px-4 font-bold text-xs uppercase tracking-wider text-muted-foreground">Index</th>
+                    <th className="py-3 px-4 text-right font-bold text-xs uppercase tracking-wider text-muted-foreground">Rank</th>
+                    <th className="py-3 px-4 text-right font-bold text-xs uppercase tracking-wider text-muted-foreground">Percentile</th>
+                    <th className="py-3 px-4 text-right font-bold text-xs uppercase tracking-wider text-muted-foreground">Change</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-border/50 divide-dashed">
+                <tbody className="divide-y divide-white/5">
                   {rankings.map((ranking) => (
                     <tr
                       key={ranking.indexId}
-                      className="group hover:bg-muted/30 transition-colors"
+                      className="group hover:bg-white/5 transition-colors"
                     >
                       <td className="py-4">
                         <a

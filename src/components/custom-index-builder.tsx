@@ -270,7 +270,7 @@ export function CustomIndexBuilder({
       </div>
 
       {/* Weight summary and validation */}
-      <div className="mb-6 p-4 bg-muted/50 rounded-none" id="weight-summary" role="status" aria-live="polite">
+      <div className="mb-6 p-4 bg-white/5 border border-white/10 rounded-xl" id="weight-summary" role="status" aria-live="polite">
         <div className="flex items-center justify-between mb-2">
           <span className="text-xs font-medium">Total Weight</span>
           <span
@@ -324,7 +324,7 @@ export function CustomIndexBuilder({
 
       {/* Composite score preview */}
       {compositeScore && (
-        <div className="mb-6 p-4 border border-border rounded-none">
+        <div className="mb-6 p-4 border border-white/10 bg-white/5 rounded-xl">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-medium text-muted-foreground">
               Composite Score Preview
@@ -449,7 +449,7 @@ function ComponentRow({ component, onWeightChange, onRemove, score }: ComponentR
 
   return (
     <div 
-      className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 p-3 border border-border rounded-none bg-background"
+      className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 p-3 border border-white/10 rounded-xl bg-white/5 hover:bg-white/10 transition-colors"
       role="listitem"
     >
       {/* Index info */}

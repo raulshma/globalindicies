@@ -69,7 +69,7 @@ function HeatmapCell({ score, rank, isSelected, onClick }: HeatmapCellProps) {
     <button
       onClick={onClick}
       className={cn(
-        'w-full h-10 sm:h-12 flex flex-col items-center justify-center text-xs transition-all',
+        'w-full h-10 sm:h-12 flex flex-col items-center justify-center text-xs transition-all rounded-md',
         'touch-manipulation', // Optimize for touch
         getColorForScore(score),
         getTextColorForScore(score),

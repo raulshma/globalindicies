@@ -295,7 +295,7 @@ function SavedIndexCard({
       </CardHeader>
       <CardContent>
         {/* Composite Score */}
-        <div className="mb-4 p-3 bg-muted/50 rounded-none">
+        <div className="mb-4 p-3 bg-white/5 border border-white/10 rounded-xl">
           <p className="text-xs text-muted-foreground">Composite Score</p>
           <p className="text-2xl font-bold">
             {compositeScore !== null ? compositeScore.toFixed(1) : "—"}

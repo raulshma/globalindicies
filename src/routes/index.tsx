@@ -107,8 +107,8 @@ function HomePage() {
       {/* Top Movers - Bento Row 2 */}
       <div className="grid gap-6 lg:grid-cols-2">
         <Retro3D>
-            <Card className="h-full border-2 border-border shadow-hard">
-            <CardHeader className="pb-3 border-b-2 border-border bg-muted/20">
+            <Card className="h-full overflow-hidden">
+            <CardHeader className="pb-3 border-b border-white/10 bg-white/5">
                 <CardTitle className="flex items-center gap-2 text-lg font-bold uppercase tracking-wide">
                 <IconTrendingUp className="size-5 text-green-600" />
                 Top Improvers
@@ -139,8 +139,8 @@ function HomePage() {
         </Retro3D>
 
         <Retro3D>
-            <Card className="h-full border-2 border-border shadow-hard">
-            <CardHeader className="pb-3 border-b-2 border-border bg-muted/20">
+            <Card className="h-full overflow-hidden">
+            <CardHeader className="pb-3 border-b border-white/10 bg-white/5">
                 <CardTitle className="flex items-center gap-2 text-lg font-bold uppercase tracking-wide">
                 <IconTrendingDown className="size-5 text-red-600" />
                 Top Decliners
@@ -187,7 +187,7 @@ function HomePage() {
                 className={i === 0 || i === 3 ? "md:col-span-2 bg-muted/10" : "md:col-span-1"}
                 icon={<span className="text-2xl mb-2 block">{summary.domain.icon}</span>}
                 header={
-                   <div className="mt-auto pt-4 border-t-2 border-border border-dashed w-full">
+                   <div className="mt-auto pt-4 border-t border-white/10 w-full">
                        <div className="flex justify-between items-end">
                            <div>
                                <div className="text-xs text-muted-foreground font-bold uppercase">Avg Percentile</div>
@@ -230,7 +230,7 @@ function RankingChangeItem({
   percentile,
 }: RankingChangeItemProps) {
   return (
-    <div className="flex items-center justify-between gap-4 border-b border-border pb-3 last:border-0 last:pb-0">
+    <div className="flex items-center justify-between gap-4 border-b border-white/5 pb-3 last:border-0 last:pb-0">
       <div className="min-w-0 flex-1">
         <p className="truncate text-sm font-medium">{indexName}</p>
         <p className="text-muted-foreground text-xs">{domainName}</p>

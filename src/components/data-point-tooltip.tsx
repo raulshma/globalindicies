@@ -28,7 +28,7 @@ export function DataPointTooltip({
   return (
     <div
       className={cn(
-        "bg-popover border border-border p-3 shadow-md text-popover-foreground",
+        "bg-popover/80 backdrop-blur-md border border-border p-3 shadow-soft rounded-xl text-popover-foreground",
         className
       )}
       role="tooltip"

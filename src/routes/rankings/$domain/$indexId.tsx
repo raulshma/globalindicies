@@ -132,7 +132,7 @@ function RankingRow({
         "group transition-colors",
         !isPinned && "hover:bg-muted/30",
         entry.isSelected && "bg-primary/5 ring-1 ring-inset ring-primary/20",
-        isPinned && "z-40 bg-background/95 backdrop-blur-md shadow-hard-sm border-b-2 border-primary/20 cursor-default"
+        isPinned && "z-40 bg-background/80 backdrop-blur-xl shadow-soft border-b border-white/10 cursor-default"
       )}
       style={isPinned ? { position: 'sticky', top: stickyTop } : undefined}
     >
@@ -431,29 +431,29 @@ function IndexDetailPage() {
       )}
 
       {/* Full Ranking List */}
-      <Card className="border-2 border-border shadow-hard">
-        <CardHeader className="border-b-2 border-border bg-muted/5">
-          <CardTitle className="text-xl font-black uppercase tracking-tight">
+      <Card className="overflow-hidden">
+        <CardHeader className="border-b border-white/10 bg-white/5">
+          <CardTitle className="text-xl font-bold uppercase tracking-tight">
             Global Leaderboard_{data.selectedYear}
           </CardTitle>
-          <p className="text-muted-foreground font-mono text-xs">// Complete international standing for this index</p>
+          <p className="text-muted-foreground text-xs">// Complete international standing for this index</p>
         </CardHeader>
-        <CardContent className="pt-6">
+        <CardContent className="pt-0 p-0">
           <div className="scrollbar-none">
-            <table className="w-full text-sm font-mono relative border-separate border-spacing-0">
+            <table className="w-full text-sm relative border-separate border-spacing-0">
               <thead className="z-40">
-                <tr ref={tableHeaderRef} className="sticky top-[56px] z-50 bg-background/95 backdrop-blur-md border-b-2 border-border border-dashed text-left">
-                  <th className="pb-3 pt-1 font-black uppercase tracking-wider bg-background/95">Rank</th>
-                  <th className="pb-3 pt-1 font-black uppercase tracking-wider bg-background/95">Country</th>
-                  <th className="pb-3 pt-1 font-black uppercase tracking-wider bg-background/95">Region</th>
-                  <th className="pb-3 pt-1 text-right font-black uppercase tracking-wider bg-background/95">Score</th>
-                  <th className="pb-3 pt-1 text-right font-black uppercase tracking-wider bg-background/95">Percentile</th>
+                <tr ref={tableHeaderRef} className="sticky top-[56px] z-50 bg-background/80 backdrop-blur-xl border-b border-white/10 text-left">
+                  <th className="pb-3 pt-3 pl-4 font-bold uppercase tracking-wider text-xs text-muted-foreground">Rank</th>
+                  <th className="pb-3 pt-3 font-bold uppercase tracking-wider text-xs text-muted-foreground">Country</th>
+                  <th className="pb-3 pt-3 font-bold uppercase tracking-wider text-xs text-muted-foreground">Region</th>
+                  <th className="pb-3 pt-3 text-right font-bold uppercase tracking-wider text-xs text-muted-foreground">Score</th>
+                  <th className="pb-3 pt-3 pr-4 text-right font-bold uppercase tracking-wider text-xs text-muted-foreground">Percentile</th>
                 </tr>
                 {isPinned && selectedEntry && (
                   <RankingRow entry={selectedEntry} isPinned={true} offsetTop={headerHeight} />
                 )}
               </thead>
-              <tbody className="divide-y divide-border/50 divide-dashed">
+              <tbody className="divide-y divide-white/5">
                 {fullRankingList.map((entry) => (
                   <RankingRow 
                     key={entry.countryCode} 

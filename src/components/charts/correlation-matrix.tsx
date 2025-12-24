@@ -109,7 +109,7 @@ function MatrixCell({ correlation, sampleSize, isSelected, onClick }: MatrixCell
     <button
       onClick={onClick}
       className={cn(
-        'w-full h-12 flex flex-col items-center justify-center text-xs transition-all',
+        'w-full h-12 flex flex-col items-center justify-center text-xs transition-all rounded-md',
         getCorrelationColor(correlation),
         getCorrelationTextColor(correlation),
         isSelected && 'ring-2 ring-primary ring-offset-2',
@@ -336,7 +336,7 @@ export function CorrelationMatrix({
                       // Diagonal - self correlation is always 1
                       return (
                         <td key={colIndex.id} className="p-0.5">
-                          <div className="w-full h-12 bg-gray-100 flex items-center justify-center text-xs text-muted-foreground">
+                          <div className="w-full h-12 bg-gray-100 flex items-center justify-center text-xs text-muted-foreground rounded-md">
                             1.00
                           </div>
                         </td>
@@ -350,7 +350,7 @@ export function CorrelationMatrix({
                     if (!correlation) {
                       return (
                         <td key={colIndex.id} className="p-0.5">
-                          <div className="w-full h-12 bg-muted flex items-center justify-center text-xs text-muted-foreground">
+                          <div className="w-full h-12 bg-muted flex items-center justify-center text-xs text-muted-foreground rounded-md">
                             N/A
                           </div>
                         </td>

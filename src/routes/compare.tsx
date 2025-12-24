@@ -576,7 +576,7 @@ function ComparisonResults({
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-border text-left">
+                  <tr className="border-b border-white/10 text-left">
                     <th className="pb-2 font-medium">Index</th>
                     <th className="pb-2 text-right font-medium">
                       {countries.find((c) => c.code === baseCountry)?.name ?? baseCountry}
@@ -590,7 +590,7 @@ function ComparisonResults({
                   {gapData.gaps.slice(0, 20).map((gap) => (
                     <tr
                       key={`${gap.indexId}-${gap.comparisonCountryCode}`}
-                      className="border-b border-border last:border-0"
+                      className="border-b border-white/10 last:border-0"
                     >
                       <td className="py-2">{gap.indexName}</td>
                       <td className="py-2 text-right font-medium">{gap.baseRank}</td>
@@ -624,14 +624,14 @@ function ComparisonResults({
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-border text-left">
+                <tr className="border-b border-white/10 text-left">
                   <th className="pb-2 font-medium">Index</th>
                   {countries.map((country) => (
                     <th
                       key={country.code}
                       className={cn(
                         "pb-2 text-right font-medium",
-                        country.code === baseCountry && "bg-muted/50"
+                        country.code === baseCountry && "bg-white/5 rounded-t-lg"
                       )}
                     >
                       {country.name}
@@ -641,7 +641,7 @@ function ComparisonResults({
               </thead>
               <tbody>
                 {Array.from(dataByIndex.values()).map(({ index, entries }) => (
-                  <tr key={index.id} className="border-b border-border last:border-0">
+                  <tr key={index.id} className="border-b border-white/10 last:border-0">
                     <td className="py-2">
                       <span className="font-medium">{index.name}</span>
                     </td>
@@ -656,7 +656,7 @@ function ComparisonResults({
                           key={country.code}
                           className={cn(
                             "py-2 text-right",
-                            isBase && "bg-muted/50",
+                            isBase && "bg-white/5",
                             isBest && "text-green-600 font-medium"
                           )}
                         >

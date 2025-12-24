@@ -191,7 +191,7 @@ export function SearchFilterPanel({
 
             {/* View Mode Toggle - Requirement 4.3, 7.4 */}
             <div 
-              className="flex items-center border border-border rounded-md shrink-0"
+              className="flex items-center border border-border rounded-xl shrink-0"
               role="group"
               aria-label="View mode"
             >
@@ -200,11 +200,11 @@ export function SearchFilterPanel({
                 size="sm"
                 onClick={() => handleViewModeChange("grouped")}
                 className={cn(
-                  "rounded-r-none h-9 w-9 sm:h-8 sm:w-8 p-0 touch-manipulation",
+                  "rounded-r-none rounded-l-xl h-9 w-9 sm:h-8 sm:w-8 p-0 touch-manipulation",
                   viewMode === "grouped" && "pointer-events-none"
                 )}
                 aria-label="Grouped view"
-                aria-pressed={viewMode === "grouped"}
+                aria-pressed={viewMode === "grouped" ? "true" : "false"}
               >
                 <IconLayoutGrid className="size-4" aria-hidden="true" />
               </Button>
@@ -213,11 +213,11 @@ export function SearchFilterPanel({
                 size="sm"
                 onClick={() => handleViewModeChange("flat")}
                 className={cn(
-                  "rounded-l-none h-9 w-9 sm:h-8 sm:w-8 p-0 touch-manipulation",
+                  "rounded-l-none rounded-r-xl h-9 w-9 sm:h-8 sm:w-8 p-0 touch-manipulation",
                   viewMode === "flat" && "pointer-events-none"
                 )}
                 aria-label="List view"
-                aria-pressed={viewMode === "flat"}
+                aria-pressed={viewMode === "flat" ? "true" : "false"}
               >
                 <IconLayoutList className="size-4" aria-hidden="true" />
               </Button>

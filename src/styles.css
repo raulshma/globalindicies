@@ -14,112 +14,118 @@
 /* Retro-Futuristic Bento Palette */
 :root {
     /* Base Palette */
-    --color-cream: oklch(0.97 0.02 95);  /* Warm Paper/Cream */
-    --color-ink: oklch(0.15 0.05 265);   /* Soft Deep Black/Blue */
-    --color-orange: oklch(0.70 0.22 50); /* Retro Orange */
-    --color-teal: oklch(0.70 0.16 190);  /* Retro Teal */
-    --color-yellow: oklch(0.85 0.18 90); /* Highlight Yellow */
-    --color-purple: oklch(0.65 0.20 300); /* Deep Purple Accent */
-
+    --color-cream: oklch(0.98 0.01 95);  /* Clean white/off-white */
+    --color-ink: oklch(0.20 0.02 265);   /* Soft Dark Grey/Blue */
+    --color-blue: oklch(0.60 0.18 250);  /* System Blue */
+    --color-purple: oklch(0.65 0.18 300); /* System Purple */
+    --color-indigo: oklch(0.55 0.15 280); /* System Indigo */
+    --color-teal: oklch(0.70 0.12 190);  /* System Teal */
+    --color-gray-50: oklch(0.98 0.00 0);
+    --color-gray-100: oklch(0.96 0.00 0);
+    --color-gray-200: oklch(0.92 0.00 0);
+    
     /* Semantic Mapping */
-    --background: var(--color-cream);
+    --background: var(--color-gray-50); /* Subtle off-white background */
     --foreground: var(--color-ink);
     
-    --card: oklch(1 0 0); /* Pure white cards for contrast against cream bg */
+    /* Glass Effect Base */
+    --card: oklch(1 0 0 / 0.7); /* Translucent white */
     --card-foreground: var(--color-ink);
     
-    --popover: var(--card);
+    --popover: oklch(1 0 0 / 0.8);
     --popover-foreground: var(--foreground);
     
-    /* Vibrant Primary interactions */
-    --primary: var(--color-orange);
+    /* Primary interactions */
+    --primary: var(--color-ink);
     --primary-foreground: oklch(1 0 0);
     
-    --secondary: var(--color-teal);
-    --secondary-foreground: oklch(1 0 0);
+    --secondary: oklch(0.96 0.01 265); /* Very light grey */
+    --secondary-foreground: var(--color-ink);
     
-    --muted: oklch(0.92 0.01 90);
-    --muted-foreground: oklch(0.45 0.05 265);
+    --muted: oklch(0.96 0.00 0);
+    --muted-foreground: oklch(0.55 0.02 265);
     
-    --accent: var(--color-yellow);
+    --accent: oklch(0.96 0.01 265); /* Soft gray accent */
     --accent-foreground: var(--color-ink);
     
-    --destructive: oklch(0.6 0.25 25);
+    --destructive: oklch(0.6 0.22 25);
     
-    --border: var(--color-ink); /* Robust borders */
-    --input: var(--color-ink);
-    --ring: var(--color-orange);
+    --border: oklch(0.0 0.0 0 / 0.08); /* Minimalist border */
+    --input: oklch(0.0 0.0 0 / 0.08);
+    --ring: var(--color-blue);
     
-    --chart-1: var(--color-orange);
-    --chart-2: var(--color-teal);
-    --chart-3: var(--color-purple);
-    --chart-4: var(--color-yellow);
+    --chart-1: var(--color-blue);
+    --chart-2: var(--color-purple);
+    --chart-3: var(--color-indigo);
+    --chart-4: var(--color-teal);
     --chart-5: var(--color-ink);
     
-    --radius: 0px; /* Sharp corners for retro feel */
+    --radius: 1.25rem; /* Rounded Apple-like corners */
     
-    --sidebar: var(--color-cream);
+    --sidebar: oklch(0.98 0.01 265 / 0.8);
     --sidebar-foreground: var(--color-ink);
-    --sidebar-primary: var(--color-orange);
+    --sidebar-primary: var(--color-ink);
     --sidebar-primary-foreground: oklch(1 0 0);
-    --sidebar-accent: var(--color-yellow);
+    --sidebar-accent: oklch(0.95 0.01 265);
     --sidebar-accent-foreground: var(--color-ink);
-    --sidebar-border: var(--color-ink);
-    --sidebar-ring: var(--color-orange);
+    --sidebar-border: oklch(0.0 0.0 0 / 0.05);
+    --sidebar-ring: var(--color-blue);
 
     /* Custom Effects */
-    --shadow-hard: 4px 4px 0px 0px var(--color-ink);
-    --shadow-hard-sm: 2px 2px 0px 0px var(--color-ink);
-    --shadow-hard-lg: 8px 8px 0px 0px var(--color-ink);
+    --shadow-soft-sm: 0 2px 8px -2px rgba(0,0,0,0.05);
+    --shadow-soft: 0 8px 30px -6px rgba(0,0,0,0.08);
+    --shadow-soft-lg: 0 20px 40px -10px rgba(0,0,0,0.12);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .dark {
-    /* Dark Mode Flip - "Terminal / Blueprint" Vibe */
-    --background: var(--color-ink);
-    --foreground: var(--color-cream);
+    /* Dark Mode Glass */
+    --background: oklch(0.12 0.02 270); /* Deep dark background */
+    --foreground: oklch(0.98 0.00 0);
     
-    --card: oklch(0.2 0.05 265);
-    --card-foreground: var(--color-cream);
+    --card: oklch(0.20 0.03 270 / 0.6); /* Translucent dark */
+    --card-foreground: oklch(0.98 0.00 0);
     
-    --popover: oklch(0.2 0.05 265);
-    --popover-foreground: var(--color-cream);
+    --popover: oklch(0.20 0.03 270 / 0.8);
+    --popover-foreground: oklch(0.98 0.00 0);
     
-    --primary: var(--color-orange); /* Keep orange vibrant */
-    --primary-foreground: oklch(1 0 0);
+    --primary: oklch(0.98 0.00 0);
+    --primary-foreground: oklch(0.15 0.02 270);
     
-    --secondary: var(--color-teal);
-    --secondary-foreground: oklch(1 0 0);
+    --secondary: oklch(0.25 0.03 270);
+    --secondary-foreground: oklch(0.98 0.00 0);
     
-    --muted: oklch(0.25 0.05 265);
-    --muted-foreground: oklch(0.7 0.05 265);
+    --muted: oklch(0.25 0.03 270);
+    --muted-foreground: oklch(0.70 0.02 270);
     
-    --accent: oklch(0.3 0.1 265);
-    --accent-foreground: var(--color-cream);
+    --accent: oklch(0.25 0.03 270);
+    --accent-foreground: oklch(0.98 0.00 0);
     
-    --destructive: oklch(0.6 0.25 25);
+    --destructive: oklch(0.4 0.18 25);
     
-    --border: var(--color-cream); /* Light borders on dark */
-    --input: var(--color-cream);
-    --ring: var(--color-orange);
+    --border: oklch(1 1 1 / 0.08);
+    --input: oklch(1 1 1 / 0.08);
+    --ring: var(--color-blue);
     
-    --chart-1: var(--color-orange);
-    --chart-2: var(--color-teal);
-    --chart-3: var(--color-purple);
-    --chart-4: var(--color-yellow);
-    --chart-5: var(--color-cream);
+    --chart-1: var(--color-blue);
+    --chart-2: var(--color-purple);
+    --chart-3: var(--color-indigo);
+    --chart-4: var(--color-teal);
+    --chart-5: var(--color-gray-200);
     
-    --sidebar: var(--color-ink);
-    --sidebar-foreground: var(--color-cream);
-    --sidebar-primary: var(--color-orange);
-    --sidebar-primary-foreground: oklch(1 0 0);
-    --sidebar-accent: oklch(0.3 0.1 265);
-    --sidebar-accent-foreground: var(--color-cream);
-    --sidebar-border: var(--color-cream);
-    --sidebar-ring: var(--color-orange);
+    --sidebar: oklch(0.15 0.02 270 / 0.8);
+    --sidebar-foreground: oklch(0.98 0.00 0);
+    --sidebar-primary: oklch(0.98 0.00 0);
+    --sidebar-primary-foreground: oklch(0.15 0.02 270);
+    --sidebar-accent: oklch(0.25 0.03 270);
+    --sidebar-accent-foreground: oklch(0.98 0.00 0);
+    --sidebar-border: oklch(1 1 1 / 0.05);
+    --sidebar-ring: var(--color-blue);
 
-    --shadow-hard: 4px 4px 0px 0px var(--color-cream);
-    --shadow-hard-sm: 2px 2px 0px 0px var(--color-cream);
-    --shadow-hard-lg: 8px 8px 0px 0px var(--color-cream);
+    --shadow-soft-sm: 0 2px 8px -2px rgba(0,0,0,0.3);
+    --shadow-soft: 0 8px 30px -6px rgba(0,0,0,0.4);
+    --shadow-soft-lg: 0 20px 40px -10px rgba(0,0,0,0.5);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 @theme inline {
@@ -133,7 +139,7 @@
     --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
     --color-sidebar-primary: var(--sidebar-primary);
     --color-sidebar-foreground: var(--sidebar-foreground);
-    --color-sidebar: var(--sidebar);
+    --color-sidebar-: var(--sidebar);
     
     --color-chart-5: var(--chart-5);
     --color-chart-4: var(--chart-4);
@@ -161,16 +167,24 @@
     --color-background: var(--background);
     
     /* Radius */
-    --radius-sm: var(--radius);
-    --radius-md: var(--radius);
+    --radius-sm: calc(var(--radius) - 6px);
+    --radius-md: calc(var(--radius) - 2px);
     --radius-lg: var(--radius);
-    --radius-xl: var(--radius);
-    --radius-2xl: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
+    --radius-2xl: calc(var(--radius) + 8px);
     
     /* Shadows - Custom Theme Keys */
-    --shadow-hard: var(--shadow-hard);
-    --shadow-hard-sm: var(--shadow-hard-sm);
-    --shadow-hard-lg: var(--shadow-hard-lg);
+    --shadow-soft: var(--shadow-soft);
+    --shadow-soft-sm: var(--shadow-soft-sm);
+    --shadow-soft-lg: var(--shadow-soft-lg);
+    
+    --animate-float: float 6s ease-in-out infinite;
+
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
+    }
 }
 
 @layer base {

@@ -253,8 +253,8 @@ export function FullRankingTable({
                   <tr
                     key={entry.id}
                     className={cn(
-                      'border-b last:border-0 hover:bg-muted/50 transition-colors',
-                      isSelected && 'bg-primary/10 hover:bg-primary/15'
+                      'border-b border-white/5 last:border-0 hover:bg-white/5 transition-colors',
+                      isSelected && 'bg-primary/20 hover:bg-primary/25'
                     )}
                   >
                     <td className="p-2 text-sm">
@@ -314,7 +314,7 @@ export function FullRankingTable({
               <button
                 onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                 disabled={currentPage === 1}
-                className="px-3 py-1.5 text-xs border rounded hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation min-h-[36px]"
+                className="px-3 py-1.5 text-xs border border-white/10 bg-white/5 rounded-full hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation min-h-[36px] transition-colors shadow-soft-sm"
                 aria-label="Previous page"
               >
                 Previous
@@ -325,7 +325,7 @@ export function FullRankingTable({
               <button
                 onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                 disabled={currentPage === totalPages}
-                className="px-3 py-1.5 text-xs border rounded hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation min-h-[36px]"
+                className="px-3 py-1.5 text-xs border border-white/10 bg-white/5 rounded-full hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation min-h-[36px] transition-colors shadow-soft-sm"
                 aria-label="Next page"
               >
                 Next
