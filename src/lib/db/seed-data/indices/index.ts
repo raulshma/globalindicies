@@ -9,6 +9,7 @@
 import { populationIndex, populationRankings, totalCountries as populationTotal } from './population'
 import { giiIndex, giiRankings, totalCountries as giiTotal } from './gii'
 import { hdiIndex, hdiRankings, totalCountries as hdiTotal } from './hdi'
+import { humanCapitalIndex, humanCapitalRankings, totalCountries as humanCapitalTotal } from './human-capital-index'
 import { cpiIndex, cpiRankings, totalCountries as cpiTotal } from './cpi'
 import { gdpPerCapitaIndex, gdpPerCapitaRankings, totalCountries as gdpTotal } from './gdp-per-capita'
 import { epiIndex, epiRankings, totalCountries as epiTotal } from './epi'
@@ -38,6 +39,7 @@ import { ictDevelopmentIndex, ictDevelopmentRankings, totalCountries as ictDevel
 export { populationIndex, populationRankings } from './population'
 export { giiIndex, giiRankings } from './gii'
 export { hdiIndex, hdiRankings } from './hdi'
+export { humanCapitalIndex, humanCapitalRankings } from './human-capital-index'
 export { cpiIndex, cpiRankings } from './cpi'
 export { gdpPerCapitaIndex, gdpPerCapitaRankings } from './gdp-per-capita'
 export { epiIndex, epiRankings } from './epi'
@@ -68,6 +70,7 @@ export const allIndices = [
   populationIndex,
   giiIndex,
   hdiIndex,
+  humanCapitalIndex,
   cpiIndex,
   gdpPerCapitaIndex,
   epiIndex,
@@ -99,6 +102,7 @@ export const allRankingsData = [
   { index: populationIndex, rankings: populationRankings, totalCountries: populationTotal, valueField: 'value' as const },
   { index: giiIndex, rankings: giiRankings, totalCountries: giiTotal, valueField: 'score' as const },
   { index: hdiIndex, rankings: hdiRankings, totalCountries: hdiTotal, valueField: 'score' as const },
+  { index: humanCapitalIndex, rankings: humanCapitalRankings, totalCountries: humanCapitalTotal, valueField: 'score' as const },
   { index: cpiIndex, rankings: cpiRankings, totalCountries: cpiTotal, valueField: 'score' as const },
   { index: gdpPerCapitaIndex, rankings: gdpPerCapitaRankings, totalCountries: gdpTotal, valueField: 'value' as const },
   { index: epiIndex, rankings: epiRankings, totalCountries: epiTotal, valueField: 'score' as const },
