@@ -1,0 +1,70 @@
+/**
+ * Henley Passport Index Data
+ * Source: Henley & Partners - 2024
+ * https://www.henleyglobal.com/passport-index
+ */
+
+export const passportIndex = {
+  id: 'ri-passport',
+  name: 'Henley Passport Index',
+  shortName: 'HPI',
+  domainId: 'd-governance',
+  source: 'Henley & Partners',
+  sourceUrl: 'https://www.henleyglobal.com/passport-index',
+  methodology: 'Ranks passports by number of destinations their holders can access without a prior visa.',
+  updateFrequency: 'quarterly',
+  scoreMin: 0,
+  scoreMax: 200,
+  higherIsBetter: true,
+  lastUpdated: new Date('2024-10-01'),
+}
+
+export const passportRankings = [
+  { code: 'SGP', rank: 1, year: 2024, score: 195 },
+  { code: 'FRA', rank: 2, year: 2024, score: 194 },
+  { code: 'DEU', rank: 2, year: 2024, score: 194 },
+  { code: 'ITA', rank: 2, year: 2024, score: 194 },
+  { code: 'JPN', rank: 2, year: 2024, score: 194 },
+  { code: 'ESP', rank: 2, year: 2024, score: 194 },
+  { code: 'AUT', rank: 3, year: 2024, score: 193 },
+  { code: 'FIN', rank: 3, year: 2024, score: 193 },
+  { code: 'IRL', rank: 3, year: 2024, score: 193 },
+  { code: 'KOR', rank: 3, year: 2024, score: 193 },
+  { code: 'LUX', rank: 3, year: 2024, score: 193 },
+  { code: 'NLD', rank: 3, year: 2024, score: 193 },
+  { code: 'SWE', rank: 3, year: 2024, score: 193 },
+  { code: 'GBR', rank: 4, year: 2024, score: 192 },
+  { code: 'BEL', rank: 4, year: 2024, score: 192 },
+  { code: 'DNK', rank: 4, year: 2024, score: 192 },
+  { code: 'NOR', rank: 4, year: 2024, score: 192 },
+  { code: 'PRT', rank: 4, year: 2024, score: 192 },
+  { code: 'CHE', rank: 4, year: 2024, score: 192 },
+  { code: 'AUS', rank: 5, year: 2024, score: 191 },
+  { code: 'CAN', rank: 5, year: 2024, score: 191 },
+  { code: 'CZE', rank: 5, year: 2024, score: 191 },
+  { code: 'GRC', rank: 5, year: 2024, score: 191 },
+  { code: 'MLT', rank: 5, year: 2024, score: 191 },
+  { code: 'NZL', rank: 5, year: 2024, score: 191 },
+  { code: 'POL', rank: 5, year: 2024, score: 191 },
+  { code: 'USA', rank: 6, year: 2024, score: 189 },
+  { code: 'HUN', rank: 6, year: 2024, score: 189 },
+  { code: 'LTU', rank: 6, year: 2024, score: 189 },
+  { code: 'SVK', rank: 6, year: 2024, score: 189 },
+  { code: 'SVN', rank: 6, year: 2024, score: 189 },
+  { code: 'EST', rank: 7, year: 2024, score: 188 },
+  { code: 'LVA', rank: 7, year: 2024, score: 188 },
+  { code: 'BRA', rank: 8, year: 2024, score: 174 },
+  { code: 'ARG', rank: 9, year: 2024, score: 173 },
+  { code: 'MEX', rank: 10, year: 2024, score: 161 },
+  { code: 'TUR', rank: 11, year: 2024, score: 118 },
+  { code: 'RUS', rank: 12, year: 2024, score: 118 },
+  { code: 'CHN', rank: 13, year: 2024, score: 85 },
+  { code: 'IND', rank: 14, year: 2024, score: 58 },
+  { code: 'PAK', rank: 15, year: 2024, score: 34 },
+  { code: 'BGD', rank: 16, year: 2024, score: 42 },
+  { code: 'IRN', rank: 17, year: 2024, score: 44 },
+  { code: 'NPL', rank: 18, year: 2024, score: 40 },
+  { code: 'LKA', rank: 19, year: 2024, score: 43 },
+]
+
+export const totalCountries = 199

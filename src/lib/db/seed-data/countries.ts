@@ -131,4 +131,5 @@ export const countriesData = [
   { id: 'c-mdv', code: 'MDV', name: 'Maldives', region: 'Asia', incomeLevel: 'upper-middle', population: 529676 },
   { id: 'c-brn', code: 'BRN', name: 'Brunei', region: 'Asia', incomeLevel: 'high', population: 466330 },
   { id: 'c-isl', code: 'ISL', name: 'Iceland', region: 'Europe', incomeLevel: 'high', population: 398266 },
+  { id: 'c-sen', code: 'SEN', name: 'Senegal', region: 'Africa', incomeLevel: 'lower-middle', population: 18275743 },
 ]
