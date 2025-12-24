@@ -45,6 +45,16 @@ import { socialProgressIndex, socialProgressRankings, totalCountries as socialPr
 import { energyTransitionIndex, energyTransitionRankings, totalCountries as energyTransitionTotal } from './energy-transition'
 import { goodCountryIndex, goodCountryRankings, totalCountries as goodCountryTotal } from './good-country'
 
+// New indices - December 2025
+import { cybersecurityIndex, cybersecurityRankings, totalCountries as cybersecurityTotal } from './cybersecurity'
+import { foodSecurityIndex, foodSecurityRankings, totalCountries as foodSecurityTotal } from './food-security'
+import { povertyMpiIndex, povertyMpiRankings, totalCountries as povertyMpiTotal } from './poverty-mpi'
+import { inequalityCriIndex, inequalityCriRankings, totalCountries as inequalityCriTotal } from './inequality-cri'
+import { openBudgetIndex, openBudgetRankings, totalCountries as openBudgetTotal } from './open-budget'
+import { talentRankingIndex, talentRankingRankings, totalCountries as talentRankingTotal } from './talent-ranking'
+import { givingIndex, givingIndexRankings, totalCountries as givingTotal } from './giving-index'
+import { liveabilityIndex, liveabilityRankings, totalCountries as liveabilityTotal } from './liveability'
+
 // Re-export individual index data
 export { populationIndex, populationRankings } from './population'
 export { giiIndex, giiRankings } from './gii'
@@ -84,6 +94,16 @@ export { airQualityIndex, airQualityRankings } from './air-quality'
 export { socialProgressIndex, socialProgressRankings } from './social-progress'
 export { energyTransitionIndex, energyTransitionRankings } from './energy-transition'
 export { goodCountryIndex, goodCountryRankings } from './good-country'
+
+// New exports - December 2025
+export { cybersecurityIndex, cybersecurityRankings } from './cybersecurity'
+export { foodSecurityIndex, foodSecurityRankings } from './food-security'
+export { povertyMpiIndex, povertyMpiRankings } from './poverty-mpi'
+export { inequalityCriIndex, inequalityCriRankings } from './inequality-cri'
+export { openBudgetIndex, openBudgetRankings } from './open-budget'
+export { talentRankingIndex, talentRankingRankings } from './talent-ranking'
+export { givingIndex, givingIndexRankings } from './giving-index'
+export { liveabilityIndex, liveabilityRankings } from './liveability'
 
 // All index metadata
 export const allIndices = [
@@ -126,6 +146,15 @@ export const allIndices = [
   socialProgressIndex,
   energyTransitionIndex,
   goodCountryIndex,
+  // New indices - December 2025
+  cybersecurityIndex,
+  foodSecurityIndex,
+  povertyMpiIndex,
+  inequalityCriIndex,
+  openBudgetIndex,
+  talentRankingIndex,
+  givingIndex,
+  liveabilityIndex,
 ]
 
 // All rankings data with their index info
@@ -169,4 +198,13 @@ export const allRankingsData = [
   { index: socialProgressIndex, rankings: socialProgressRankings, totalCountries: socialProgressTotal, valueField: 'score' as const },
   { index: energyTransitionIndex, rankings: energyTransitionRankings, totalCountries: energyTransitionTotal, valueField: 'score' as const },
   { index: goodCountryIndex, rankings: goodCountryRankings, totalCountries: goodCountryTotal, valueField: 'score' as const },
+  // New indices data - December 2025
+  { index: cybersecurityIndex, rankings: cybersecurityRankings, totalCountries: cybersecurityTotal, valueField: 'score' as const },
+  { index: foodSecurityIndex, rankings: foodSecurityRankings, totalCountries: foodSecurityTotal, valueField: 'score' as const },
+  { index: povertyMpiIndex, rankings: povertyMpiRankings, totalCountries: povertyMpiTotal, valueField: 'score' as const },
+  { index: inequalityCriIndex, rankings: inequalityCriRankings, totalCountries: inequalityCriTotal, valueField: 'score' as const },
+  { index: openBudgetIndex, rankings: openBudgetRankings, totalCountries: openBudgetTotal, valueField: 'score' as const },
+  { index: talentRankingIndex, rankings: talentRankingRankings, totalCountries: talentRankingTotal, valueField: 'score' as const },
+  { index: givingIndex, rankings: givingIndexRankings, totalCountries: givingTotal, valueField: 'score' as const },
+  { index: liveabilityIndex, rankings: liveabilityRankings, totalCountries: liveabilityTotal, valueField: 'score' as const },
 ]

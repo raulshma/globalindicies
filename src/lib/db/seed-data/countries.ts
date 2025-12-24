@@ -161,5 +161,12 @@ export const countriesData = [
   { id: 'c-lat', code: 'LAT', name: 'Latvia (alt)', region: 'Europe', incomeLevel: 'high', population: 1853559 },
   { id: 'c-uae', code: 'UAE', name: 'United Arab Emirates (alt)', region: 'Asia', incomeLevel: 'high', population: 11346000 },
   { id: 'c-pri', code: 'PRI', name: 'Puerto Rico', region: 'Latin America', incomeLevel: 'high', population: 3205691 },
+  // Additional countries needed for new indices
+  { id: 'c-gmb', code: 'GMB', name: 'Gambia', region: 'Africa', incomeLevel: 'low', population: 2705568 },
+  { id: 'c-mli', code: 'MLI', name: 'Mali', region: 'Africa', incomeLevel: 'low', population: 23293698 },
+  { id: 'c-bdi', code: 'BDI', name: 'Burundi', region: 'Africa', incomeLevel: 'low', population: 13238559 },
+  { id: 'c-sle', code: 'SLE', name: 'Sierra Leone', region: 'Africa', incomeLevel: 'low', population: 8791092 },
+  { id: 'c-lbr', code: 'LBR', name: 'Liberia', region: 'Africa', incomeLevel: 'low', population: 5418377 },
+  { id: 'c-vut', code: 'VUT', name: 'Vanuatu', region: 'Oceania', incomeLevel: 'lower-middle', population: 334506 },
 ]
 
