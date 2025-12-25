@@ -1,23 +1,26 @@
-import * as React from "react"
+import * as React from 'react'
 import {
   HeadContent,
   Outlet,
   Scripts,
   createRootRouteWithContext,
-} from "@tanstack/react-router"
-import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
-import { TanStackDevtools } from "@tanstack/react-devtools"
+} from '@tanstack/react-router'
+import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
+import { TanStackDevtools } from '@tanstack/react-devtools'
 
-import appCss from "../styles.css?url"
-import { ThemeProvider } from "@/components/theme-provider"
-import { BackgroundProvider, useBackground } from "@/components/background-provider"
-import { Layout } from "@/components/layout"
-import { getAllCountries } from "@/lib/server-functions/countries"
-import { generateWebsiteJsonLd } from "@/lib/seo"
-import { ThreeBackground } from "@/components/ThreeBackground"
-import { BackgroundGradientAnimation } from "@/components/background-gradient-animation"
-import { ShootingMeteors } from "@/components/ShootingMeteors"
-import { Toaster } from "sonner"
+import appCss from '../styles.css?url'
+import { ThemeProvider } from '@/components/theme-provider'
+import {
+  BackgroundProvider,
+  useBackground,
+} from '@/components/background-provider'
+import { Layout } from '@/components/layout'
+import { getAllCountries } from '@/lib/server-functions/countries'
+import { generateWebsiteJsonLd } from '@/lib/seo'
+import { ThreeBackground } from '@/components/ThreeBackground'
+import { BackgroundGradientAnimation } from '@/components/background-gradient-animation'
+import { ShootingMeteors } from '@/components/ShootingMeteors'
+import { Toaster } from 'sonner'
 
 // Router context type
 export interface RouterContext {
@@ -25,115 +28,115 @@ export interface RouterContext {
 }
 
 // Default country code
-const DEFAULT_COUNTRY = "IND"
+const DEFAULT_COUNTRY = 'IND'
 
 export const Route = createRootRouteWithContext<RouterContext>()({
   head: () => ({
     meta: [
       {
-        charSet: "utf-8",
+        charSet: 'utf-8',
       },
       {
-        name: "viewport",
-        content: "width=device-width, initial-scale=1",
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1',
       },
       {
-        title: "Global Indicies — Global Rankings Intelligence Platform",
+        title: 'Global Indicies — Global Rankings Intelligence Platform',
       },
       {
-        name: "description",
+        name: 'description',
         content:
-          "Track and analyze global ranking indices. Compare countries, explore trends, and build custom composite indices.",
+          'Track and analyze global ranking indices. Compare countries, explore trends, and build custom composite indices.',
       },
       {
-        name: "keywords",
+        name: 'keywords',
         content:
-          "global rankings, country indices, country comparison, HDI, GDP, innovation index, world rankings, international rankings",
+          'global rankings, country indices, country comparison, HDI, GDP, innovation index, world rankings, international rankings',
       },
       {
-        property: "og:title",
-        content: "Global Indicies — Global Rankings Intelligence Platform",
+        property: 'og:title',
+        content: 'Global Indicies — Global Rankings Intelligence Platform',
       },
       {
-        property: "og:description",
+        property: 'og:description',
         content:
-          "Track and analyze global ranking indices. Compare countries, explore trends, and build custom composite indices.",
+          'Track and analyze global ranking indices. Compare countries, explore trends, and build custom composite indices.',
       },
       {
-        property: "og:type",
-        content: "website",
+        property: 'og:type',
+        content: 'website',
       },
       {
-        name: "twitter:card",
-        content: "summary_large_image",
+        name: 'twitter:card',
+        content: 'summary_large_image',
       },
       {
-        name: "twitter:title",
-        content: "Global Indicies — Global Rankings Intelligence Platform",
+        name: 'twitter:title',
+        content: 'Global Indicies — Global Rankings Intelligence Platform',
       },
       {
-        name: "twitter:description",
+        name: 'twitter:description',
         content:
-          "Track and analyze global ranking indices. Compare countries, explore trends, and build custom composite indices.",
+          'Track and analyze global ranking indices. Compare countries, explore trends, and build custom composite indices.',
       },
       // Theme color for mobile browsers
       {
-        name: "theme-color",
-        content: "#16a34a",
-        media: "(prefers-color-scheme: light)",
+        name: 'theme-color',
+        content: '#16a34a',
+        media: '(prefers-color-scheme: light)',
       },
       {
-        name: "theme-color",
-        content: "#22c55e",
-        media: "(prefers-color-scheme: dark)",
+        name: 'theme-color',
+        content: '#22c55e',
+        media: '(prefers-color-scheme: dark)',
       },
       // Mobile app capable
       {
-        name: "mobile-web-app-capable",
-        content: "yes",
+        name: 'mobile-web-app-capable',
+        content: 'yes',
       },
       {
-        name: "apple-mobile-web-app-capable",
-        content: "yes",
+        name: 'apple-mobile-web-app-capable',
+        content: 'yes',
       },
       {
-        name: "apple-mobile-web-app-status-bar-style",
-        content: "default",
+        name: 'apple-mobile-web-app-status-bar-style',
+        content: 'default',
       },
     ],
     links: [
       {
-        rel: "stylesheet",
+        rel: 'stylesheet',
         href: appCss,
       },
       {
-        rel: "icon",
-        href: "/favicon.ico",
+        rel: 'icon',
+        href: '/favicon.ico',
       },
       {
-        rel: "canonical",
-        href: "https://globalranks.vercel.app",
+        rel: 'canonical',
+        href: 'https://globalranks.vercel.app',
       },
       // Preconnect to font origins for faster loading
       {
-        rel: "preconnect",
-        href: "https://fonts.gstatic.com",
-        crossOrigin: "anonymous",
+        rel: 'preconnect',
+        href: 'https://fonts.gstatic.com',
+        crossOrigin: 'anonymous',
       },
       // Apple touch icon for iOS
       {
-        rel: "apple-touch-icon",
-        href: "/logo192.png",
+        rel: 'apple-touch-icon',
+        href: '/logo192.png',
       },
       // Theme color for mobile browsers
       {
-        rel: "manifest",
-        href: "/manifest.json",
+        rel: 'manifest',
+        href: '/manifest.json',
       },
     ],
     scripts: [
       {
-        type: "application/ld+json",
+        type: 'application/ld+json',
         children: JSON.stringify(generateWebsiteJsonLd()),
       },
     ],
@@ -168,11 +171,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         {children}
         <TanStackDevtools
           config={{
-            position: "bottom-right",
+            position: 'bottom-right',
           }}
           plugins={[
             {
-              name: "Tanstack Router",
+              name: 'Tanstack Router',
               render: <TanStackRouterDevtoolsPanel />,
             },
           ]}
@@ -186,15 +189,20 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 // Background renderer component that switches based on preference
 function BackgroundRenderer() {
   const { background } = useBackground()
-  
-  if (background === "gradient") {
-    return <BackgroundGradientAnimation />
+
+  if (background === 'gradient') {
+    return (
+      <>
+        <BackgroundGradientAnimation />
+        <ShootingMeteors number={2} />
+      </>
+    )
   }
-  
+
   return (
     <>
       <ThreeBackground />
-      <ShootingMeteors />
+      <ShootingMeteors number={2} />
     </>
   )
 }
@@ -202,13 +210,16 @@ function BackgroundRenderer() {
 function RootComponent() {
   const { countries } = Route.useLoaderData()
   const search: Record<string, string | undefined> = Route.useSearch()
-  
+
   // Get selected country from URL search params or default
   const selectedCountry = search.country ?? DEFAULT_COUNTRY
 
   return (
     <ThemeProvider defaultTheme="system" storageKey="global-indicies-theme">
-      <BackgroundProvider defaultBackground="3d" storageKey="global-indicies-background">
+      <BackgroundProvider
+        defaultBackground="3d"
+        storageKey="global-indicies-background"
+      >
         <Layout countries={countries} selectedCountry={selectedCountry}>
           <BackgroundRenderer />
           <Outlet />
@@ -218,4 +229,3 @@ function RootComponent() {
     </ThemeProvider>
   )
 }
-

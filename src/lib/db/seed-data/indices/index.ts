@@ -111,6 +111,7 @@ import { realGdpGrowthIndex, realGdpGrowthRankings, totalCountries as realGdpGro
 // New indices - December 2025 (batch 6)
 import { giniCoefficientIndex, giniCoefficientRankings, totalCountries as giniCoefficientTotal } from './gini-coefficient'
 import { broadbandSpeedIndex, broadbandSpeedRankings, totalCountries as broadbandSpeedTotal } from './broadband-speed'
+import { mobileSpeedIndex, mobileSpeedRankings, totalCountries as mobileSpeedTotal } from './mobile-speed'
 import { co2EmissionsIndex, co2EmissionsRankings, totalCountries as co2EmissionsTotal } from './co2-emissions'
 
 // New indices - December 2025 (batch 7)
@@ -233,6 +234,7 @@ export { realGdpGrowthIndex, realGdpGrowthRankings } from './real-gdp-growth'
 // New exports - December 2025 (batch 6)
 export { giniCoefficientIndex, giniCoefficientRankings } from './gini-coefficient'
 export { broadbandSpeedIndex, broadbandSpeedRankings } from './broadband-speed'
+export { mobileSpeedIndex, mobileSpeedRankings } from './mobile-speed'
 export { co2EmissionsIndex, co2EmissionsRankings } from './co2-emissions'
 
 // New exports - December 2025 (batch 7)
@@ -349,6 +351,7 @@ export const allIndices = [
   // New indices - December 2025 (batch 6)
   giniCoefficientIndex,
   broadbandSpeedIndex,
+  mobileSpeedIndex,
   co2EmissionsIndex,
   // New indices - December 2025 (batch 7)
   infantMortalityIndex,
@@ -464,6 +467,7 @@ export const allRankingsData = [
   // New indices data - December 2025 (batch 6)
   { index: giniCoefficientIndex, rankings: giniCoefficientRankings, totalCountries: giniCoefficientTotal, valueField: 'score' as const },
   { index: broadbandSpeedIndex, rankings: broadbandSpeedRankings, totalCountries: broadbandSpeedTotal, valueField: 'score' as const },
+  { index: mobileSpeedIndex, rankings: mobileSpeedRankings, totalCountries: mobileSpeedTotal, valueField: 'score' as const },
   { index: co2EmissionsIndex, rankings: co2EmissionsRankings, totalCountries: co2EmissionsTotal, valueField: 'score' as const },
   // New indices data - December 2025 (batch 7)
   { index: infantMortalityIndex, rankings: infantMortalityRankings, totalCountries: infantMortalityTotal, valueField: 'score' as const },

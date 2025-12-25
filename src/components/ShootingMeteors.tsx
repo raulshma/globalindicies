@@ -1,163 +1,279 @@
-import { Canvas, useFrame } from "@react-three/fiber"
-import { useRef, useState, useMemo } from "react"
-import * as THREE from "three"
-import { extend } from "@react-three/fiber"
-import { shaderMaterial } from "@react-three/drei"
-import { useTheme } from "./theme-provider"
+import { cn } from '@/lib/utils'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect, useCallback } from 'react'
 
-// Meteor streak shader - creates a smooth gradient from head to tail
-const MeteorStreakMaterial = shaderMaterial(
-    {
-        uHeadColor: new THREE.Color('#ffffff'),
-        uTailColor: new THREE.Color('#fbbf24'),
-    },
-    // Vertex
-    `
-        varying vec2 vUv;
-        void main() {
-            vUv = uv;
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        }
-    `,
-    // Fragment
-    `
-        uniform vec3 uHeadColor;
-        uniform vec3 uTailColor;
-        varying vec2 vUv;
-        
-        void main() {
-            // vUv.x goes 0 (left/tail) to 1 (right/head)
-            float t = vUv.x;
-            
-            // Color: interpolate from tail color to head color, then to white at tip
-            vec3 color = mix(uTailColor, uHeadColor, smoothstep(0.0, 0.8, t));
-            color = mix(color, vec3(1.0), smoothstep(0.85, 1.0, t)); // White hot tip
-            
-            // Alpha: fade out at the tail, solid at head
-            float alpha = smoothstep(0.0, 0.3, t);
-            
-            // Soft edges on top/bottom (vUv.y is 0-1 across width)
-            float edgeFade = 1.0 - pow(abs(vUv.y - 0.5) * 2.0, 2.0);
-            alpha *= edgeFade;
-            
-            gl_FragColor = vec4(color, alpha * 0.9);
-        }
-    `
-)
+interface MeteorState {
+  id: number
+  top: number
+  left: number
+  delay: number
+  duration: number
+  isExploding: boolean
+  explosionProgress: number
+}
 
-extend({ MeteorStreakMaterial })
+interface ExplosionParticle {
+  id: number
+  meteorId: number
+  x: number
+  y: number
+  angle: number
+  speed: number
+  size: number
+}
 
-declare global {
-    namespace JSX {
-        interface IntrinsicElements {
-            meteorStreakMaterial: any
+const Meteor = ({
+  meteor,
+  onAnimationComplete,
+  onExplode,
+  className,
+}: {
+  meteor: MeteorState
+  onAnimationComplete: (id: number) => void
+  onExplode: (id: number, x: number, y: number) => void
+  className?: string
+}) => {
+  const [hasExploded, setHasExploded] = useState(false)
+
+  useEffect(() => {
+    // Random chance to explode during the journey (10% chance - rare event)
+    const shouldExplode = Math.random() < 0.1
+    if (shouldExplode && !hasExploded) {
+      // Explode at a random point during the animation (between 20% and 80% of the journey)
+      const explosionTiming = meteor.delay * 1000 + (meteor.duration * 1000 * (0.2 + Math.random() * 0.6))
+      const timer = setTimeout(() => {
+        if (!hasExploded) {
+          setHasExploded(true)
+          // Calculate approximate position at explosion time
+          const progress = (0.2 + Math.random() * 0.6)
+          const startX = (meteor.left / 100) * window.innerWidth
+          const startY = (meteor.top / 100) * window.innerHeight
+          // Meteor moves diagonally down-right at 215 degrees
+          const distance = progress * 1500
+          const angle = (215 * Math.PI) / 180
+          const explosionX = startX + Math.cos(angle) * distance
+          const explosionY = startY - Math.sin(angle) * distance
+          onExplode(meteor.id, explosionX, explosionY)
         }
+      }, explosionTiming)
+      return () => clearTimeout(timer)
     }
+  }, [meteor, hasExploded, onExplode])
+
+  if (hasExploded) {
+    return null
+  }
+
+  return (
+    <motion.span
+      key={'meteor' + meteor.id}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className={cn(
+        'animate-meteor-effect absolute h-1 w-1 rounded-[9999px] bg-white shadow-[0_0_0_1px_#ffffff50] rotate-[15deg]',
+        "before:absolute before:top-1/2 before:h-px before:w-[200px] before:-translate-y-[50%] before:transform before:bg-linear-to-r before:from-white before:to-transparent before:content-['']",
+        className,
+      )}
+      style={{
+        top: `${meteor.top}vh`,
+        left: `${meteor.left}vw`,
+        animationDelay: `${meteor.delay}s`,
+        animationDuration: `${meteor.duration}s`,
+      }}
+      onAnimationIteration={() => onAnimationComplete(meteor.id)}
+    />
+  )
 }
 
-type MeteorData = {
-    id: number
-    x: number
-    y: number
-    z: number
-    speed: number
-    angle: number
-    length: number
-    width: number
+interface ExplosionGlow {
+  id: number
+  meteorId: number
+  x: number
+  y: number
 }
 
-function Meteor({ data, onComplete }: { data: MeteorData, onComplete: (id: number) => void }) {
-    const groupRef = useRef<THREE.Group>(null!)
-    const { theme } = useTheme()
-
-    const isDark = theme === 'dark' || !theme
-    const headColor = useMemo(() => new THREE.Color('#ffffff'), [])
-    const tailColor = useMemo(() => new THREE.Color(isDark ? '#fbbf24' : '#f59e0b'), [isDark])
-
-    useFrame((_, delta) => {
-        if (!groupRef.current) return
-
-        groupRef.current.position.x += Math.cos(data.angle) * data.speed * delta
-        groupRef.current.position.y += Math.sin(data.angle) * data.speed * delta
-
-        if (groupRef.current.position.y < -15 || groupRef.current.position.x > 25) {
-            onComplete(data.id)
-        }
-    })
-
-    return (
-        <group ref={groupRef} position={[data.x, data.y, data.z]} rotation={[0, 0, data.angle]}>
-            {/* Single continuous streak using plane with gradient shader */}
-            <mesh position={[-data.length / 2, 0, 0]}>
-                <planeGeometry args={[data.length, data.width]} />
-                {/* @ts-ignore */}
-                <meteorStreakMaterial
-                    transparent
-                    depthWrite={false}
-                    side={THREE.DoubleSide}
-                    uHeadColor={headColor}
-                    uTailColor={tailColor}
-                />
-            </mesh>
-        </group>
-    )
-}
-
-function MeteorSpawner() {
-    const [meteors, setMeteors] = useState<MeteorData[]>([])
-    const meteorIdCounter = useRef(0)
-    const nextSpawnTime = useRef(0)
-
-    useFrame((state) => {
-        const time = state.clock.elapsedTime
-
-        if (time > nextSpawnTime.current) {
-            const id = meteorIdCounter.current++
-
-            const startX = -12 + Math.random() * 18
-            const startY = 10 + Math.random() * 6
-
-            const angle = -Math.PI / 4 + (Math.random() * 0.15 - 0.075)
-
-            const newMeteor: MeteorData = {
-                id,
-                x: startX,
-                y: startY,
-                z: Math.random() * 0.3,
-                speed: 2 + Math.random() * 1, // 2-3 speed
-                angle: angle,
-                length: 1.5 + Math.random() * 1, // Long streak
-                width: 0.03 + Math.random() * 0.02 // Thin streak
-            }
-
-            setMeteors(prev => [...prev, newMeteor])
-            nextSpawnTime.current = time + 2 + Math.random() * 4
-        }
-    })
-
-    const handleComplete = (id: number) => {
-        setMeteors(prev => prev.filter(m => m.id !== id))
+const ExplosionEffect = ({
+  particles,
+  glows,
+  onComplete,
+}: {
+  particles: ExplosionParticle[]
+  glows: ExplosionGlow[]
+  onComplete: (meteorId: number) => void
+}) => {
+  useEffect(() => {
+    if (particles.length > 0) {
+      const timer = setTimeout(() => {
+        onComplete(particles[0].meteorId)
+      }, 800)
+      return () => clearTimeout(timer)
     }
+  }, [particles, onComplete])
 
-    return (
-        <>
-            {meteors.map(m => (
-                <Meteor key={m.id} data={m} onComplete={handleComplete} />
-            ))}
-        </>
-    )
+  return (
+    <>
+      {/* Central glow burst effect */}
+      {glows.map((glow) => (
+        <motion.div
+          key={`glow-${glow.id}`}
+          initial={{
+            x: glow.x,
+            y: glow.y,
+            scale: 0.2,
+            opacity: 1,
+          }}
+          animate={{
+            scale: 3,
+            opacity: 0,
+          }}
+          transition={{
+            duration: 0.5,
+            ease: 'easeOut',
+          }}
+          className="absolute rounded-full pointer-events-none"
+          style={{
+            width: 40,
+            height: 40,
+            marginLeft: -20,
+            marginTop: -20,
+            background: 'radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0.6) 30%, rgba(200,220,255,0.3) 60%, transparent 100%)',
+            boxShadow: '0 0 30px 15px rgba(255, 255, 255, 0.6), 0 0 60px 30px rgba(200, 220, 255, 0.4), 0 0 100px 50px rgba(150, 180, 255, 0.2)',
+          }}
+        />
+      ))}
+      {/* Particles */}
+      {particles.map((particle) => (
+        <motion.div
+          key={particle.id}
+          initial={{
+            x: particle.x,
+            y: particle.y,
+            scale: 1,
+            opacity: 1,
+          }}
+          animate={{
+            x: particle.x + Math.cos(particle.angle) * particle.speed * 100,
+            y: particle.y + Math.sin(particle.angle) * particle.speed * 100,
+            scale: 0,
+            opacity: 0,
+          }}
+          transition={{
+            duration: 0.6,
+            ease: 'easeOut',
+          }}
+          className="absolute rounded-full bg-white pointer-events-none"
+          style={{
+            width: particle.size,
+            height: particle.size,
+            boxShadow: '0 0 8px 3px rgba(255, 255, 255, 0.9), 0 0 16px 6px rgba(200, 220, 255, 0.5)',
+          }}
+        />
+      ))}
+    </>
+  )
 }
 
-export function ShootingMeteors() {
-    return (
-        <div className="fixed inset-0 z-50 pointer-events-none">
-            <Canvas
-                camera={{ position: [0, 0, 10], fov: 45 }}
-                gl={{ alpha: true, antialias: true }}
-                style={{ pointerEvents: 'none' }}
-            >
-                <MeteorSpawner />
-            </Canvas>
-        </div>
+export const ShootingMeteors = ({
+  number,
+  className,
+}: {
+  number?: number
+  className?: string
+}) => {
+  const meteorCount = number || 2
+
+  const generateMeteor = useCallback((id: number, initialDelay = 0): MeteorState => {
+    return {
+      id,
+      top: Math.floor(Math.random() * 30) - 20, // -20 to 10 vh (start above or near top)
+      left: Math.floor(Math.random() * 80) + 10, // 10 to 90 vw
+      delay: initialDelay + 5 + Math.random() * 10, // 5-15s additional delay (less frequent)
+      duration: Math.floor(Math.random() * 3 + 2), // 2-5s duration
+      isExploding: false,
+      explosionProgress: 0,
+    }
+  }, [])
+
+  const [meteors, setMeteors] = useState<MeteorState[]>(() =>
+    Array.from({ length: meteorCount }, (_, idx) => generateMeteor(idx, idx * 8)) // 8s stagger between initial meteors
+  )
+  const [explosions, setExplosions] = useState<ExplosionParticle[]>([])
+  const [explosionGlows, setExplosionGlows] = useState<ExplosionGlow[]>([])
+  const [meteorIdCounter, setMeteorIdCounter] = useState(meteorCount)
+
+  const handleAnimationComplete = useCallback((id: number) => {
+    // Replace the completed meteor with a new one at a random position
+    setMeteors((prev) =>
+      prev.map((m) =>
+        m.id === id ? generateMeteor(meteorIdCounter, 0) : m
+      )
     )
+    setMeteorIdCounter((prev) => prev + 1)
+  }, [generateMeteor, meteorIdCounter])
+
+  const handleExplode = useCallback((meteorId: number, x: number, y: number) => {
+    // Create explosion particles
+    const particleCount = 8 + Math.floor(Math.random() * 8) // 8-15 particles
+    const newParticles: ExplosionParticle[] = Array.from({ length: particleCount }, (_, i) => ({
+      id: Date.now() + i,
+      meteorId,
+      x,
+      y,
+      angle: (Math.PI * 2 * i) / particleCount + Math.random() * 0.5,
+      speed: 0.5 + Math.random() * 1.5,
+      size: 2 + Math.random() * 4,
+    }))
+    setExplosions((prev) => [...prev, ...newParticles])
+
+    // Create central glow effect
+    const newGlow: ExplosionGlow = {
+      id: Date.now(),
+      meteorId,
+      x,
+      y,
+    }
+    setExplosionGlows((prev) => [...prev, newGlow])
+
+    // Remove the exploded meteor and spawn a new one
+    setMeteors((prev) =>
+      prev.map((m) =>
+        m.id === meteorId ? generateMeteor(meteorIdCounter, 1 + Math.random() * 3) : m
+      )
+    )
+    setMeteorIdCounter((prev) => prev + 1)
+  }, [generateMeteor, meteorIdCounter])
+
+  const handleExplosionComplete = useCallback((meteorId: number) => {
+    setExplosions((prev) => prev.filter((p) => p.meteorId !== meteorId))
+    setExplosionGlows((prev) => prev.filter((g) => g.meteorId !== meteorId))
+  }, [])
+
+  return (
+    <div className="fixed inset-0 pointer-events-none overflow-hidden">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="relative w-full h-full"
+      >
+        <AnimatePresence mode="popLayout">
+          {meteors.map((meteor) => (
+            <Meteor
+              key={meteor.id}
+              meteor={meteor}
+              onAnimationComplete={handleAnimationComplete}
+              onExplode={handleExplode}
+              className={className}
+            />
+          ))}
+        </AnimatePresence>
+        <ExplosionEffect
+          particles={explosions}
+          glows={explosionGlows}
+          onComplete={handleExplosionComplete}
+        />
+      </motion.div>
+    </div>
+  )
 }

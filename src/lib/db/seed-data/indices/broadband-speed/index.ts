@@ -7,6 +7,7 @@
  */
 
 import { broadbandSpeedRankings2024 } from './2024'
+import { broadbandSpeedRankings2025 } from './2025'
 
 export const broadbandSpeedIndex = {
   id: 'ri-broadband-speed',
@@ -21,13 +22,17 @@ export const broadbandSpeedIndex = {
   scoreMin: 0,
   scoreMax: 1000,
   higherIsBetter: true,
-  lastUpdated: new Date('2025-12-01'),
+  lastUpdated: new Date('2025-11-01'),
 }
 
 // Combined rankings for seeding
-export const broadbandSpeedRankings = [...broadbandSpeedRankings2024]
+export const broadbandSpeedRankings = [
+  ...broadbandSpeedRankings2024,
+  ...broadbandSpeedRankings2025,
+]
 
-export const totalCountries = 64
+export const totalCountries = 154
 
 // Re-export year-specific data for direct access
 export { broadbandSpeedRankings2024 } from './2024'
+export { broadbandSpeedRankings2025 } from './2025'
