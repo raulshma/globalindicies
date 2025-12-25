@@ -108,6 +108,25 @@ import { chessCountryRankingsIndex, chessCountryRankings, totalCountries as ches
 import { lifeExpectancyIndex, lifeExpectancyRankings, totalCountries as lifeExpectancyTotal } from './life-expectancy'
 import { realGdpGrowthIndex, realGdpGrowthRankings, totalCountries as realGdpGrowthTotal } from './real-gdp-growth'
 
+// New indices - December 2025 (batch 6)
+import { giniCoefficientIndex, giniCoefficientRankings, totalCountries as giniCoefficientTotal } from './gini-coefficient'
+import { broadbandSpeedIndex, broadbandSpeedRankings, totalCountries as broadbandSpeedTotal } from './broadband-speed'
+import { co2EmissionsIndex, co2EmissionsRankings, totalCountries as co2EmissionsTotal } from './co2-emissions'
+
+// New indices - December 2025 (batch 7)
+import { infantMortalityIndex, infantMortalityRankings, totalCountries as infantMortalityTotal } from './infant-mortality'
+import { academicFreedomIndex, academicFreedomRankings, totalCountries as academicFreedomTotal } from './academic-freedom'
+import { touristArrivalsIndex, touristArrivalsRankings, totalCountries as touristArrivalsTotal } from './tourist-arrivals'
+import { nuclearPowerCapacityIndex, nuclearPowerCapacityRankings, totalCountries as nuclearPowerCapacityTotal } from './nuclear-power-capacity'
+import { maternalMortalityIndex, maternalMortalityRankings, totalCountries as maternalMortalityTotal } from './maternal-mortality'
+
+// New indices - December 2025 (batch 8)
+import { steelProductionIndex, steelProductionRankings, totalCountries as steelProductionTotal } from './steel-production'
+import { automobileProductionIndex, automobileProductionRankings, totalCountries as automobileProductionTotal } from './automobile-production'
+import { milkProductionIndex, milkProductionRankings, totalCountries as milkProductionTotal } from './milk-production'
+import { teaProductionIndex, teaProductionRankings, totalCountries as teaProductionTotal } from './tea-production'
+import { mobileSubscribersIndex, mobileSubscribersRankings, totalCountries as mobileSubscribersTotal } from './mobile-subscribers'
+
 // Re-export individual index data
 export { populationIndex, populationRankings } from './population'
 export { giiIndex, giiRankings } from './gii'
@@ -211,6 +230,25 @@ export { chessCountryRankingsIndex, chessCountryRankings } from './chess-country
 export { lifeExpectancyIndex, lifeExpectancyRankings } from './life-expectancy'
 export { realGdpGrowthIndex, realGdpGrowthRankings } from './real-gdp-growth'
 
+// New exports - December 2025 (batch 6)
+export { giniCoefficientIndex, giniCoefficientRankings } from './gini-coefficient'
+export { broadbandSpeedIndex, broadbandSpeedRankings } from './broadband-speed'
+export { co2EmissionsIndex, co2EmissionsRankings } from './co2-emissions'
+
+// New exports - December 2025 (batch 7)
+export { infantMortalityIndex, infantMortalityRankings } from './infant-mortality'
+export { academicFreedomIndex, academicFreedomRankings } from './academic-freedom'
+export { touristArrivalsIndex, touristArrivalsRankings } from './tourist-arrivals'
+export { nuclearPowerCapacityIndex, nuclearPowerCapacityRankings } from './nuclear-power-capacity'
+export { maternalMortalityIndex, maternalMortalityRankings } from './maternal-mortality'
+
+// New exports - December 2025 (batch 8)
+export { steelProductionIndex, steelProductionRankings } from './steel-production'
+export { automobileProductionIndex, automobileProductionRankings } from './automobile-production'
+export { milkProductionIndex, milkProductionRankings } from './milk-production'
+export { teaProductionIndex, teaProductionRankings } from './tea-production'
+export { mobileSubscribersIndex, mobileSubscribersRankings } from './mobile-subscribers'
+
 // All index metadata
 export const allIndices = [
   populationIndex,
@@ -308,6 +346,22 @@ export const allIndices = [
   chessCountryRankingsIndex,
   lifeExpectancyIndex,
   realGdpGrowthIndex,
+  // New indices - December 2025 (batch 6)
+  giniCoefficientIndex,
+  broadbandSpeedIndex,
+  co2EmissionsIndex,
+  // New indices - December 2025 (batch 7)
+  infantMortalityIndex,
+  academicFreedomIndex,
+  touristArrivalsIndex,
+  nuclearPowerCapacityIndex,
+  maternalMortalityIndex,
+  // New indices - December 2025 (batch 8)
+  steelProductionIndex,
+  automobileProductionIndex,
+  milkProductionIndex,
+  teaProductionIndex,
+  mobileSubscribersIndex,
 ]
 
 // All rankings data with their index info
@@ -407,4 +461,20 @@ export const allRankingsData = [
   { index: chessCountryRankingsIndex, rankings: chessCountryRankings, totalCountries: chessCountryTotal, valueField: 'score' as const },
   { index: lifeExpectancyIndex, rankings: lifeExpectancyRankings, totalCountries: lifeExpectancyTotal, valueField: 'score' as const },
   { index: realGdpGrowthIndex, rankings: realGdpGrowthRankings, totalCountries: realGdpGrowthTotal, valueField: 'score' as const },
+  // New indices data - December 2025 (batch 6)
+  { index: giniCoefficientIndex, rankings: giniCoefficientRankings, totalCountries: giniCoefficientTotal, valueField: 'score' as const },
+  { index: broadbandSpeedIndex, rankings: broadbandSpeedRankings, totalCountries: broadbandSpeedTotal, valueField: 'score' as const },
+  { index: co2EmissionsIndex, rankings: co2EmissionsRankings, totalCountries: co2EmissionsTotal, valueField: 'score' as const },
+  // New indices data - December 2025 (batch 7)
+  { index: infantMortalityIndex, rankings: infantMortalityRankings, totalCountries: infantMortalityTotal, valueField: 'score' as const },
+  { index: academicFreedomIndex, rankings: academicFreedomRankings, totalCountries: academicFreedomTotal, valueField: 'score' as const },
+  { index: touristArrivalsIndex, rankings: touristArrivalsRankings, totalCountries: touristArrivalsTotal, valueField: 'score' as const },
+  { index: nuclearPowerCapacityIndex, rankings: nuclearPowerCapacityRankings, totalCountries: nuclearPowerCapacityTotal, valueField: 'score' as const },
+  { index: maternalMortalityIndex, rankings: maternalMortalityRankings, totalCountries: maternalMortalityTotal, valueField: 'score' as const },
+  // New indices data - December 2025 (batch 8)
+  { index: steelProductionIndex, rankings: steelProductionRankings, totalCountries: steelProductionTotal, valueField: 'score' as const },
+  { index: automobileProductionIndex, rankings: automobileProductionRankings, totalCountries: automobileProductionTotal, valueField: 'score' as const },
+  { index: milkProductionIndex, rankings: milkProductionRankings, totalCountries: milkProductionTotal, valueField: 'score' as const },
+  { index: teaProductionIndex, rankings: teaProductionRankings, totalCountries: teaProductionTotal, valueField: 'score' as const },
+  { index: mobileSubscribersIndex, rankings: mobileSubscribersRankings, totalCountries: mobileSubscribersTotal, valueField: 'score' as const },
 ]
