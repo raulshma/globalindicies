@@ -179,11 +179,17 @@
     --shadow-soft-lg: var(--shadow-soft-lg);
     
     --animate-float: float 6s ease-in-out infinite;
+    --animate-shimmer: shimmer 2s infinite linear;
 
     @keyframes float {
         0% { transform: translateY(0px); }
         50% { transform: translateY(-10px); }
         100% { transform: translateY(0px); }
+    }
+
+    @keyframes shimmer {
+        from { transform: translateX(-100%); }
+        to { transform: translateX(100%); }
     }
 }
 

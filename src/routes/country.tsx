@@ -19,6 +19,7 @@ import { GroupedIndicesView } from "@/components/grouped-indices-view"
 import { FlatIndicesView } from "@/components/flat-indices-view"
 import { SearchFilterPanel } from "@/components/search-filter-panel"
 import { SROnly } from "@/components/ui/sr-announcer"
+import { LoadingGlow, LoadingGlowCard } from "@/components/loading-glow-card"
 
 // Search params schema for URL state
 const searchSchema = z.object({
@@ -256,11 +257,11 @@ function StatCard({ title, value, description, icon, className }: StatCardProps)
  */
 function CountryRankingsLoading() {
   return (
-    <div className="space-y-4 sm:space-y-6 animate-pulse" aria-busy="true" aria-label="Loading rankings">
+    <div className="space-y-4 sm:space-y-6" aria-busy="true" aria-label="Loading rankings">
       {/* Page Header Skeleton */}
       <div>
-        <div className="h-6 sm:h-8 w-36 sm:w-48 bg-muted rounded" />
-        <div className="h-3 sm:h-4 w-48 sm:w-64 bg-muted rounded mt-2" />
+        <LoadingGlow className="h-6 sm:h-8 w-36 sm:w-48 bg-muted" />
+        <LoadingGlow className="h-3 sm:h-4 w-48 sm:w-64 bg-muted mt-2" />
       </div>
 
       {/* Summary Stats Skeleton */}
@@ -268,11 +269,11 @@ function CountryRankingsLoading() {
         {[1, 2, 3].map((i) => (
           <Card key={i} className={i === 3 ? "col-span-2 md:col-span-1" : ""}>
             <CardHeader className="flex flex-row items-center justify-between pb-1 sm:pb-2">
-              <div className="h-2 sm:h-3 w-16 sm:w-20 bg-muted rounded" />
+              <LoadingGlow className="h-2 sm:h-3 w-16 sm:w-20 bg-muted" />
             </CardHeader>
             <CardContent>
-              <div className="h-5 sm:h-8 w-12 sm:w-16 bg-muted rounded" />
-              <div className="h-2 sm:h-3 w-20 sm:w-24 bg-muted rounded mt-2" />
+              <LoadingGlow className="h-5 sm:h-8 w-12 sm:w-16 bg-muted" />
+              <LoadingGlow className="h-2 sm:h-3 w-20 sm:w-24 bg-muted mt-2" />
             </CardContent>
           </Card>
         ))}
@@ -282,11 +283,11 @@ function CountryRankingsLoading() {
       <Card>
         <CardContent className="py-3 sm:py-4">
           <div className="flex flex-col gap-3 sm:gap-4">
-            <div className="h-10 sm:h-9 w-full bg-muted rounded" />
+            <LoadingGlow className="h-10 sm:h-9 w-full bg-muted" />
             <div className="flex flex-wrap gap-2 sm:gap-3">
-              <div className="h-10 sm:h-9 w-full sm:w-[140px] bg-muted rounded" />
+              <LoadingGlow className="h-10 sm:h-9 w-full sm:w-[140px] bg-muted" />
               <div className="flex-1" />
-              <div className="h-9 sm:h-8 w-[72px] bg-muted rounded" />
+              <LoadingGlow className="h-9 sm:h-8 w-[72px] bg-muted" />
             </div>
           </div>
         </CardContent>
@@ -295,19 +296,7 @@ function CountryRankingsLoading() {
       {/* Rankings Grid Skeleton */}
       <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-          <Card key={i}>
-            <CardHeader className="pb-2">
-              <div className="h-4 w-24 sm:w-32 bg-muted rounded" />
-            </CardHeader>
-            <CardContent className="space-y-2 sm:space-y-3">
-              <div className="flex items-center justify-between">
-                <div className="h-6 sm:h-8 w-16 sm:w-20 bg-muted rounded" />
-                <div className="h-5 sm:h-6 w-10 sm:w-12 bg-muted rounded" />
-              </div>
-              <div className="h-3 sm:h-4 w-full bg-muted rounded" />
-              <div className="h-3 sm:h-4 w-20 sm:w-24 bg-muted rounded" />
-            </CardContent>
-          </Card>
+          <LoadingGlowCard key={i} />
         ))}
       </div>
     </div>

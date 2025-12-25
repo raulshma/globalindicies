@@ -27,6 +27,8 @@ const searchSchema = z.object({
   year: z.coerce.number().optional(),
 })
 
+import { LoadingGlow, LoadingGlowCard } from "@/components/loading-glow-card"
+
 export const Route = createFileRoute("/rankings/$domain/$indexId")({
   validateSearch: searchSchema,
   loaderDeps: ({ search }) => ({ country: search.country, year: search.year }),
@@ -110,7 +112,40 @@ export const Route = createFileRoute("/rankings/$domain/$indexId")({
     }
   },
   component: IndexDetailPage,
+  pendingComponent: IndexDetailLoading,
 })
+
+function IndexDetailLoading() {
+  return (
+    <div className="space-y-8 container-wide relative z-10 animate-fade-in">
+      {/* Header skeleton */}
+      <div className="mb-8 flex items-center justify-between">
+        <LoadingGlow className="h-6 w-32 bg-white/5" />
+        <LoadingGlow className="h-8 w-24 bg-white/5" />
+      </div>
+
+      {/* Main Stats Grid */}
+      <div className="grid gap-4 lg:grid-cols-3">
+        <div className="lg:col-span-2 h-[200px]">
+           <LoadingGlowCard />
+        </div>
+        <div className="h-[200px]">
+           <LoadingGlowCard />
+        </div>
+      </div>
+
+      {/* History Card Skeleton */}
+      <div className="h-[300px]">
+        <LoadingGlowCard />
+      </div>
+
+      {/* Leaderboard Skeleton */}
+      <div className="h-[600px]">
+        <LoadingGlowCard />
+      </div>
+    </div>
+  )
+}
 
 function RankingRow({ 
   entry, 

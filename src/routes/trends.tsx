@@ -32,6 +32,8 @@ const searchSchema = z.object({
   domain: z.string().optional(),
 })
 
+import { LoadingGlowCard } from "@/components/loading-glow-card"
+
 export const Route = createFileRoute("/trends")({
   validateSearch: searchSchema,
   loaderDeps: ({ search }) => ({
@@ -109,7 +111,29 @@ export const Route = createFileRoute("/trends")({
     }
   },
   component: TrendsPage,
+  pendingComponent: TrendsLoading,
 })
+
+function TrendsLoading() {
+  return (
+    <div className="space-y-8 container mx-auto px-4 relative z-10 animate-fade-in">
+       {/* Selection Controls Skeleton */}
+       <div className="h-[200px]">
+          <LoadingGlowCard />
+       </div>
+
+       {/* Time Series Charts Skeleton */}
+       <div className="space-y-6">
+          <div className="h-[300px]">
+             <LoadingGlowCard />
+          </div>
+          <div className="h-[300px]">
+             <LoadingGlowCard />
+          </div>
+       </div>
+    </div>
+  )
+}
 
 
 function TrendsPage() {

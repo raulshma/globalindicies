@@ -37,6 +37,8 @@ const searchSchema = z.object({
   domain: z.string().optional(),
 })
 
+import { LoadingGlowCard } from "@/components/loading-glow-card"
+
 export const Route = createFileRoute("/compare")({
   validateSearch: searchSchema,
   loaderDeps: ({ search }) => ({
@@ -167,7 +169,31 @@ export const Route = createFileRoute("/compare")({
     }
   },
   component: ComparePage,
+  pendingComponent: CompareLoading,
 })
+
+function CompareLoading() {
+  return (
+    <div className="space-y-8 container mx-auto px-4 relative z-10 animate-fade-in">
+       {/* Selection Controls Skeleton */}
+       <div className="h-[200px]">
+          <LoadingGlowCard />
+       </div>
+
+       {/* Results Skeleton */}
+       <div className="space-y-6">
+          <div className="grid gap-4 md:grid-cols-4">
+             {[1, 2, 3, 4].map((i) => (
+                <LoadingGlowCard key={i} className="h-24" />
+             ))}
+          </div>
+          <div className="h-[400px]">
+             <LoadingGlowCard />
+          </div>
+       </div>
+    </div>
+  )
+}
 
 
 function ComparePage() {

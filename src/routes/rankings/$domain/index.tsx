@@ -13,10 +13,12 @@ import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 import { generateBreadcrumbJsonLd, generateDomainJsonLd } from "@/lib/seo"
 import { CACHE_CONFIG } from "@/lib/cache-config"
+import { LoadingGlowCard } from "@/components/loading-glow-card"
 
 const searchSchema = z.object({
   country: z.string().length(3).optional().default("IND"),
 })
+
 
 export const Route = createFileRoute("/rankings/$domain/")({
   validateSearch: searchSchema,
@@ -78,7 +80,31 @@ export const Route = createFileRoute("/rankings/$domain/")({
     }
   },
   component: DomainDetailPage,
+  pendingComponent: DomainDetailLoading,
 })
+
+function DomainDetailLoading() {
+  return (
+    <div className="space-y-8 container-wide relative z-10 animate-fade-in">
+       {/* Breadcrumb Skeleton */}
+       <div className="mb-8">
+          <div className="h-4 w-32 bg-muted rounded"></div>
+       </div>
+
+       {/* Stats Overview Skeleton */}
+       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {[1, 2, 3, 4].map((i) => (
+             <LoadingGlowCard key={i} className="h-32" />
+          ))}
+       </div>
+
+       {/* Rankings Table Skeleton */}
+       <div className="h-[500px]">
+          <LoadingGlowCard />
+       </div>
+    </div>
+  )
+}
 
 function DomainDetailPage() {
   const data = Route.useLoaderData()

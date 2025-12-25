@@ -20,6 +20,8 @@ const searchSchema = z.object({
   country: z.string().length(3).optional().default("IND"),
 })
 
+import { LoadingGlowCard } from "@/components/loading-glow-card"
+
 export const Route = createFileRoute("/")({
   validateSearch: searchSchema,
   loaderDeps: ({ search }) => ({ country: search.country }),
@@ -52,7 +54,38 @@ export const Route = createFileRoute("/")({
     }
   },
   component: HomePage,
+  pendingComponent: DashboardLoading,
 })
+
+function DashboardLoading() {
+  return (
+    <div className="space-y-8 container mx-auto px-4 relative z-10 animate-fade-in">
+      {/* Bento Grid Skeleton */}
+      <div className="grid md:grid-cols-3 gap-4 md:auto-rows-[12rem]">
+        {[1, 2, 3].map((i) => (
+          <div key={i} className={cn("h-full", i === 3 ? "md:col-span-1" : "md:col-span-1")}>
+            <LoadingGlowCard />
+          </div>
+        ))}
+      </div>
+
+       {/* Top Movers Skeleton */}
+       <div className="grid gap-4 lg:grid-cols-2 max-w-7xl mx-auto h-[400px]">
+          <LoadingGlowCard />
+          <LoadingGlowCard />
+       </div>
+
+       {/* Domain Performance Skeleton */}
+       <div className="max-w-7xl mx-auto grid md:grid-cols-4 md:auto-rows-[16rem] gap-4">
+          {[1, 2, 3, 4].map((i) => (
+             <div key={i} className={cn("h-full", i === 1 || i === 4 ? "md:col-span-2" : "md:col-span-1")}>
+                <LoadingGlowCard />
+             </div>
+          ))}
+       </div>
+    </div>
+  )
+}
 
 function HomePage() {
   const data = Route.useLoaderData()

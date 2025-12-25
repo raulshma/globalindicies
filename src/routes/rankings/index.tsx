@@ -11,6 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { DomainIcon } from "@/components/domain-icon"
 import { cn } from "@/lib/utils"
+import { LoadingGlowCard } from "@/components/loading-glow-card"
 import { CACHE_CONFIG } from "@/lib/cache-config"
 
 const searchSchema = z.object({
@@ -53,7 +54,23 @@ export const Route = createFileRoute("/rankings/")({
     }
   },
   component: RankingsPage,
+  pendingComponent: RankingsLoading,
 })
+
+function RankingsLoading() {
+  return (
+    <div className="space-y-8 container mx-auto px-4 relative z-10 animate-fade-in">
+       <div className="space-y-12">
+        {/* Render 3 loading sections */}
+        {[1, 2, 3].map((i) => (
+          <div key={i} className="h-[400px]">
+             <LoadingGlowCard />
+          </div>
+        ))}
+       </div>
+    </div>
+  )
+}
 
 function RankingsPage() {
   const data = Route.useLoaderData()

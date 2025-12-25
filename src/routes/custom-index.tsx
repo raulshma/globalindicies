@@ -26,6 +26,8 @@ const searchSchema = z.object({
 // Temporary user ID for demo purposes
 const DEMO_USER_ID = "demo-user"
 
+import { LoadingGlowCard } from "@/components/loading-glow-card"
+
 export const Route = createFileRoute("/custom-index")({
   validateSearch: searchSchema,
   loaderDeps: ({ search }) => ({
@@ -114,7 +116,33 @@ export const Route = createFileRoute("/custom-index")({
     }
   },
   component: CustomIndexPage,
+  pendingComponent: CustomIndexLoading,
 })
+
+function CustomIndexLoading() {
+  return (
+    <div className="space-y-8 container mx-auto px-4 relative z-10 animate-fade-in">
+       {/* Builder Skeleton */}
+       <div className="flex justify-end">
+          <div className="h-10 w-32 bg-muted rounded"></div>
+       </div>
+
+       <div className="h-[400px]">
+          <LoadingGlowCard />
+       </div>
+
+       {/* Saved Indices Skeleton */}
+       <div>
+          <div className="h-8 w-48 bg-muted rounded mb-4"></div>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+             <LoadingGlowCard />
+             <LoadingGlowCard />
+             <LoadingGlowCard />
+          </div>
+       </div>
+    </div>
+  )
+}
 
 
 function CustomIndexPage() {
