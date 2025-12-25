@@ -1,5 +1,5 @@
 import { Canvas, useFrame } from "@react-three/fiber"
-import { Float, Environment, Torus, Cylinder, Sphere, Cone, Box, Icosahedron } from "@react-three/drei"
+import { Float, Environment, Torus, Cylinder, Sphere, Cone, Box, Icosahedron, Octahedron, Dodecahedron, Tetrahedron } from "@react-three/drei"
 import { useRef, useMemo } from "react"
 import * as THREE from "three"
 
@@ -176,6 +176,121 @@ function FreedomSymbol({ position }: { position: [number, number, number] }) {
     )
 }
 
+function SportsSymbol({ position }: { position: [number, number, number] }) {
+    return (
+      <Float speed={1.5} rotationIntensity={1} floatIntensity={0.8}>
+        <group position={position}>
+          {/* Pawn / Trophy abstract shape */}
+          <Cylinder args={[0.2, 0.4, 0.6, 16]} position={[0, -0.4, 0]}>
+               <meshStandardMaterial color="#f97316" metalness={0.4} roughness={0.4} />
+          </Cylinder>
+          <Sphere args={[0.35, 32, 32]} position={[0, 0.3, 0]}>
+               <meshPhysicalMaterial color="#fb923c" metalness={0.2} roughness={0.2} clearcoat={0.5} />
+          </Sphere>
+          {/* Ring for motion */}
+          <Torus args={[0.6, 0.05, 16, 32]} rotation={[Math.PI / 3, 0, 0]}>
+              <meshStandardMaterial color="#fdba74" />
+          </Torus>
+        </group>
+      </Float>
+    )
+}
+
+function TechSymbol({ position }: { position: [number, number, number] }) {
+    return (
+      <Float speed={2} rotationIntensity={2} floatIntensity={0.5}>
+        <group position={position}>
+          <Octahedron args={[0.7, 0]} rotation={[0, 0.5, 0]}>
+             <meshPhysicalMaterial color="#8b5cf6" metalness={0.9} roughness={0.1} wireframe={true} />
+          </Octahedron>
+          <Octahedron args={[0.5, 0]} rotation={[0, 0.5, 0]}>
+              <meshPhysicalMaterial color="#a78bfa" metalness={0.8} roughness={0.2} />
+          </Octahedron>
+        </group>
+      </Float>
+    )
+}
+
+function LawSymbol({ position }: { position: [number, number, number] }) {
+    return (
+      <Float speed={0.6} rotationIntensity={0.2} floatIntensity={0.4}>
+        <group position={position}>
+          {/* Pillar */}
+          <Box args={[0.8, 0.1, 0.8]} position={[0, -0.6, 0]}>
+               <meshStandardMaterial color="#d97706" />
+          </Box>
+          <Cylinder args={[0.25, 0.25, 1.2, 16]} position={[0, 0, 0]}>
+               <meshStandardMaterial color="#f59e0b" roughness={0.5} />
+          </Cylinder>
+          <Box args={[0.7, 0.1, 0.7]} position={[0, 0.65, 0]}>
+               <meshStandardMaterial color="#d97706" />
+          </Box>
+        </group>
+      </Float>
+    )
+}
+
+function EnergySymbol({ position }: { position: [number, number, number] }) {
+    return (
+      <Float speed={2.5} rotationIntensity={3} floatIntensity={1}>
+        <group position={position}>
+          {/* Glowing Crystal */}
+          <Tetrahedron args={[0.8, 0]}>
+             <meshPhysicalMaterial color="#facc15" emissive="#fde047" emissiveIntensity={0.8} metalness={0.8} roughness={0.1} />
+          </Tetrahedron>
+          {/* Floating rings */}
+          <Torus args={[1.2, 0.02, 16, 64]} rotation={[Math.PI / 4, 0, 0]}>
+             <meshStandardMaterial color="#eab308" transparent opacity={0.5} />
+          </Torus>
+        </group>
+      </Float>
+    )
+}
+
+function TravelSymbol({ position }: { position: [number, number, number] }) {
+    return (
+      <Float speed={0.8} rotationIntensity={0.4} floatIntensity={0.4}>
+        <group position={position}>
+           {/* Globe abstraction */}
+           <Dodecahedron args={[0.6, 0]}>
+               <meshPhysicalMaterial color="#14b8a6" metalness={0.4} roughness={0.2} />
+           </Dodecahedron>
+           {/* Orbital path */}
+           <Torus args={[0.9, 0.03, 16, 64]} rotation={[0.5, 0.5, 0]}>
+               <meshStandardMaterial color="#5eead4" />
+           </Torus>
+           {/* Small moon/satellite */}
+           <Sphere args={[0.1, 16, 16]} position={[0.9, 0.2, 0]}>
+               <meshStandardMaterial color="#ccfbf1" />
+           </Sphere>
+        </group>
+      </Float>
+    )
+}
+
+function MediaSymbol({ position }: { position: [number, number, number] }) {
+    return (
+      <Float speed={1.2} rotationIntensity={0.5} floatIntensity={0.6}>
+        <group position={position} rotation={[0, 0, 0.3]}>
+           {/* Microphone / Broadcast shape */}
+           <Cylinder args={[0.2, 0.2, 0.8, 16]} position={[0, 0, 0]}>
+               <meshStandardMaterial color="#64748b" metalness={0.6} />
+           </Cylinder>
+           <Sphere args={[0.3, 16, 16]} position={[0, 0.5, 0]}>
+               <meshPhysicalMaterial color="#94a3b8" metalness={0.8} roughness={0.2} />
+           </Sphere>
+           {/* Signal Waves */}
+           <Torus args={[0.5, 0.03, 16, 32]} position={[0, 0.5, 0]} rotation={[Math.PI/2, 0, 0]}>
+               <meshStandardMaterial color="#cbd5e1" transparent opacity={0.6} />
+           </Torus>
+           <Torus args={[0.8, 0.03, 16, 32]} position={[0, 0.5, 0]} rotation={[Math.PI/2, 0, 0]}>
+               <meshStandardMaterial color="#cbd5e1" transparent opacity={0.4} />
+           </Torus>
+        </group>
+      </Float>
+    )
+}
+
 function ParallaxGroup({ children }: { children: React.ReactNode }) {
     const group = useRef<THREE.Group>(null!)
     useFrame((state) => {
@@ -229,6 +344,24 @@ export function ThreeBackground() {
             
             {/* Freedom - Far Right */}
             <FreedomSymbol position={[7, 0, -5]} />
+            
+            {/* Sports - Bottom Center */}
+            <SportsSymbol position={[0, -3.5, -4]} />
+
+            {/* Tech - Top Far Left */}
+            <TechSymbol position={[-3, 5, -5]} />
+
+            {/* Law - Right Side */}
+            <LawSymbol position={[6, -2, -3]} />
+            
+            {/* Energy - High Center */}
+            <EnergySymbol position={[0, 6, -6]} />
+
+            {/* Travel - Center Right */}
+            <TravelSymbol position={[3.5, 0.5, -4]} />
+
+            {/* Media - Bottom Far Left */}
+            <MediaSymbol position={[-6, -4, -3]} />
             
             <Particles />
         </ParallaxGroup>
