@@ -34,7 +34,7 @@ export function cacheKey(prefix: string, ...parts: (string | number)[]): string 
  */
 export async function getCache<T>(key: string): Promise<T | null> {
   const redis = getRedisClient()
-  if (!redis) return null
+  if (!redis || redis.status !== 'ready') return null
 
   try {
     const cached = await redis.get(key)
@@ -53,7 +53,7 @@ export async function getCache<T>(key: string): Promise<T | null> {
  */
 export async function setCache<T>(key: string, value: T, ttlSeconds: number): Promise<void> {
   const redis = getRedisClient()
-  if (!redis) return
+  if (!redis || redis.status !== 'ready') return
 
   try {
     await redis.setex(key, ttlSeconds, JSON.stringify(value))
@@ -105,7 +105,7 @@ export async function withCache<T>(
  */
 export async function deleteCache(key: string): Promise<void> {
   const redis = getRedisClient()
-  if (!redis) return
+  if (!redis || redis.status !== 'ready') return
 
   try {
     await redis.del(key)
@@ -122,7 +122,7 @@ export async function deleteCache(key: string): Promise<void> {
  */
 export async function invalidateCachePattern(pattern: string): Promise<void> {
   const redis = getRedisClient()
-  if (!redis) return
+  if (!redis || redis.status !== 'ready') return
 
   try {
     const keys = await redis.keys(pattern)

@@ -32,7 +32,8 @@ const searchSchema = z.object({
   domain: z.string().optional(),
 })
 
-import { LoadingGlowCard } from "@/components/loading-glow-card"
+import { LoadingGlow } from "@/components/loading-glow-card"
+import { ChartSkeleton } from "@/components/skeletons/chart-skeleton"
 
 export const Route = createFileRoute("/trends")({
   validateSearch: searchSchema,
@@ -118,18 +119,24 @@ function TrendsLoading() {
   return (
     <div className="space-y-8 container mx-auto px-4 relative z-10 animate-fade-in">
        {/* Selection Controls Skeleton */}
-       <div className="h-[200px]">
-          <LoadingGlowCard />
+       <div className="p-6 rounded-xl border border-white/10 bg-white/5 space-y-4">
+          <LoadingGlow className="h-3 w-32 bg-white/10 mb-2" />
+          <div className="flex gap-2">
+             <LoadingGlow className="h-9 w-24 rounded-md bg-white/5" />
+             <LoadingGlow className="h-9 w-24 rounded-md bg-white/5" />
+             <LoadingGlow className="h-9 w-24 rounded-md bg-white/5" />
+             <LoadingGlow className="h-9 w-24 rounded-md bg-white/5" />
+             <LoadingGlow className="h-9 w-24 rounded-md bg-white/5" />
+          </div>
+          
+          <LoadingGlow className="h-3 w-32 bg-white/10 mb-2 mt-4" />
+          <LoadingGlow className="h-10 w-full max-w-md rounded-md bg-white/5" />
        </div>
 
        {/* Time Series Charts Skeleton */}
        <div className="space-y-6">
-          <div className="h-[300px]">
-             <LoadingGlowCard />
-          </div>
-          <div className="h-[300px]">
-             <LoadingGlowCard />
-          </div>
+          <ChartSkeleton height={300} />
+          <ChartSkeleton height={300} />
        </div>
     </div>
   )

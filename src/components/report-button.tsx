@@ -13,7 +13,6 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Textarea } from "@/components/ui/textarea"
-import { submitDataReport } from "@/lib/server-functions/data-reports"
 import { Label } from "@/components/ui/label"
 
 interface ReportButtonProps {
@@ -39,6 +38,8 @@ export function ReportButton({ indexId, year, indexName }: ReportButtonProps) {
         `${window.screen.width}x${window.screen.height}`
       ].join("|");
 
+      // Dynamic import to prevent server-side db code from being bundled into client
+      const { submitDataReport } = await import("@/lib/server-functions/data-reports")
       const result = await submitDataReport({
         data: {
           indexId,

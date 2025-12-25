@@ -6,10 +6,13 @@ import viteTsConfigPaths from 'vite-tsconfig-paths'
 import tailwindcss from '@tailwindcss/vite'
 import { nitro } from 'nitro/vite'
 
-const config = defineConfig({
+const config = defineConfig(({ command }) => ({
   plugins: [
     devtools(),
-    nitro(),
+    // Nitro is required for some deployment targets (e.g. Vercel), but its dev worker
+    // can conflict with TanStack Start's server entry during `vite dev`.
+    // Only enable Nitro during build.
+    ...(command === 'build' ? [nitro()] : []),
     // this is the plugin that enables path aliases
     viteTsConfigPaths({
       projects: ['./tsconfig.json'],
@@ -33,6 +36,9 @@ const config = defineConfig({
     // CSS code splitting
     cssCodeSplit: true,
   },
+  server: {
+    port: 3000,
+  },
   // Optimize dependencies
   optimizeDeps: {
     include: [
@@ -40,7 +46,6 @@ const config = defineConfig({
       'react-dom',
       '@tanstack/react-router',
       'recharts',
-      'detect-gpu',
     ],
   },
   ssr: {
@@ -68,6 +73,6 @@ const config = defineConfig({
       },
     },
   },
-})
+}))
 
 export default config

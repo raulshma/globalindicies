@@ -19,6 +19,7 @@ import { GroupedIndicesView } from "@/components/grouped-indices-view"
 import { FlatIndicesView } from "@/components/flat-indices-view"
 import { SearchFilterPanel } from "@/components/search-filter-panel"
 import { SROnly } from "@/components/ui/sr-announcer"
+import { StatCardSkeleton } from "@/components/skeletons/stat-card-skeleton"
 import { LoadingGlow, LoadingGlowCard } from "@/components/loading-glow-card"
 
 // Search params schema for URL state
@@ -267,15 +268,10 @@ function CountryRankingsLoading() {
       {/* Summary Stats Skeleton */}
       <div className="grid gap-3 sm:gap-4 grid-cols-2 md:grid-cols-3">
         {[1, 2, 3].map((i) => (
-          <Card key={i} className={i === 3 ? "col-span-2 md:col-span-1" : ""}>
-            <CardHeader className="flex flex-row items-center justify-between pb-1 sm:pb-2">
-              <LoadingGlow className="h-2 sm:h-3 w-16 sm:w-20 bg-muted" />
-            </CardHeader>
-            <CardContent>
-              <LoadingGlow className="h-5 sm:h-8 w-12 sm:w-16 bg-muted" />
-              <LoadingGlow className="h-2 sm:h-3 w-20 sm:w-24 bg-muted mt-2" />
-            </CardContent>
-          </Card>
+          <StatCardSkeleton 
+             key={i} 
+             className={i === 3 ? "col-span-2 md:col-span-1" : ""} 
+          />
         ))}
       </div>
 

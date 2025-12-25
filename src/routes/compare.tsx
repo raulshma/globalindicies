@@ -37,7 +37,10 @@ const searchSchema = z.object({
   domain: z.string().optional(),
 })
 
-import { LoadingGlowCard } from "@/components/loading-glow-card"
+import { LoadingGlow } from "@/components/loading-glow-card"
+import { StatCardSkeleton } from "@/components/skeletons/stat-card-skeleton"
+import { ChartSkeleton } from "@/components/skeletons/chart-skeleton"
+import { TableSkeleton } from "@/components/skeletons/table-skeleton"
 
 export const Route = createFileRoute("/compare")({
   validateSearch: searchSchema,
@@ -176,20 +179,33 @@ function CompareLoading() {
   return (
     <div className="space-y-8 container mx-auto px-4 relative z-10 animate-fade-in">
        {/* Selection Controls Skeleton */}
-       <div className="h-[200px]">
-          <LoadingGlowCard />
+       <div className="p-6 rounded-xl border border-white/10 bg-white/5 space-y-4">
+          <LoadingGlow className="h-6 w-64 bg-white/10 mb-4" />
+          <div className="flex gap-2">
+             {[1, 2, 3, 4].map(i => (
+                <LoadingGlow key={i} className="h-9 w-24 rounded-md bg-white/5" />
+             ))}
+          </div>
+          <LoadingGlow className="h-10 w-full max-w-md rounded-md bg-white/5" />
        </div>
 
        {/* Results Skeleton */}
        <div className="space-y-6">
+          {/* Stats Grid */}
           <div className="grid gap-4 md:grid-cols-4">
              {[1, 2, 3, 4].map((i) => (
-                <LoadingGlowCard key={i} className="h-24" />
+                <StatCardSkeleton key={i} />
              ))}
           </div>
-          <div className="h-[400px]">
-             <LoadingGlowCard />
-          </div>
+          
+          {/* Radar Chart Skeleton */}
+          <ChartSkeleton height={400} />
+
+          {/* Gap Analysis Table Skeleton */}
+          <TableSkeleton title="Gap Analysis" rows={5} columns={5} />
+
+          {/* Side-by-Side Rankings Table Skeleton */}
+          <TableSkeleton title="Side-by-Side Rankings" rows={8} columns={4} />
        </div>
     </div>
   )

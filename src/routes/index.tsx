@@ -20,7 +20,8 @@ const searchSchema = z.object({
   country: z.string().length(3).optional().default("IND"),
 })
 
-import { LoadingGlowCard } from "@/components/loading-glow-card"
+import { LoadingGlow } from "@/components/loading-glow-card"
+import { BentoSkeleton } from "@/components/skeletons/bento-skeleton"
 
 export const Route = createFileRoute("/")({
   validateSearch: searchSchema,
@@ -60,28 +61,61 @@ export const Route = createFileRoute("/")({
 function DashboardLoading() {
   return (
     <div className="space-y-8 container mx-auto px-4 relative z-10 animate-fade-in">
-      {/* Bento Grid Skeleton */}
-      <div className="grid md:grid-cols-3 gap-4 md:auto-rows-[12rem]">
-        {[1, 2, 3].map((i) => (
-          <div key={i} className={cn("h-full", i === 3 ? "md:col-span-1" : "md:col-span-1")}>
-            <LoadingGlowCard />
-          </div>
-        ))}
-      </div>
+       {/* Bento Grid Skeleton */}
+       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:auto-rows-[12rem]">
+         <BentoSkeleton className="md:col-span-1" />
+         <BentoSkeleton className="md:col-span-1" />
+         <BentoSkeleton className="md:col-span-1" />
+       </div>
 
        {/* Top Movers Skeleton */}
-       <div className="grid gap-4 lg:grid-cols-2 max-w-7xl mx-auto h-[400px]">
-          <LoadingGlowCard />
-          <LoadingGlowCard />
+       <div className="grid gap-4 lg:grid-cols-2 max-w-7xl mx-auto">
+          {/* Top Improvers Skeleton */}
+          <div className="h-[400px] rounded-xl border border-white/10 bg-white/5 overflow-hidden">
+             <div className="p-6 border-b border-white/10">
+                <LoadingGlow className="h-6 w-48 bg-white/10" />
+             </div>
+             <div className="p-6 space-y-4">
+                {[1, 2, 3, 4, 5].map(i => (
+                   <div key={i} className="flex justify-between items-center pb-3 border-b border-white/5 last:border-0">
+                      <div className="space-y-1 w-1/2">
+                         <LoadingGlow className="h-4 w-3/4 bg-white/10" />
+                         <LoadingGlow className="h-3 w-1/2 bg-white/5" />
+                      </div>
+                      <LoadingGlow className="h-5 w-24 bg-white/5" />
+                   </div>
+                ))}
+             </div>
+          </div>
+
+          {/* Top Decliners Skeleton (duplicate of above) */}
+           <div className="h-[400px] rounded-xl border border-white/10 bg-white/5 overflow-hidden">
+             <div className="p-6 border-b border-white/10">
+                <LoadingGlow className="h-6 w-48 bg-white/10" />
+             </div>
+             <div className="p-6 space-y-4">
+                {[1, 2, 3, 4, 5].map(i => (
+                   <div key={i} className="flex justify-between items-center pb-3 border-b border-white/5 last:border-0">
+                      <div className="space-y-1 w-1/2">
+                         <LoadingGlow className="h-4 w-3/4 bg-white/10" />
+                         <LoadingGlow className="h-3 w-1/2 bg-white/5" />
+                      </div>
+                      <LoadingGlow className="h-5 w-24 bg-white/5" />
+                   </div>
+                ))}
+             </div>
+          </div>
        </div>
 
        {/* Domain Performance Skeleton */}
-       <div className="max-w-7xl mx-auto grid md:grid-cols-4 md:auto-rows-[16rem] gap-4">
-          {[1, 2, 3, 4].map((i) => (
-             <div key={i} className={cn("h-full", i === 1 || i === 4 ? "md:col-span-2" : "md:col-span-1")}>
-                <LoadingGlowCard />
-             </div>
-          ))}
+       <div className="max-w-7xl mx-auto">
+          <LoadingGlow className="h-8 w-64 bg-white/10 mb-4" />
+          <div className="grid grid-cols-1 md:grid-cols-4 md:auto-rows-[16rem] gap-4">
+             <BentoSkeleton className="md:col-span-2 bg-white/5" />
+             <BentoSkeleton className="md:col-span-1" />
+             <BentoSkeleton className="md:col-span-1" />
+             <BentoSkeleton className="md:col-span-2 bg-white/5" />
+          </div>
        </div>
     </div>
   )

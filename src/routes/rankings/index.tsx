@@ -11,7 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { DomainIcon } from "@/components/domain-icon"
 import { cn } from "@/lib/utils"
-import { LoadingGlowCard } from "@/components/loading-glow-card"
+import { DomainSectionSkeleton } from "@/components/skeletons/domain-section-skeleton"
 import { CACHE_CONFIG } from "@/lib/cache-config"
 import { ReportButton } from "@/components/report-button"
 
@@ -64,9 +64,7 @@ function RankingsLoading() {
        <div className="space-y-12">
         {/* Render 3 loading sections */}
         {[1, 2, 3].map((i) => (
-          <div key={i} className="h-[400px]">
-             <LoadingGlowCard />
-          </div>
+          <DomainSectionSkeleton key={i} />
         ))}
        </div>
     </div>

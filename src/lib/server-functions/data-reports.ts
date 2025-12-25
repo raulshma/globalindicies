@@ -6,7 +6,6 @@
 import { eq, and, sql } from 'drizzle-orm'
 import { z } from 'zod'
 import { createServerFn } from '@tanstack/react-start'
-import { getRequest } from '@tanstack/react-start/server'
 import { db } from '../db'
 import { dataReports, rankingIndices } from '../db/schema'
 import { createRateLimiter, createRateLimitError } from '../rate-limit'
@@ -45,6 +44,7 @@ export const submitDataReport = createServerFn({ method: 'POST' })
     // precise request-based fingerprinting
     let ip = "unknown"
     try {
+      const { getRequest } = await import("@tanstack/react-start/server"); 
       const req = getRequest();
       ip = req.headers.get('x-forwarded-for') || "unknown"
     } catch (e) {
