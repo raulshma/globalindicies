@@ -210,5 +210,9 @@ export const countriesData = [
   { id: 'c-com', code: 'COM', name: 'Comoros', region: 'Africa', incomeLevel: 'lower-middle', population: 852075 },
   { id: 'c-syc', code: 'SYC', name: 'Seychelles', region: 'Africa', incomeLevel: 'high', population: 107660 },
   { id: 'c-bhs', code: 'BHS', name: 'Bahamas', region: 'Latin America', incomeLevel: 'high', population: 412623 },
+  // Additional countries for Real GDP Growth Index
+  { id: 'c-xkx', code: 'XKX', name: 'Kosovo', region: 'Europe', incomeLevel: 'upper-middle', population: 1798506 },
+  { id: 'c-mac', code: 'MAC', name: 'Macao', region: 'Asia', incomeLevel: 'high', population: 704149 },
+  { id: 'c-pse', code: 'PSE', name: 'Palestine', region: 'Asia', incomeLevel: 'lower-middle', population: 5483450 },
 ]
 
