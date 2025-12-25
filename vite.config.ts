@@ -38,7 +38,13 @@ const config = defineConfig({
     include: ['react', 'react-dom', '@tanstack/react-router', 'recharts'],
   },
   ssr: {
-    noExternal: ['@tabler/icons-react'],
+    noExternal: [
+      '@tabler/icons-react',
+      '@react-three/fiber',
+      '@react-three/drei',
+      'react-reconciler',
+      'three',
+    ],
   },
   environments: {
     client: {
