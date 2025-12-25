@@ -1,51 +1,10 @@
 import { Canvas, useFrame } from "@react-three/fiber"
-import { Float, Environment, Torus, Cylinder, Sphere, Cone, Box, Icosahedron, Octahedron, Dodecahedron, Tetrahedron } from "@react-three/drei"
-import { useRef, useMemo } from "react"
+import { Float, Environment, Torus, Cylinder, Sphere, Cone, Box, Icosahedron, Octahedron, Dodecahedron, Tetrahedron, Stars, Sparkles } from "@react-three/drei"
+import { useRef, useEffect, useState } from "react"
 import * as THREE from "three"
+import { useTheme } from "./theme-provider"
 
-function Particles() {
-  const pointsRef = useRef<THREE.Points>(null!)
-  
-  // Clean, minimal particles
-  const particlesCount = 70
-  const positions = useMemo(() => {
-    const pos = new Float32Array(particlesCount * 3)
-    for(let i = 0; i < particlesCount; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * 25
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 25
-      pos[i * 3 + 2] = (Math.random() - 0.5) * 12 - 4
-    }
-    return pos
-  }, [])
 
-  useFrame((state) => {
-    if (pointsRef.current) {
-      pointsRef.current.rotation.y = state.clock.getElapsedTime() * 0.03
-      pointsRef.current.rotation.x = state.clock.getElapsedTime() * 0.01
-    }
-  })
-
-  return (
-    <points ref={pointsRef}>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          count={particlesCount}
-          array={positions}
-          itemSize={3}
-          args={[positions, 3]}
-        />
-      </bufferGeometry>
-      <pointsMaterial
-        size={0.12}
-        color="#22c55e"
-        transparent
-        opacity={0.3}
-        sizeAttenuation
-      />
-    </points>
-  )
-}
 
 function CoinStack({ position }: { position: [number, number, number] }) {
   const group = useRef<THREE.Group>(null!)
@@ -403,16 +362,65 @@ function ParallaxGroup({ children }: { children: React.ReactNode }) {
 }
 
 export function ThreeBackground() {
+  const { theme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  
+  // Resolve system theme
+  const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('dark')
+
+  useEffect(() => {
+    setMounted(true)
+    const media = window.matchMedia('(prefers-color-scheme: dark)')
+    
+    const updateTheme = () => {
+      if (theme === 'system') {
+        setResolvedTheme(media.matches ? 'dark' : 'light')
+      } else {
+        setResolvedTheme(theme)
+      }
+    }
+
+    updateTheme()
+    media.addEventListener('change', updateTheme) 
+    return () => media.removeEventListener('change', updateTheme)
+  }, [theme])
+
+  // Don't render until mounted to avoid hydration mismatch
+  if (!mounted) return null
+
+  const isDark = resolvedTheme === 'dark'
+
+  // Theme Config
+  const bgColors = {
+      dark: '#020617', // slate-950
+      light: '#f8fafc', // slate-50
+  }
+  const fogColors = {
+      dark: '#020617',
+      light: '#f8fafc',
+  }
+  const spotLightColor = isDark ? "#38bdf8" : "#0ea5e9" // Sky-400 vs Sky-500
+  const pointLightColor = isDark ? "#c084fc" : "#8b5cf6" // Purple-400 vs Violet-500
+  const ambientIntensity = isDark ? 0.5 : 0.8
+  
+  // Star colors need to be dark in light mode
+  const starOpacity = isDark ? 1 : 0.3
+  const sparkleColor1 = isDark ? "#e2e8f0" : "#64748b"
+  const sparkleColor2 = isDark ? "#38bdf8" : "#0284c7"
+
   return (
-    <div className="fixed inset-0 -z-10 pointer-events-none opacity-80">
+    <div className={`fixed inset-0 -z-10 pointer-events-none transition-colors duration-700 ${isDark ? 'bg-slate-950' : 'bg-slate-50'}`}>
       <Canvas
         camera={{ position: [0, 0, 10], fov: 45 }}
         gl={{ antialias: true, alpha: true }}
         dpr={[1, 2]}
       >
-        <ambientLight intensity={0.8} />
-        <pointLight position={[10, 10, 10]} intensity={1.5} color="#ffffff" />
-        <pointLight position={[-10, -5, -10]} intensity={0.5} color="#22c55e" />
+        <color attach="background" args={[isDark ? bgColors.dark : bgColors.light]} />
+        <fog attach="fog" args={[isDark ? fogColors.dark : fogColors.light, 5, 30]} />
+        
+        <ambientLight intensity={ambientIntensity} />
+        <spotLight position={[10, 10, 10]} angle={0.5} penumbra={1} intensity={2} color={spotLightColor} />
+        <pointLight position={[-10, -10, -10]} intensity={2} color={pointLightColor} />
         
         <ParallaxGroup>
             {/* Economy - Top Left */}
@@ -457,7 +465,10 @@ export function ThreeBackground() {
             {/* Media - Bottom Far Left */}
             <MediaSymbol position={[-6, -4, -3]} />
             
-            <Particles />
+            {/* Modify star color for light mode via a prop isn't supported directly by Drei Stars efficiently, but we can lower transparency/fade or use Sparkles more */}
+            <Stars radius={50} depth={50} count={5000} factor={4} saturation={0} fade speed={1} /> 
+            <Sparkles count={150} scale={15} size={3} speed={0.4} opacity={0.5} color={sparkleColor1} />
+            <Sparkles count={50} scale={25} size={6} speed={0.2} opacity={0.2} color={sparkleColor2} />
         </ParallaxGroup>
 
         <Environment preset="city" blur={1} />

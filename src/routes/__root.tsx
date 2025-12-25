@@ -14,6 +14,7 @@ import { Layout } from "@/components/layout"
 import { getAllCountries } from "@/lib/server-functions/countries"
 import { generateWebsiteJsonLd } from "@/lib/seo"
 import { ThreeBackground } from "@/components/ThreeBackground"
+import { ShootingMeteors } from "@/components/ShootingMeteors"
 
 // Router context type
 export interface RouterContext {
@@ -190,6 +191,7 @@ function RootComponent() {
     <ThemeProvider defaultTheme="system" storageKey="global-indicies-theme">
       <Layout countries={countries} selectedCountry={selectedCountry}>
         <ThreeBackground />
+        <ShootingMeteors />
         <Outlet />
       </Layout>
     </ThemeProvider>
